@@ -1,0 +1,292 @@
+{
+  "v": 3,
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-21T00:40:00Z"
+  },
+  "title": "Wordless",
+  "launch": {
+    "view": "canvas"
+  },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {
+      "x": 0,
+      "y": 0,
+      "w": 1440,
+      "h": 1380,
+      "title": "Design system — color & type"
+    },
+    "Pictograms.dc.html": {
+      "x": 1520,
+      "y": 0,
+      "w": 1440,
+      "h": 1300,
+      "title": "Pictogram family"
+    },
+    "Pills.dc.html": {
+      "x": 3040,
+      "y": 0,
+      "w": 1440,
+      "h": 1180,
+      "title": "Pill styles"
+    },
+    "SunArc.dc.html": {
+      "x": 0,
+      "y": 1800,
+      "w": 390,
+      "h": 844,
+      "title": "Sun Arc — interactive",
+      "is_interactive": true
+    },
+    "SunArcStates.dc.html": {
+      "x": 470,
+      "y": 1800,
+      "w": 1460,
+      "h": 1080,
+      "title": "Sun Arc — three prescriptions",
+      "is_interactive": true
+    },
+    "FridgeSheet.dc.html": {
+      "x": 0,
+      "y": 3300,
+      "w": 794,
+      "h": 1123,
+      "title": "Fridge sheet — color (A4)",
+      "paper": "a4"
+    },
+    "FridgeSheetMono.dc.html": {
+      "x": 874,
+      "y": 3300,
+      "w": 794,
+      "h": 1123,
+      "title": "Fridge sheet — black & white printer (A4)",
+      "paper": "a4"
+    },
+    "Start.dc.html": {
+      "x": 0,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "1 · Start — first launch",
+      "is_interactive": true
+    },
+    "AddMedicine.dc.html": {
+      "x": 470,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "2 · Medicine — the Pill Builder",
+      "is_interactive": true
+    },
+    "When.dc.html": {
+      "x": 940,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "3 · When — the Sun Arc",
+      "is_interactive": true
+    },
+    "HowLong.dc.html": {
+      "x": 1410,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "4 · How long — the Course Grid",
+      "is_interactive": true
+    },
+    "Rules.dc.html": {
+      "x": 1880,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "5 · Rules",
+      "is_interactive": true
+    },
+    "Household.dc.html": {
+      "x": 2350,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "6 · Household",
+      "is_interactive": true
+    },
+    "SheetPreview.dc.html": {
+      "x": 2820,
+      "y": 5000,
+      "w": 390,
+      "h": 844,
+      "title": "7 · The sheet",
+      "is_interactive": true
+    },
+    "AddMedicineStates.dc.html": {
+      "x": 0,
+      "y": 6450,
+      "w": 1864,
+      "h": 1080,
+      "title": "Pill Builder — halves, liquids, drops, inhalers",
+      "is_interactive": true
+    },
+    "HowLongStates.dc.html": {
+      "x": 1944,
+      "y": 6450,
+      "w": 1460,
+      "h": 1080,
+      "title": "How long — set, missing, ongoing",
+      "is_interactive": true
+    },
+    "DailyStrip.dc.html": {
+      "x": 0,
+      "y": 8130,
+      "w": 794,
+      "h": 1123,
+      "title": "Daily strips — tear-off (A4)",
+      "paper": "a4"
+    },
+    "PrintEdgeCases.dc.html": {
+      "x": 874,
+      "y": 8130,
+      "w": 794,
+      "h": 1123,
+      "title": "Sheet rows — liquids, drops, halves, every 8 h (A4)",
+      "paper": "a4"
+    },
+    "DesktopEntry.dc.html": {
+      "x": 0,
+      "y": 9850,
+      "w": 1440,
+      "h": 1040,
+      "title": "Desktop · entry — split view with live sheet",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "DesktopPrint.dc.html": {
+      "x": 1520,
+      "y": 9850,
+      "w": 1440,
+      "h": 1180,
+      "title": "Desktop · print preview",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "LiveSheet.dc.html": {
+      "x": 3040,
+      "y": 9850,
+      "w": 794,
+      "h": 1123,
+      "title": "Live sheet — redraws from what is entered (A4)",
+      "paper": "a4"
+    },
+    "DesktopEntryMedicine.dc.html": {
+      "x": 0,
+      "y": 11150,
+      "w": 1440,
+      "h": 1080,
+      "title": "Desktop · entry, opened at the Pill Builder",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "Landing.dc.html": {
+      "x": 0,
+      "y": 12830,
+      "w": 1440,
+      "h": 5800,
+      "title": "Landing page — desktop",
+      "expand": "fill",
+      "is_interactive": true
+    },
+    "LandingMobile.dc.html": {
+      "x": 1520,
+      "y": 12830,
+      "w": 390,
+      "h": 7500,
+      "title": "Landing page — phone (390)",
+      "is_interactive": true
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Pictograms.dc.html",
+    "Pills.dc.html",
+    "SunArc.dc.html",
+    "SunArcStates.dc.html",
+    "FridgeSheet.dc.html",
+    "FridgeSheetMono.dc.html",
+    "Start.dc.html",
+    "AddMedicine.dc.html",
+    "When.dc.html",
+    "HowLong.dc.html",
+    "Rules.dc.html",
+    "Household.dc.html",
+    "SheetPreview.dc.html",
+    "AddMedicineStates.dc.html",
+    "HowLongStates.dc.html",
+    "DailyStrip.dc.html",
+    "PrintEdgeCases.dc.html",
+    "DesktopEntry.dc.html",
+    "DesktopPrint.dc.html",
+    "LiveSheet.dc.html",
+    "DesktopEntryMedicine.dc.html",
+    "Landing.dc.html",
+    "LandingMobile.dc.html"
+  ],
+  "notes": {
+    "stage1": {
+      "x": 0,
+      "y": -300,
+      "text": "Stage 1 · The design system",
+      "kind": "title1",
+      "maxW": 4480
+    },
+    "arc": {
+      "x": 0,
+      "y": 1500,
+      "text": "The Sun Arc — time without clocks",
+      "kind": "title1",
+      "maxW": 1930
+    },
+    "sheet": {
+      "x": 0,
+      "y": 3000,
+      "text": "The fridge sheet — in color, and on a black & white printer",
+      "kind": "title1",
+      "maxW": 1668
+    },
+    "stage2": {
+      "x": 0,
+      "y": 4700,
+      "text": "Stage 2 · The flow, in order — press Play on Start",
+      "kind": "title1",
+      "maxW": 3210
+    },
+    "states": {
+      "x": 0,
+      "y": 6150,
+      "text": "States and edge cases",
+      "kind": "title1",
+      "maxW": 3404
+    },
+    "prints": {
+      "x": 0,
+      "y": 7830,
+      "text": "Prints — daily strips and other medicine forms",
+      "kind": "title1",
+      "maxW": 1668
+    },
+    "desktop": {
+      "x": 0,
+      "y": 9550,
+      "text": "Desktop · split view, keyboard first",
+      "kind": "title1",
+      "maxW": 3834
+    },
+    "landing": {
+      "x": 0,
+      "y": 12530,
+      "text": "Landing page · desktop and phone",
+      "kind": "title1",
+      "maxW": 1910
+    }
+  },
+  "designSystems": []
+}

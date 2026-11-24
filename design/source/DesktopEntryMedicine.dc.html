@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wordless — desktop entry, at the Pill Builder</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Young+Serif&amp;family=Kalam:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3B3A8C}a:hover{color:#1F1C33}
+.wl-grain{background-image:url(/_blob/4d7804bf572af9cc85e09178a9207d13);background-size:256px 256px}
+
+@keyframes wl-drop{0%{transform:translateY(-86px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.08,.9)}78%{transform:translateY(-7px) scale(.97,1.03)}90%{transform:translateY(1px)}100%{transform:translateY(0) scale(1)}}
+.wl-drop{animation:wl-drop .7s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-spin{to{transform:rotate(360deg)}}
+.wl-spin{animation:wl-spin 40s linear infinite}
+@keyframes wl-nudge{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-6deg)}45%{transform:translateX(8px) rotate(5deg)}70%{transform:translateX(-5px)}85%{transform:translateX(3px)}}
+.wl-nudgeA{animation:wl-nudge .55s ease both}
+.wl-nudgeB{animation:wl-nudge .55s ease both}
+@keyframes wl-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.wl-fade{animation:wl-fade .4s ease both}
+@media (prefers-reduced-motion: reduce){.wl-drop,.wl-spin,.wl-nudgeA,.wl-nudgeB,.wl-fade{animation:none}}
+button:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+button:disabled{cursor:default}
+
+@keyframes wl-dropA{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+@keyframes wl-dropB{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+.wl-dropA{animation:wl-dropA .66s cubic-bezier(.3,.7,.4,1) both}.wl-dropB{animation:wl-dropB .66s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-popA{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+@keyframes wl-popB{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+.wl-popA{animation:wl-popA .38s ease both}.wl-popB{animation:wl-popB .38s ease both}
+@keyframes wl-stampA{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+@keyframes wl-stampB{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+.wl-stampA{animation:wl-stampA .5s cubic-bezier(.2,.8,.3,1) both}.wl-stampB{animation:wl-stampB .5s cubic-bezier(.2,.8,.3,1) both}
+@keyframes wl-printA{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+@keyframes wl-printB{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+.wl-printA{animation:wl-printA 1.25s cubic-bezier(.45,.05,.3,1) both}.wl-printB{animation:wl-printB 1.25s cubic-bezier(.45,.05,.3,1) both}
+@media (prefers-reduced-motion: reduce){.wl-dropA,.wl-dropB,.wl-popA,.wl-popB,.wl-stampA,.wl-stampB,.wl-printA,.wl-printB{animation:none}}
+a:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+
+</style>
+</helmet>
+<div style="min-height:100vh;background:#F6EEDD">
+<dc-import name="DesktopEntry" initial="medicine" heading="{{ hd.name }}" hint-size="100%,1000px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading":{"editor":null,"default":"Young Serif"},"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+renderVals() {
+  const HEADS = {"Young Serif": {"name": "Young Serif", "f": "'Young Serif',Georgia,serif", "w": "400", "st": "100%", "ls": "-0.01em", "k": "0.92", "kind": "heavy old-style serif", "note": "Heavy and bookish: a picture book with grown-up manners."}};
+  const hd = HEADS[this.props.heading] || HEADS['Young Serif'];
+  return { hd: hd };
+}
+}
+</script>
+</body>
+</html>

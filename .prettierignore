@@ -1,0 +1,6 @@
+build/
+.react-router/
+design/
+test-results/
+playwright-report/
+package-lock.json

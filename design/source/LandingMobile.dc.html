@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wordless — landing page on a phone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Young+Serif&amp;family=Kalam:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3B3A8C}a:hover{color:#1F1C33}
+.wl-grain{background-image:url(/_blob/4d7804bf572af9cc85e09178a9207d13);background-size:256px 256px}
+
+@keyframes wl-drop{0%{transform:translateY(-86px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.08,.9)}78%{transform:translateY(-7px) scale(.97,1.03)}90%{transform:translateY(1px)}100%{transform:translateY(0) scale(1)}}
+.wl-drop{animation:wl-drop .7s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-spin{to{transform:rotate(360deg)}}
+.wl-spin{animation:wl-spin 40s linear infinite}
+@keyframes wl-nudge{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-6deg)}45%{transform:translateX(8px) rotate(5deg)}70%{transform:translateX(-5px)}85%{transform:translateX(3px)}}
+.wl-nudgeA{animation:wl-nudge .55s ease both}
+.wl-nudgeB{animation:wl-nudge .55s ease both}
+@keyframes wl-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.wl-fade{animation:wl-fade .4s ease both}
+@media (prefers-reduced-motion: reduce){.wl-drop,.wl-spin,.wl-nudgeA,.wl-nudgeB,.wl-fade{animation:none}}
+button:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+button:disabled{cursor:default}
+
+@keyframes wl-dropA{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+@keyframes wl-dropB{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+.wl-dropA{animation:wl-dropA .66s cubic-bezier(.3,.7,.4,1) both}.wl-dropB{animation:wl-dropB .66s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-popA{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+@keyframes wl-popB{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+.wl-popA{animation:wl-popA .38s ease both}.wl-popB{animation:wl-popB .38s ease both}
+@keyframes wl-stampA{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+@keyframes wl-stampB{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+.wl-stampA{animation:wl-stampA .5s cubic-bezier(.2,.8,.3,1) both}.wl-stampB{animation:wl-stampB .5s cubic-bezier(.2,.8,.3,1) both}
+@keyframes wl-printA{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+@keyframes wl-printB{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+.wl-printA{animation:wl-printA 1.25s cubic-bezier(.45,.05,.3,1) both}.wl-printB{animation:wl-printB 1.25s cubic-bezier(.45,.05,.3,1) both}
+@media (prefers-reduced-motion: reduce){.wl-dropA,.wl-dropB,.wl-popA,.wl-popB,.wl-stampA,.wl-stampB,.wl-printA,.wl-printB{animation:none}}
+a:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+
+.wlp-root{container:wlp / inline-size}
+.wlp-wrap{max-width:1280px;margin:0 auto;padding:0 56px;box-sizing:border-box}
+.wlp-nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:84px}
+.wlp-links{display:flex;align-items:center;gap:28px}
+.wlp-hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:56px;align-items:center;padding:36px 0 72px}
+.wlp-h1{font-size:76px;line-height:1.02;margin:0}
+.wlp-h2{font-size:52px;line-height:1.06;margin:0}
+.wlp-lead{font-size:21px;line-height:1.5;margin:0}
+.wlp-two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+.wlp-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px}
+.wlp-step{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center}
+.wlp-phone{width:273px;height:591px;flex:none;border-radius:26px;overflow:hidden;box-shadow:0 0 0 2.5px #1F1C33, 8px 9px 0 2.5px #D9C7A2}
+.wlp-phone > .wlp-in{width:390px;height:844px;transform:scale(.7);transform-origin:0 0}
+.wlp-showcase{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:40px;align-items:center}
+.wlp-sheet{position:relative;width:635px;height:898px;flex:none;background:#FFFFFF;box-shadow:0 0 0 2px #1F1C33, 10px 11px 0 2px #D9C7A2}
+.wlp-sheet > .wlp-in{width:794px;height:1123px;transform:scale(.8);transform-origin:0 0}
+.wlp-notes{display:flex;flex-direction:column;gap:40px}
+.wlp-diff{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.wlp-wide{grid-column:span 2}
+.wlp-ctas{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.wlp-sec{padding:96px 0}
+.wlp-safe{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:48px;align-items:center}
+.wlp-mobile-only{display:none}
+@keyframes wlp-orbit{0%,10%{transform:rotate(-172deg)}40%,48%{transform:rotate(-90deg)}76%,82%{transform:rotate(-8deg)}92%,100%{transform:rotate(14deg)}}
+@keyframes wlp-sunfade{0%{opacity:0}4%,84%{opacity:1}90%,100%{opacity:0}}
+@keyframes wlp-suncol{0%,20%{fill:#F2A516}40%,55%{fill:#EE7A5B}72%,100%{fill:#B4502E}}
+@keyframes wlp-sky{0%,18%{fill:#FBE3A0}40%,55%{fill:#F9CDBC}74%,84%{fill:#EDB9A0}90%,96%{fill:#DEDBF1}100%{fill:#FBE3A0}}
+@keyframes wlp-p1{0%,10%{opacity:0;transform:translateY(-80px)}12%{opacity:1}15%{transform:translateY(7px)}17%{transform:translateY(-6px)}19%,94%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+@keyframes wlp-p2{0%,46%{opacity:0;transform:translateY(-80px)}48%{opacity:1}51%{transform:translateY(7px)}53%{transform:translateY(-6px)}55%,94%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+@keyframes wlp-p3{0%,80%{opacity:0;transform:translateY(-80px)}82%{opacity:1}85%{transform:translateY(7px)}87%{transform:translateY(-6px)}89%,94%{opacity:1;transform:none}98%,100%{opacity:0;transform:none}}
+@keyframes wlp-moon{0%,86%{opacity:0}91%,96%{opacity:1}100%{opacity:0}}
+@keyframes wlp-n1{0%,14%{opacity:0}16%,48%{opacity:1}50%,100%{opacity:0}}
+@keyframes wlp-n2{0%,50%{opacity:0}52%,82%{opacity:1}84%,100%{opacity:0}}
+@keyframes wlp-n3{0%,84%{opacity:0}86%,95%{opacity:1}98%,100%{opacity:0}}
+@keyframes wlp-spin{to{transform:rotate(360deg)}}
+.wlp-sun{transform-box:view-box;transform-origin:280px 262px;transform:rotate(-90deg);animation:wlp-orbit 10s ease-in-out infinite, wlp-sunfade 10s linear infinite}
+.wlp-sunfill{animation:wlp-suncol 10s linear infinite}
+.wlp-rays{transform-box:fill-box;transform-origin:center;animation:wlp-spin 30s linear infinite}
+.wlp-sky{animation:wlp-sky 10s linear infinite}
+.wlp-p1{animation:wlp-p1 10s ease-out infinite}.wlp-p2{animation:wlp-p2 10s ease-out infinite}.wlp-p3{animation:wlp-p3 10s ease-out infinite}
+.wlp-moon{opacity:0;animation:wlp-moon 10s linear infinite}
+.wlp-n1{opacity:0;animation:wlp-n1 10s linear infinite}.wlp-n2{opacity:0;animation:wlp-n2 10s linear infinite}.wlp-n3{opacity:1;animation:wlp-n3 10s linear infinite}
+.wlp-cta{transition:transform .15s ease, box-shadow .15s ease}.wlp-cta:hover{transform:translate(-1px,-1px)}
+@media (prefers-reduced-motion: reduce){.wlp-sun,.wlp-sunfill,.wlp-rays,.wlp-sky,.wlp-p1,.wlp-p2,.wlp-p3,.wlp-moon,.wlp-n1,.wlp-n2,.wlp-n3{animation:none}}
+@container wlp (max-width: 760px){
+/* one scale on phones: 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 — 20px side margins — 64px between sections */
+.wlp-wrap{padding:0 20px}
+.wlp-nav{height:64px}
+.wlp-links{display:none}
+.wlp-hero{grid-template-columns:minmax(0,1fr);gap:32px;padding:16px 0 64px}
+.wlp-h1{font-size:44px;line-height:1.04}
+.wlp-h2{font-size:34px;line-height:1.1}
+.wlp-lead{font-size:18px}
+.wlp-two{grid-template-columns:minmax(0,1fr);gap:32px}
+.wlp-steps{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;gap:16px;padding:0 20px 16px;margin:0 -20px}
+.wlp-step{flex:0 0 272px;scroll-snap-align:start;align-items:flex-start;text-align:left;gap:12px}
+.wlp-step .wlp-phone{margin-top:4px}
+.wlp-phone{width:242px;height:524px}
+.wlp-phone > .wlp-in{transform:scale(.62)}
+.wlp-showcase{grid-template-columns:minmax(0,1fr);gap:24px;justify-items:start}
+.wlp-sheet{width:349px;height:494px}
+.wlp-sheet > .wlp-in{transform:scale(.44)}
+.wlp-notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;width:100%}
+.wlp-diff{grid-template-columns:minmax(0,1fr);gap:16px}
+.wlp-wide{grid-column:auto}
+.wlp-sec{padding:64px 0}
+.wlp-safe{grid-template-columns:minmax(0,1fr);gap:24px;justify-items:start}
+.wlp-ctas{flex-direction:column;align-items:stretch;gap:12px;width:100%}
+.wlp-desk-only{display:none}
+.wlp-mobile-only{display:block}
+.m-g8{gap:8px!important}.m-g12{gap:12px!important}.m-g16{gap:16px!important}.m-g24{gap:24px!important}.m-g32{gap:32px!important}
+.m-mt8{margin-top:8px!important}
+.m-pt4{padding-top:4px!important}
+.m-pad8{padding:8px 12px!important}.m-pad12{padding:12px 16px!important}
+.m-left{text-align:left!important;align-items:flex-start!important;justify-content:flex-start!important}
+.m-start{justify-self:start!important;align-self:flex-start!important}
+.m-card{padding:24px!important}
+.m-swipe{text-align:left!important;margin-top:-16px}
+.m-foot{padding-top:24px!important;padding-bottom:32px!important;flex-direction:column;align-items:flex-start!important;gap:12px!important}
+}
+@container wlp (max-width: 389px){
+.wlp-sheet{width:318px;height:449px}
+.wlp-sheet > .wlp-in{transform:scale(.4)}
+.wlp-step{flex-basis:256px}
+}
+
+</style>
+</helmet>
+<div style="width:390px;min-height:844px;background:#F6EEDD;overflow:hidden"><dc-import name="Landing" heading="{{ hd.name }}" hint-size="390px,7500px"></dc-import></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading":{"editor":null,"default":"Young Serif"},"$preview":{"width":390,"height":7500}}'>
+class Component extends DCLogic {
+renderVals() {
+  const HEADS = {"Young Serif": {"name": "Young Serif", "f": "'Young Serif',Georgia,serif", "w": "400", "st": "100%", "ls": "-0.01em", "k": "0.92", "kind": "heavy old-style serif", "note": "Heavy and bookish: a picture book with grown-up manners."}};
+  const hd = HEADS[this.props.heading] || HEADS['Young Serif'];
+  return { hd: hd };
+}
+}
+</script>
+</body>
+</html>

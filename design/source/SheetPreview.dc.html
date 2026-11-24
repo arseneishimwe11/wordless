@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wordless — the sheet, print preview</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Young+Serif&amp;family=Kalam:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3B3A8C}a:hover{color:#1F1C33}
+.wl-grain{background-image:url(/_blob/4d7804bf572af9cc85e09178a9207d13);background-size:256px 256px}
+
+@keyframes wl-drop{0%{transform:translateY(-86px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.08,.9)}78%{transform:translateY(-7px) scale(.97,1.03)}90%{transform:translateY(1px)}100%{transform:translateY(0) scale(1)}}
+.wl-drop{animation:wl-drop .7s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-spin{to{transform:rotate(360deg)}}
+.wl-spin{animation:wl-spin 40s linear infinite}
+@keyframes wl-nudge{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px) rotate(-6deg)}45%{transform:translateX(8px) rotate(5deg)}70%{transform:translateX(-5px)}85%{transform:translateX(3px)}}
+.wl-nudgeA{animation:wl-nudge .55s ease both}
+.wl-nudgeB{animation:wl-nudge .55s ease both}
+@keyframes wl-fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.wl-fade{animation:wl-fade .4s ease both}
+@media (prefers-reduced-motion: reduce){.wl-drop,.wl-spin,.wl-nudgeA,.wl-nudgeB,.wl-fade{animation:none}}
+button:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+button:disabled{cursor:default}
+
+@keyframes wl-dropA{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+@keyframes wl-dropB{0%{transform:translateY(-70px) scale(.86);opacity:0}38%{opacity:1}60%{transform:translateY(5px) scale(1.07,.92)}80%{transform:translateY(-5px)}100%{transform:none}}
+.wl-dropA{animation:wl-dropA .66s cubic-bezier(.3,.7,.4,1) both}.wl-dropB{animation:wl-dropB .66s cubic-bezier(.3,.7,.4,1) both}
+@keyframes wl-popA{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+@keyframes wl-popB{0%{transform:scale(.3);opacity:0}70%{transform:scale(1.12);opacity:1}100%{transform:none}}
+.wl-popA{animation:wl-popA .38s ease both}.wl-popB{animation:wl-popB .38s ease both}
+@keyframes wl-stampA{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+@keyframes wl-stampB{0%{transform:scale(2.3) rotate(-24deg);opacity:0}55%{transform:scale(.9) rotate(-10deg);opacity:1}75%{transform:scale(1.05) rotate(-13deg)}100%{transform:scale(1) rotate(-12deg);opacity:1}}
+.wl-stampA{animation:wl-stampA .5s cubic-bezier(.2,.8,.3,1) both}.wl-stampB{animation:wl-stampB .5s cubic-bezier(.2,.8,.3,1) both}
+@keyframes wl-printA{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+@keyframes wl-printB{0%{transform:translateY(-102%)}70%{transform:translateY(2%)}85%{transform:translateY(-.6%)}100%{transform:none}}
+.wl-printA{animation:wl-printA 1.25s cubic-bezier(.45,.05,.3,1) both}.wl-printB{animation:wl-printB 1.25s cubic-bezier(.45,.05,.3,1) both}
+@media (prefers-reduced-motion: reduce){.wl-dropA,.wl-dropB,.wl-popA,.wl-popB,.wl-stampA,.wl-stampB,.wl-printA,.wl-printB{animation:none}}
+a:focus-visible{outline:3px solid #3B3A8C;outline-offset:3px}
+
+</style>
+</helmet>
+<div style="width:390px;height:844px;position:relative;overflow:hidden;background:#F6EEDD;color:#1F1C33;font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif">
+<svg width="0" height="0" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><defs><pattern id="wl-p-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.35" fill="#1F1C33" fill-opacity=".55"/></pattern><pattern id="wl-p-diag" width="5.5" height="5.5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1.9" height="5.5" fill="#1F1C33" fill-opacity=".5"/></pattern><pattern id="wl-p-back" width="5.5" height="5.5" patternUnits="userSpaceOnUse" patternTransform="rotate(-45)"><rect width="1.9" height="5.5" fill="#1F1C33" fill-opacity=".5"/></pattern><pattern id="wl-p-horiz" width="6" height="5" patternUnits="userSpaceOnUse"><rect width="6" height="1.7" fill="#1F1C33" fill-opacity=".5"/></pattern><pattern id="wl-p-vert" width="5" height="6" patternUnits="userSpaceOnUse"><rect width="1.7" height="6" fill="#FFFFFF" fill-opacity=".55"/></pattern><pattern id="wl-p-cross" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1.4" height="6" fill="#1F1C33" fill-opacity=".5"/><rect width="6" height="1.4" fill="#1F1C33" fill-opacity=".5"/></pattern><pattern id="wl-p-check" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#1F1C33" fill-opacity=".38"/><rect x="4" y="4" width="4" height="4" fill="#1F1C33" fill-opacity=".38"/></pattern><pattern id="wl-p-rings" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.9" fill="none" stroke="#1F1C33" stroke-width="1.1" stroke-opacity=".6"/></pattern><pattern id="wl-p-zig" width="8" height="5" patternUnits="userSpaceOnUse"><path d="M0 4L2 1.2L4 4L6 1.2L8 4" fill="none" stroke="#1F1C33" stroke-width="1.15" stroke-opacity=".6"/></pattern><pattern id="wl-p-pstripe" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="2.6" height="7" fill="#1F1C33" fill-opacity=".42"/></pattern></defs></svg>
+<a href="Household.dc.html" aria-label="Back" style="position:absolute;left:6px;top:8px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:#1F1C33;text-decoration:none;border-radius:50%"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M14.99 4.49C13.93 5.74 8.63 9.49 8.64 12C8.64 14.51 13.93 18.29 14.99 19.54" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a><div style="position:absolute;left:70px;right:70px;top:8px;height:48px;display:flex;align-items:center;justify-content:center"><span style="font-size:17px;font-weight:700">Print</span></div>
+<div aria-hidden="true" style="position:absolute;left:10px;right:10px;top:70px;height:20px;box-sizing:border-box;background:#1F1C33;border-radius:10px;z-index:3"><div style="position:absolute;left:24px;right:24px;top:8px;height:4px;border-radius:2px;background:#3A3655"></div></div>
+<button type="button" onClick="{{ replay }}" aria-label="Print the preview again" style="position:absolute;left:24px;top:82px;width:342px;height:494px;margin:0;padding:0;border:none;background:transparent;overflow:hidden;cursor:pointer;z-index:2">
+<div class="{{ printCls }}" style="position:absolute;left:0;top:0;width:342px;height:484px;background:#FFFFFF;box-shadow:0 0 0 1.5px #1F1C33">
+<div style="position:absolute;left:0;top:0;width:342px;height:484px;overflow:hidden">
+<sc-if value="{{ isSheet }}" hint-placeholder-val="{{ true }}"><div style="width:794px;height:1123px;transform:scale(0.43);transform-origin:0 0"><dc-import name="FridgeSheet" mono="{{ monoStr }}" heading="{{ hd.name }}" hint-size="794px,1123px"></dc-import></div></sc-if>
+<sc-if value="{{ isStrip }}" hint-placeholder-val="{{ false }}"><div style="width:794px;height:1123px;transform:scale(0.43);transform-origin:0 0"><dc-import name="DailyStrip" mono="{{ monoStr }}" heading="{{ hd.name }}" hint-size="794px,1123px"></dc-import></div></sc-if>
+</div>
+<div class="{{ stampCls }}" style="position:absolute;right:14px;bottom:72px;width:92px;height:92px;animation-delay:1.2s"><svg viewBox="0 0 48 48" width="92" height="92" role="img" aria-label="Ready" style="display:block;overflow:visible"><g transform="translate(1.5 1.3)"><circle cx="24" cy="24" r="16.6" fill="none" stroke="#CDCAEB" stroke-width="4"/></g><g fill="none" stroke="#1F1C33" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.78 31.54C7.59 32.6 9.7 36.15 11.66 37.87C13.62 39.58 16.07 41.13 18.54 41.86C21 42.59 23.87 42.59 26.45 42.25C29.03 41.92 31.76 41.14 34.02 39.83C36.27 38.52 38.55 36.57 40 34.39C41.45 32.21 42.36 29.37 42.72 26.75C43.09 24.13 42.92 21.2 42.18 18.68C41.44 16.15 40.03 13.55 38.29 11.58C36.55 9.61 34.15 8 31.75 6.86C29.36 5.72 26.52 4.76 23.89 4.75C21.27 4.75 18.46 5.73 16 6.83C13.54 7.94 10.93 9.4 9.14 11.38C7.35 13.36 5.98 16.13 5.25 18.74C4.52 21.35 4.29 24.4 4.76 27.04C5.23 29.69 7.52 33.34 8.08 34.6" stroke="#2E2C6B"/><path d="M20.01 10.82C19.11 11.25 16.09 12.14 14.61 13.39C13.13 14.64 11.96 16.51 11.12 18.31C10.27 20.12 9.55 22.23 9.52 24.22C9.49 26.2 10.08 28.42 10.95 30.23C11.82 32.05 13.2 33.79 14.74 35.1C16.28 36.42 18.25 37.61 20.18 38.1C22.12 38.59 24.36 38.38 26.35 38.03C28.35 37.68 30.44 37.07 32.15 36C33.86 34.93 35.59 33.35 36.62 31.62C37.64 29.9 38.05 27.67 38.3 25.62C38.55 23.58 38.71 21.29 38.11 19.36C37.51 17.44 36.13 15.55 34.71 14.06C33.3 12.57 31.5 11.24 29.62 10.41C27.74 9.59 25.47 9.03 23.43 9.11C21.39 9.2 18.4 10.64 17.39 10.94" stroke="#2E2C6B" stroke-width="1.8"/><path d="M16.54 24.5C17.36 25.39 18.89 30.97 21.47 29.81C24.05 28.65 30.26 19.56 32.02 17.51" stroke="#2E2C6B" stroke-width="3.2"/><path d="M44.87 18.42L46.41 18.01" stroke="#2E2C6B" stroke-width="1.6"/><path d="M39.28 8.73L40.41 7.6" stroke="#2E2C6B" stroke-width="1.6"/><path d="M29.58 3.13L30.01 1.59" stroke="#2E2C6B" stroke-width="1.6"/><path d="M18.41 3.13L18 1.59" stroke="#2E2C6B" stroke-width="1.6"/><path d="M8.72 8.73L7.6 7.59" stroke="#2E2C6B" stroke-width="1.6"/><path d="M3.14 18.41L1.59 18" stroke="#2E2C6B" stroke-width="1.6"/><path d="M3.14 29.59L1.59 30" stroke="#2E2C6B" stroke-width="1.6"/><path d="M8.73 39.28L7.6 40.41" stroke="#2E2C6B" stroke-width="1.6"/><path d="M18.4 44.86L18 46.41" stroke="#2E2C6B" stroke-width="1.6"/><path d="M29.58 44.87L30 46.41" stroke="#2E2C6B" stroke-width="1.6"/><path d="M39.26 39.28L40.41 40.4" stroke="#2E2C6B" stroke-width="1.6"/><path d="M44.87 29.58L46.41 30.01" stroke="#2E2C6B" stroke-width="1.6"/></g></svg></div>
+</div>
+</button>
+<div role="group" aria-label="Printer" style="position:absolute;left:16px;right:16px;top:592px;height:48px;box-sizing:border-box;display:flex;gap:2px;background:#1F1C33;border:2px solid #1F1C33;border-radius:20px 16px 19px 15px / 16px 20px 15px 19px;overflow:hidden"><button type="button" aria-pressed="{{ m_color.on }}" onClick="{{ m_color.tap }}" style="flex:1;min-width:0;border:none;margin:0;padding:0 6px;background:{{ m_color.bg }};color:{{ m_color.fg }};font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s ease">Color</button><button type="button" aria-pressed="{{ m_bw.on }}" onClick="{{ m_bw.tap }}" style="flex:1;min-width:0;border:none;margin:0;padding:0 6px;background:{{ m_bw.bg }};color:{{ m_bw.fg }};font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s ease">Black &amp; white</button></div>
+<div role="group" aria-label="What to print" style="position:absolute;left:16px;right:16px;top:652px;height:48px;box-sizing:border-box;display:flex;gap:2px;background:#1F1C33;border:2px solid #1F1C33;border-radius:20px 16px 19px 15px / 16px 20px 15px 19px;overflow:hidden"><button type="button" aria-pressed="{{ o_sheet.on }}" onClick="{{ o_sheet.tap }}" style="flex:1;min-width:0;border:none;margin:0;padding:0 6px;background:{{ o_sheet.bg }};color:{{ o_sheet.fg }};font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s ease">Fridge sheet</button><button type="button" aria-pressed="{{ o_strip.on }}" onClick="{{ o_strip.tap }}" style="flex:1;min-width:0;border:none;margin:0;padding:0 6px;background:{{ o_strip.bg }};color:{{ o_strip.fg }};font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .2s ease">Daily strips</button></div>
+<p style="position:absolute;left:20px;right:20px;top:710px;margin:0;font-family:'Kalam','Comic Sans MS',cursive;font-size:17px;line-height:1.3;color:#3B3A8C">tap the page to print it again · both fit A4</p>
+<button type="button" onClick="{{ replay }}" style="position:absolute;left:16px;right:16px;top:752px;height:56px;margin:0;box-sizing:border-box;border:2.5px solid #1F1C33;border-radius:20px 16px 19px 15px / 16px 20px 15px 19px;background:#1F1C33;color:#F6EEDD;box-shadow:4px 4px 0 #F2A516;font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer">Print</button>
+<div class="wl-grain" aria-hidden="true" style="position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none;mix-blend-mode:multiply;opacity:0.5"></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading":{"editor":null,"default":"Young Serif"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+
+renderVals() {
+  const HEADS = {"Young Serif": {"name": "Young Serif", "f": "'Young Serif',Georgia,serif", "w": "400", "st": "100%", "ls": "-0.01em", "k": "0.92", "kind": "heavy old-style serif", "note": "Heavy and bookish: a picture book with grown-up manners."}};
+  const hd = HEADS[this.props.heading] || HEADS['Young Serif'];
+  const s = this.state || {};
+  const mono = !!s.mono, out = s.out || 'sheet', run = s.run || 0;
+  const seg = (on, fn) => ({ on: on, bg: on ? '#1F1C33' : '#FBF6EA', fg: on ? '#F6EEDD' : '#1F1C33', tap: fn });
+  const again = (o) => this.setState(Object.assign({ run: run + 1 }, o || {}));
+  return {
+    hd: hd, monoStr: mono ? '1' : '', isSheet: out === 'sheet', isStrip: out === 'strip',
+    printCls: run % 2 ? 'wl-printA' : 'wl-printB', stampCls: run % 2 ? 'wl-stampA' : 'wl-stampB',
+    m_color: seg(!mono, () => this.setState({ mono: false })), m_bw: seg(mono, () => this.setState({ mono: true })),
+    o_sheet: seg(out === 'sheet', () => again({ out: 'sheet' })), o_strip: seg(out === 'strip', () => again({ out: 'strip' })),
+    replay: () => again()
+  };
+}
+
+}
+</script>
+</body>
+</html>

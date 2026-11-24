@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Wordless — fridge sheet, black and white printer (A4)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&amp;family=Young+Serif&amp;family=Kalam:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#3B3A8C}a:hover{color:#1F1C33}
+.wl-grain{background-image:url(/_blob/4d7804bf572af9cc85e09178a9207d13);background-size:256px 256px}
+
+</style>
+</helmet>
+<div style="width:794px;height:1123px;position:relative;overflow:hidden;background:#FFFFFF">
+<dc-import name="FridgeSheet" mono="1" heading="{{ hd.name }}" hint-size="794px,1123px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading":{"editor":null,"default":"Young Serif"},"$preview":{"width":794,"height":1123}}'>
+class Component extends DCLogic {
+renderVals() {
+  const HEADS = {"Young Serif": {"name": "Young Serif", "f": "'Young Serif',Georgia,serif", "w": "400", "st": "100%", "ls": "-0.01em", "k": "0.92", "kind": "heavy old-style serif", "note": "Heavy and bookish: a picture book with grown-up manners."}};
+  const hd = HEADS[this.props.heading] || HEADS['Young Serif'];
+  return { hd: hd };
+}
+}
+</script>
+</body>
+</html>

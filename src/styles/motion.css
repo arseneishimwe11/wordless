@@ -1,0 +1,160 @@
+/*
+ * Shared keyframes, copied from the design. Components apply them with the matching
+ * duration and easing tokens, for example:
+ *   animation: wl-drop var(--duration-drop) var(--ease-drop) both;
+ * To replay an animation, re-mount the element with a new React `key`.
+ * The reduced-motion block in global.css skips every animation to its end state.
+ */
+
+/* A dose chip falls onto the Sun Arc and squashes as it lands. */
+@keyframes wl-drop {
+  0% {
+    transform: translateY(-86px) scale(0.86);
+    opacity: 0;
+  }
+
+  38% {
+    opacity: 1;
+  }
+
+  60% {
+    transform: translateY(5px) scale(1.08, 0.9);
+  }
+
+  78% {
+    transform: translateY(-7px) scale(0.97, 1.03);
+  }
+
+  90% {
+    transform: translateY(1px);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* A pill unit drops into the Pill Builder. */
+@keyframes wl-drop-unit {
+  0% {
+    transform: translateY(-70px) scale(0.86);
+    opacity: 0;
+  }
+
+  38% {
+    opacity: 1;
+  }
+
+  60% {
+    transform: translateY(5px) scale(1.07, 0.92);
+  }
+
+  80% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+/* Course Grid boxes and rule previews pop in. */
+@keyframes wl-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+
+  70% {
+    transform: scale(1.12);
+    opacity: 1;
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+/* A rubber stamp lands and rests slightly turned. */
+@keyframes wl-stamp {
+  0% {
+    transform: scale(2.3) rotate(-24deg);
+    opacity: 0;
+  }
+
+  55% {
+    transform: scale(0.9) rotate(-10deg);
+    opacity: 1;
+  }
+
+  75% {
+    transform: scale(1.05) rotate(-13deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(-12deg);
+    opacity: 1;
+  }
+}
+
+/* The sheet slides out of the printer. */
+@keyframes wl-print {
+  0% {
+    transform: translateY(-102%);
+  }
+
+  70% {
+    transform: translateY(2%);
+  }
+
+  85% {
+    transform: translateY(-0.6%);
+  }
+
+  100% {
+    transform: none;
+  }
+}
+
+/* A gentle "not yet" shake for errors. */
+@keyframes wl-nudge {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20% {
+    transform: translateX(-9px) rotate(-6deg);
+  }
+
+  45% {
+    transform: translateX(8px) rotate(5deg);
+  }
+
+  70% {
+    transform: translateX(-5px);
+  }
+
+  85% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes wl-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The sun's rays turn slowly. */
+@keyframes wl-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

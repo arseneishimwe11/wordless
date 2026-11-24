@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 1 of 11, project scaffold. See [Roadmap](#roadmap).
+> **Status:** Phase 2 of 11, design tokens and global styles. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -27,6 +27,7 @@ npx playwright install chromium
 | ------------------- | ------------------------------------------------------------------------ |
 | `npm run dev`       | Development server with hot reload                                       |
 | `npm run build`     | Production build into `build/client` (a static single-page app)          |
+| `npm run tokens`    | Regenerates `src/styles/tokens.css` from `src/styles/tokens.ts`          |
 | `npm run preview`   | Serves the production build                                              |
 | `npm run typecheck` | Generates route types, then runs TypeScript (strict)                     |
 | `npm run lint`      | ESLint: TypeScript, React hooks, accessibility (jsx-a11y strict)         |
@@ -79,7 +80,7 @@ Dependencies point one way: `routes → features → components / graphics → s
 
 **Styling**
 
-- Every color, size, space, radius, shadow and duration comes from a design token (CSS custom properties, introduced in Phase 2). Stylelint rejects raw values.
+- Every color, size, space, radius, shadow and duration comes from a design token (see [Design tokens](#design-tokens)). Stylelint rejects raw values.
 - CSS Modules are co-located with components. Global CSS lives only in `src/styles/`.
 - Build mobile-first. Every animation must respect `prefers-reduced-motion`.
 
@@ -97,10 +98,40 @@ Dependencies point one way: `routes → features → components / graphics → s
 
 - Domain rules get unit tests. Components get behaviour tests (Testing Library: query by role and label). Screens get Playwright tests, including an axe scan.
 
+## Design tokens
+
+Every visual value in the design lives in **`src/styles/tokens.ts`**: one typed file and the only place a hex code or pixel size is written. `npm run tokens` turns it into `src/styles/tokens.css`, which defines a CSS custom property for each token, named `--{group}-{key}`. A unit test fails if the two files drift apart.
+
+| Group                                            | Example                                                   | Notes                                                                             |
+| ------------------------------------------------ | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `color`                                          | `--color-ink`, `--color-sunrise-tint`, `--color-pill-red` | Paper and ink, the four times of day (ink, tint, wash), states, pill colors       |
+| `display`                                        | `--display-26` → 23.92px                                  | Young Serif, keyed by the **size written in the design**; drawn at ×0.92          |
+| `text`                                           | `--text-17`                                               | Every other font size, exactly as designed                                        |
+| `leading`                                        | `--leading-normal`, `--leading-130`                       | `normal` is the design's default; others are ×100 (`130` = 1.3)                   |
+| `space`                                          | `--space-14`                                              | Gaps, padding and margins, by their px value                                      |
+| `stroke`                                         | `--stroke-base` (2.5px)                                   | Line weights                                                                      |
+| `radius`                                         | `--radius-control`, `--radius-cell-1…4`                   | Hand-drawn corners; numbered families are rotated so repeats never look identical |
+| `shadow`                                         | `--shadow-cta`, `--shadow-dose-offset`                    | Hard, unblurred shadows and rings                                                 |
+| `duration`, `ease`                               | `--duration-drop`, `--ease-drop`                          | Paired with the keyframes in `motion.css`                                         |
+| `opacity`, `layer`, `font`, `weight`, `tracking` |                                                           |                                                                                   |
+
+Sizes keep the numbers the design uses, so a value seen in the design maps to exactly one token, without converting it to a scale step.
+
+**Adding or changing a token:** edit `tokens.ts`, run `npm run tokens`, and commit both files.
+
+**Rules that bite:**
+
+- A token can only refer to other tokens. Custom properties resolve where they are defined (`:root`), so a token like `var(--dose-color)` would ignore the element's value. For colors that vary per element, tokens hold the geometry and the component adds the color: `box-shadow: var(--shadow-dose-offset) var(--dose-color)`. A unit test enforces this.
+- The design sizes elements content-box: a `60px` swatch with a 2px border is 64px wide. The app uses border-box, so when copying a size from the design, add its border widths.
+- Text color pairs are listed in `textPairs`, and a unit test checks each one against WCAG AA. Add a pair whenever you put text on a new background.
+- Breakpoints (`breakpoint` in `tokens.ts`) are TypeScript only, because CSS can't use custom properties in media queries. Write them as literal numbers in CSS (`@media (width >= 1024px)`), matching the constants.
+
+The styleguide at **`/styleguide`** (not linked, `noindex`) rebuilds the design's color and type board from tokens and lists every token, with motion demos and measured contrast.
+
 ## Roadmap
 
 1. Scaffolding and tooling ✔
-2. Design tokens and global styles
+2. Design tokens and global styles ✔
 3. Pictogram, pill and illustration library
 4. UI primitives
 5. Domain model, storage and QR code

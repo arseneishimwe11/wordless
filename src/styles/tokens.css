@@ -1,0 +1,277 @@
+/*
+ * GENERATED FILE: do not edit.
+ * Source: src/styles/tokens.ts. Regenerate with `npm run tokens`.
+ */
+
+:root {
+  /* color */
+  --color-paper: #F6EEDD;
+  --color-paper-deep: #EEE2C6;
+  --color-rule: #D9C7A2;
+  --color-surface: #FBF6EA;
+  --color-ink: #1F1C33;
+  --color-ink-soft: #5A5368;
+  --color-pen: #3B3A8C;
+  --color-white: #FFFFFF;
+  --color-sheet: #FFFDF8;
+  --color-sheet-cell: #FBF7EE;
+  --color-sheet-tally: #F7F1E4;
+  --color-veil: rgba(255, 255, 255, 0.82);
+  --color-veil-strong: rgba(255, 255, 255, 0.85);
+  --color-sunrise: #F2A516;
+  --color-sunrise-tint: #FBE3A0;
+  --color-sunrise-wash: #FDF3D6;
+  --color-midday: #EE7A5B;
+  --color-midday-tint: #F9CDBC;
+  --color-midday-wash: #FDEAE2;
+  --color-sunset: #B4502E;
+  --color-sunset-tint: #EDB9A0;
+  --color-sunset-wash: #F9E6DC;
+  --color-night: #2E2C6B;
+  --color-night-tint: #CDCAEB;
+  --color-night-wash: #ECEBF7;
+  --color-night-sky: #DEDBF1;
+  --color-on-night: #E4E1F4;
+  --color-prn-sky: #EFE6D2;
+  --color-error: #A4492A;
+  --color-error-wash: #F9E6DC;
+  --color-focus: #3B3A8C;
+  --color-pill-white: #FFFFFF;
+  --color-pill-yellow: #F7D046;
+  --color-pill-orange: #F39A33;
+  --color-pill-pink: #F3A9BC;
+  --color-pill-red: #CF4630;
+  --color-pill-brown: #8E5B3B;
+  --color-pill-green: #86AD5C;
+  --color-pill-blue: #7193CF;
+  --color-pill-purple: #8F6BB8;
+  --color-pill-dark: #3A3540;
+  --color-illo-box-top: #F3E9D2;
+  --color-illo-box-side: #E3D3B1;
+  --color-illo-coral-shade: #D9694C;
+  --color-illo-pen-shade: #2A2960;
+  --color-illo-slot: #3A3655;
+
+  /* font */
+  --font-display: 'Young Serif', Georgia, serif;
+  --font-body: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+  --font-hand: 'Kalam', 'Comic Sans MS', cursive;
+
+  /* weight */
+  --weight-regular: 400;
+  --weight-bold: 700;
+
+  /* display */
+  --display-14: 12.88px;
+  --display-15: 13.8px;
+  --display-16: 14.72px;
+  --display-17: 15.64px;
+  --display-19: 17.48px;
+  --display-20: 18.4px;
+  --display-22: 20.24px;
+  --display-24: 22.08px;
+  --display-26: 23.92px;
+  --display-27: 24.84px;
+  --display-28: 25.76px;
+  --display-30: 27.6px;
+  --display-31: 28.52px;
+  --display-32: 29.44px;
+  --display-34: 31.28px;
+  --display-36: 33.12px;
+  --display-38: 34.96px;
+  --display-40: 36.8px;
+  --display-44: 40.48px;
+  --display-54: 49.68px;
+  --display-56: 51.52px;
+  --display-60: 55.2px;
+  --display-64: 58.88px;
+  --display-150: 138px;
+
+  /* text */
+  --text-12: 12px;
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-15: 15px;
+  --text-16: 16px;
+  --text-17: 17px;
+  --text-18: 18px;
+  --text-19: 19px;
+  --text-20: 20px;
+  --text-21: 21px;
+  --text-22: 22px;
+  --text-24: 24px;
+  --text-30: 30px;
+  --text-34: 34px;
+  --text-44: 44px;
+  --text-52: 52px;
+  --text-64: 64px;
+  --text-76: 76px;
+
+  /* leading */
+  --leading-86: 0.86;
+  --leading-100: 1;
+  --leading-102: 1.02;
+  --leading-104: 1.04;
+  --leading-105: 1.05;
+  --leading-106: 1.06;
+  --leading-108: 1.08;
+  --leading-110: 1.1;
+  --leading-115: 1.15;
+  --leading-120: 1.2;
+  --leading-125: 1.25;
+  --leading-130: 1.3;
+  --leading-135: 1.35;
+  --leading-140: 1.4;
+  --leading-145: 1.45;
+  --leading-150: 1.5;
+  --leading-normal: normal;
+
+  /* tracking */
+  --tracking-display: -0.01em;
+  --tracking-caps: 0.1em;
+  --tracking-eyebrow: 0.12em;
+  --tracking-eyebrow-wide: 0.14em;
+
+  /* space */
+  --space-2: 2px;
+  --space-3: 3px;
+  --space-4: 4px;
+  --space-5: 5px;
+  --space-6: 6px;
+  --space-7: 7px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-13: 13px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-22: 22px;
+  --space-24: 24px;
+  --space-26: 26px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-36: 36px;
+  --space-40: 40px;
+  --space-44: 44px;
+  --space-48: 48px;
+  --space-52: 52px;
+  --space-56: 56px;
+  --space-64: 64px;
+  --space-72: 72px;
+  --space-88: 88px;
+  --space-96: 96px;
+
+  /* stroke */
+  --stroke-hair: 1.5px;
+  --stroke-cut: 1.6px;
+  --stroke-kbd: 1.8px;
+  --stroke-thin: 2px;
+  --stroke-dash: 2.2px;
+  --stroke-desk: 2.4px;
+  --stroke-base: 2.5px;
+  --stroke-ink: 2.6px;
+  --stroke-heavy: 3px;
+
+  /* radius */
+  --radius-2: 2px;
+  --radius-3: 3px;
+  --radius-6: 6px;
+  --radius-10: 10px;
+  --radius-12: 12px;
+  --radius-round: 50%;
+  --radius-control: 20px 16px 19px 15px / 16px 20px 15px 19px;
+  --radius-card: 22px 18px 21px 17px / 18px 22px 17px 21px;
+  --radius-panel: 28px 22px 26px 20px / 22px 28px 20px 26px;
+  --radius-feature: 26px 20px 24px 18px / 20px 26px 18px 24px;
+  --radius-segment: 26px 22px 25px 23px / 23px 26px 22px 25px;
+  --radius-chip-1: 29px 27px 30px 26px / 26px 29px 27px 30px;
+  --radius-chip-2: 27px 30px 26px 29px / 30px 26px 29px 27px;
+  --radius-chip-3: 30px 26px 29px 27px / 27px 30px 26px 29px;
+  --radius-sun: 23px 21px 22px 20px / 21px 23px 20px 22px;
+  --radius-sun-lg: 30px 28px 29px 27px / 28px 30px 27px 29px;
+  --radius-cell-1: 12px 9px 11px 8px / 9px 12px 8px 11px;
+  --radius-cell-2: 9px 12px 8px 11px / 12px 8px 11px 9px;
+  --radius-cell-3: 11px 8px 12px 9px / 8px 11px 9px 12px;
+  --radius-cell-4: 8px 11px 9px 12px / 11px 9px 12px 8px;
+  --radius-sheet-1: 14px 11px 13px 10px / 11px 14px 10px 13px;
+  --radius-sheet-2: 11px 14px 10px 13px / 14px 10px 13px 11px;
+  --radius-sheet-3: 13px 10px 14px 11px / 10px 13px 11px 14px;
+  --radius-sheet-4: 10px 13px 11px 14px / 13px 11px 14px 10px;
+  --radius-outline: 24px 20px 23px 19px / 20px 24px 19px 23px;
+  --radius-box-1: 8px 6px 7px 5px / 6px 8px 5px 7px;
+  --radius-box-2: 6px 8px 5px 7px / 8px 5px 7px 6px;
+  --radius-box-3: 7px 5px 8px 6px / 5px 7px 6px 8px;
+  --radius-tick: 7px 5px 6px 4px / 5px 7px 4px 6px;
+  --radius-swatch-1: 14px 18px 12px 16px / 16px 12px 18px 14px;
+  --radius-swatch-2: 18px 12px 16px 14px / 12px 18px 14px 16px;
+  --radius-swatch-3: 12px 16px 18px 14px / 18px 14px 12px 16px;
+  --radius-swatch-chip: 7px 5px 8px 6px;
+  --radius-tile: 10px 14px 9px 12px / 12px 9px 14px 10px;
+  --radius-progress: 6px 5px 6px 5px;
+  --radius-kbd: 7px 6px 7px 5px;
+  --radius-phone: 34px;
+  --radius-phone-sm: 26px;
+  --radius-tag: 18px;
+
+  /* shadow */
+  --shadow-cta: 4px 4px 0 var(--color-sunrise);
+  --shadow-cta-sm: 3px 3px 0 var(--color-sunrise);
+  --shadow-pressed: 4px 4px 0 var(--color-ink);
+  --shadow-pressed-sm: 3px 3px 0 var(--color-ink);
+  --shadow-dose-offset: 3px 3px 0;
+  --shadow-dose-offset-lg: 4px 4px 0;
+  --shadow-qr: 4px 4px 0 var(--color-sunrise-tint);
+  --shadow-badge: 8px 8px 0 var(--color-night-tint);
+  --shadow-frame-phone: 0 0 0 2.5px var(--color-ink), 9px 10px 0 2.5px var(--color-rule);
+  --shadow-frame-phone-sm: 0 0 0 2.5px var(--color-ink), 8px 9px 0 2.5px var(--color-rule);
+  --shadow-frame-sheet: 0 0 0 2px var(--color-ink), 10px 11px 0 2px var(--color-rule);
+  --shadow-frame-preview: 0 0 0 2px var(--color-ink), 9px 10px 0 2px var(--color-rule);
+  --shadow-outline-ink: 0 0 0 2px var(--color-ink);
+  --shadow-outline-pen: 0 0 0 2px var(--color-pen);
+  --shadow-outline-hair: 0 0 0 1.5px var(--color-ink);
+  --shadow-ring-swatch: 0 0 0 3px var(--color-paper), 0 0 0 6px var(--color-ink);
+  --shadow-ring-swatch-surface: 0 0 0 3px var(--color-surface), 0 0 0 6px var(--color-ink);
+  --shadow-ring-stop-halo: 0 0 0 5px;
+  --shadow-ring-stop-edge: 0 0 0 7.5px var(--color-ink);
+  --shadow-ring-stop-halo-lg: 0 0 0 6px;
+  --shadow-ring-stop-edge-lg: 0 0 0 9px var(--color-ink);
+
+  /* duration */
+  --duration-hover: 0.15s;
+  --duration-fast: 0.2s;
+  --duration-base: 0.25s;
+  --duration-medium: 0.3s;
+  --duration-slow: 0.4s;
+  --duration-slower: 0.5s;
+  --duration-pop: 0.38s;
+  --duration-stamp: 0.5s;
+  --duration-nudge: 0.55s;
+  --duration-drop-unit: 0.66s;
+  --duration-drop: 0.7s;
+  --duration-fade: 0.4s;
+  --duration-print: 1.25s;
+  --duration-spin: 40s;
+
+  /* ease */
+  --ease-standard: ease;
+  --ease-linear: linear;
+  --ease-drop: cubic-bezier(0.3, 0.7, 0.4, 1);
+  --ease-stamp: cubic-bezier(0.2, 0.8, 0.3, 1);
+  --ease-print: cubic-bezier(0.45, 0.05, 0.3, 1);
+
+  /* opacity */
+  --opacity-grain: 0.5;
+  --opacity-grain-soft: 0.45;
+  --opacity-ghost: 0.45;
+  --opacity-half: 0.5;
+  --opacity-muted: 0.35;
+  --opacity-faint: 0.3;
+
+  /* layer */
+  --layer-raised: 2;
+  --layer-overlay: 3;
+  --layer-handle: 5;
+  --layer-grain: 100;
+}

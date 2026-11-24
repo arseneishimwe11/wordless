@@ -1,0 +1,33 @@
+/*
+ * Print basics. Sheets are laid out at A4 (794 × 1123 CSS px at 96 dpi) and print
+ * edge to edge, so the page has no margin of its own.
+ */
+
+@page {
+  size: a4;
+  margin: 0;
+}
+
+.printOnly {
+  display: none;
+}
+
+@media print {
+  html,
+  body {
+    background: var(--color-white);
+    print-color-adjust: exact;
+  }
+
+  body::after {
+    display: none;
+  }
+
+  .screenOnly {
+    display: none !important;
+  }
+
+  .printOnly {
+    display: revert;
+  }
+}

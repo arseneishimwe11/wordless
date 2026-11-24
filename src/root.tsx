@@ -9,6 +9,7 @@ import {
 } from 'react-router';
 
 import { copy } from '@/copy/en';
+import { PatternDefs } from '@/graphics/PatternDefs';
 
 import type { Route } from './+types/root';
 
@@ -43,6 +44,8 @@ export function Layout({ children }: { children: ReactNode }) {
         <Links />
       </head>
       <body>
+        {/* Fill patterns for pill colours, shared by every drawing on the page. */}
+        <PatternDefs />
         {children}
         <ScrollRestoration />
         <Scripts />

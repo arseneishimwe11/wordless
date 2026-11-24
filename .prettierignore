@@ -5,3 +5,4 @@ test-results/
 playwright-report/
 package-lock.json
 src/styles/tokens.css
+src/graphics/generated/

@@ -1,0 +1,253 @@
+/*
+ * Mirrors design/source/Pills.dc.html: at 1024px and up the measurements match the
+ * board (1440 × 1180, rows spread with space-between); below that, everything stacks.
+ */
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-40) var(--space-20);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.title {
+  font-size: var(--display-40);
+  line-height: var(--leading-100);
+}
+
+.lead {
+  max-width: 600px;
+  font-size: var(--text-18);
+  line-height: var(--leading-150);
+  color: var(--color-ink-soft);
+  text-wrap: pretty;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--space-16);
+  margin: 0;
+  padding: var(--space-28) 0 var(--space-24);
+  list-style: none;
+  border-top: var(--stroke-thin) solid var(--color-ink);
+  border-bottom: var(--stroke-thin) solid var(--color-ink);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  text-align: center;
+}
+
+.formName {
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+}
+
+.howMany,
+.colors {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+  min-width: 0;
+}
+
+.sectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-14);
+}
+
+.sectionTitle {
+  font-size: var(--display-30);
+  line-height: var(--leading-normal);
+}
+
+.sectionNote {
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+.counts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-24) var(--space-20);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-10);
+}
+
+.countUnits {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+/* Units in one dose overlap, the way the design draws a count. */
+.countUnits > * + * {
+  margin-left: calc(var(--space-14) * -1);
+}
+
+.countName {
+  font-size: var(--text-15);
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.swatchName {
+  font-size: var(--text-14);
+}
+
+.monoTitle {
+  margin-top: var(--space-6);
+  font-size: var(--text-15);
+  font-weight: var(--weight-bold);
+}
+
+/* How the swatches come out of a black and white printer. */
+.grey {
+  padding: var(--space-10) var(--space-6);
+  background: var(--color-white);
+  border-radius: var(--radius-10);
+  filter: grayscale(1);
+}
+
+.household {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  padding-top: var(--space-24);
+  border-top: var(--stroke-thin) solid var(--color-ink);
+}
+
+.householdText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 300px;
+}
+
+.householdNote {
+  font-size: var(--text-15);
+  line-height: var(--leading-140);
+  color: var(--color-ink-soft);
+}
+
+.marks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-24) var(--space-40);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mark {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.markName {
+  font-size: var(--text-15);
+  line-height: var(--leading-130);
+}
+
+@media (width >= 640px) {
+  .counts {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .swatches {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 1024px) {
+  .board {
+    justify-content: space-between;
+    min-height: 1180px;
+    padding: var(--space-72) var(--space-88);
+  }
+
+  .head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-48);
+  }
+
+  .title {
+    font-size: var(--display-60);
+  }
+
+  .forms {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .middle {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-72);
+  }
+
+  .howMany {
+    flex: none;
+    width: 540px;
+  }
+
+  .colors {
+    flex: 1;
+  }
+
+  .household {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-40);
+  }
+
+  .householdText {
+    flex: none;
+    width: 300px;
+  }
+}

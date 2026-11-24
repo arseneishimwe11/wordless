@@ -1,9 +1,12 @@
 import { copy } from '@/copy/en';
+import { Glyph, Illustration } from '@/graphics';
+import { logo } from '@/graphics/generated/illustrations/logo';
+import { medicineBox } from '@/graphics/generated/illustrations/medicine-box';
+import { sunPath } from '@/graphics/generated/illustrations/sun-path';
 import { color, greyEquivalent } from '@/styles/tokens';
 
 import styles from './ColorTypeBoard.module.css';
 import { tokenVar, type StyleWithVars } from './cssVars';
-import { IllustrationSlot } from './IllustrationSlot';
 
 const board = copy.styleguide.board;
 
@@ -24,7 +27,7 @@ export function ColorTypeBoard() {
         <div className={styles.heroText}>
           <p className={styles.eyebrow}>{board.eyebrow}</p>
           <div className={styles.wordmarkRow}>
-            <IllustrationSlot label={board.logoLabel} width={112} height={112} />
+            <Illustration data={logo} width={112} className={styles.logo} />
             <h1 id="sg-wordmark" className={styles.wordmark}>
               {board.wordmark}
             </h1>
@@ -32,7 +35,7 @@ export function ColorTypeBoard() {
           <p className={styles.tagline}>{board.tagline}</p>
           <p className={styles.lead}>{board.lead}</p>
         </div>
-        <IllustrationSlot label={board.boxLabel} width={520} height={340} />
+        <Illustration data={medicineBox} label={copy.graphics.medicineBox} className={styles.box} />
       </section>
 
       <section className={styles.time} aria-labelledby="sg-time">
@@ -42,7 +45,7 @@ export function ColorTypeBoard() {
           </h2>
           <p className={styles.timeLead}>{board.timeLead}</p>
         </div>
-        <IllustrationSlot label={board.sunPathLabel} width={1264} height={330} />
+        <Illustration data={sunPath} label={copy.graphics.sunPath} className={styles.sunPath} />
         <ul className={styles.timeGrid}>
           {TIMES.map((time) => {
             const t = board.times[time];
@@ -51,7 +54,7 @@ export function ColorTypeBoard() {
             return (
               <li key={time} className={styles.timeItem}>
                 <div className={styles.timeName}>
-                  <IllustrationSlot label={t.name} width={48} height={48} />
+                  <Glyph name={time} />
                   <div className={styles.timeNameText}>
                     <span className={styles.timeHeading}>{t.name}</span>
                     <span className={styles.timeWhen}>{t.when}</span>

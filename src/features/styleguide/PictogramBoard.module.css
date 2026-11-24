@@ -1,0 +1,250 @@
+/*
+ * Mirrors design/source/Pictograms.dc.html: at 1024px and up the measurements
+ * match the board (designed at 1440); below that, columns stack and rows wrap.
+ */
+
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-40) var(--space-20);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.title {
+  font-size: var(--display-40);
+  line-height: var(--leading-100);
+}
+
+.lead {
+  max-width: 640px;
+  font-size: var(--text-18);
+  line-height: var(--leading-150);
+  color: var(--color-ink-soft);
+  text-wrap: pretty;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+}
+
+.construction {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-22);
+  max-width: 384px;
+}
+
+.grid {
+  /* 288px inside a 2px border, as drawn in the design (content-box). */
+  width: 292px;
+  max-width: 100%;
+  height: auto;
+  background: var(--color-sheet);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-6);
+}
+
+.rules {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-hand);
+  font-size: var(--text-21);
+  line-height: var(--leading-135);
+  color: var(--color-pen);
+  list-style: none;
+}
+
+.demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-12);
+}
+
+.demoItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  margin: 0;
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+.demoTile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 112px inside a 2px border, as drawn in the design (content-box). */
+  width: 116px;
+  height: 116px;
+  background: var(--color-sheet);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-swatch-1);
+}
+
+.operator {
+  display: flex;
+  align-items: center;
+  height: 116px;
+  font-family: var(--font-display);
+  font-size: var(--display-34);
+  line-height: var(--leading-100);
+}
+
+.groups {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-40);
+  min-width: 0;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+}
+
+.groupHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-16);
+  padding-bottom: var(--space-8);
+  border-bottom: var(--stroke-thin) solid var(--color-ink);
+}
+
+.groupTitle {
+  font-size: var(--display-30);
+  line-height: var(--leading-normal);
+}
+
+.groupNote {
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+.marks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: var(--space-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+  text-align: center;
+}
+
+.markName {
+  max-width: 110px;
+  font-size: var(--text-15);
+  line-height: var(--leading-130);
+}
+
+.strips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-14);
+}
+
+.strip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--space-22);
+  background: var(--color-sheet);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-tile);
+}
+
+.stripMono {
+  background: var(--color-white);
+}
+
+.stripLabel {
+  flex: none;
+  width: 118px;
+  font-size: var(--text-15);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-130);
+}
+
+.stripMarks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-13);
+}
+
+/* How the marks come out of a black and white printer. */
+.grey {
+  filter: grayscale(1);
+}
+
+@media (width >= 1024px) {
+  /* The board is 1440 × 1300 with its rows spread by space-between. */
+  .board {
+    justify-content: space-between;
+    min-height: 1300px;
+    gap: var(--space-48);
+    padding: var(--space-72) var(--space-88);
+  }
+
+  .head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-48);
+  }
+
+  .title {
+    font-size: var(--display-60);
+  }
+
+  .body {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--space-72);
+  }
+
+  .construction {
+    flex: none;
+    width: 384px;
+  }
+
+  /* As in the design, the demo row runs a little past its 384px column into the gap. */
+  .demo {
+    flex-wrap: nowrap;
+  }
+
+  .marks {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .strip {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-24);
+  }
+}

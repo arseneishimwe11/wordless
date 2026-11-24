@@ -41,12 +41,21 @@
   gap: var(--space-10);
 }
 
-.wordmarkRow > :first-child {
+.logo {
   width: 72px;
 }
 
+/* Illustrations scale down with their column; ink may spill past the box as designed. */
+.box,
+.sunPath {
+  flex: none;
+  max-width: 100%;
+  height: auto;
+}
+
 .wordmark {
-  font-size: var(--display-64);
+  /* Shrinks with the screen on small phones so the word never overflows. */
+  font-size: min(var(--display-64), 14vw);
   line-height: var(--leading-86);
 }
 
@@ -295,13 +304,7 @@
     padding: var(--space-72) var(--space-88);
   }
 
-  .hero {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .wordmarkRow > :first-child {
+  .logo {
     width: 112px;
   }
 
@@ -349,5 +352,18 @@
 
   .specimenHand {
     font-size: var(--text-30);
+  }
+}
+
+/* The hero row needs the board's full width: text and box side by side from 1280px. */
+@media (width >= 1280px) {
+  .hero {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .heroText {
+    min-width: 0;
   }
 }

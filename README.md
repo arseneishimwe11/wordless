@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 2 of 11, design tokens and global styles. See [Roadmap](#roadmap).
+> **Status:** Phase 3 of 11, pictogram, pill and illustration library. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -28,6 +28,7 @@ npx playwright install chromium
 | `npm run dev`       | Development server with hot reload                                       |
 | `npm run build`     | Production build into `build/client` (a static single-page app)          |
 | `npm run tokens`    | Regenerates `src/styles/tokens.css` from `src/styles/tokens.ts`          |
+| `npm run graphics`  | Re-extracts `src/graphics/generated/` from `design/source/`              |
 | `npm run preview`   | Serves the production build                                              |
 | `npm run typecheck` | Generates route types, then runs TypeScript (strict)                     |
 | `npm run lint`      | ESLint: TypeScript, React hooks, accessibility (jsx-a11y strict)         |
@@ -126,13 +127,17 @@ Sizes keep the numbers the design uses, so a value seen in the design maps to ex
 - Text color pairs are listed in `textPairs`, and a unit test checks each one against WCAG AA. Add a pair whenever you put text on a new background.
 - Breakpoints (`breakpoint` in `tokens.ts`) are TypeScript only, because CSS can't use custom properties in media queries. Write them as literal numbers in CSS (`@media (width >= 1024px)`), matching the constants.
 
-The styleguide at **`/styleguide`** (not linked, `noindex`) rebuilds the design's color and type board from tokens and lists every token, with motion demos and measured contrast.
+## Graphics
+
+Every pictogram, pill, icon and illustration is **extracted from the design source**, not redrawn: `npm run graphics` writes `src/graphics/generated/` from the drawings listed in `scripts/graphics/manifest.ts`. Use the components in `src/graphics/` (`Glyph`, `PillUnit`, `PillStack`, `HouseholdMark`, `Icon`, `Illustration`), see `src/graphics/README.md`.
+
+The styleguide at **`/styleguide`** (not linked, `noindex`) rebuilds the design's color and type, pictogram and pill boards, and lists every token, with motion demos and measured contrast.
 
 ## Roadmap
 
 1. Scaffolding and tooling ✔
 2. Design tokens and global styles ✔
-3. Pictogram, pill and illustration library
+3. Pictogram, pill and illustration library ✔
 4. UI primitives
 5. Domain model, storage and QR code
 6. Phone flow: Start → Medicine → When → How long → Rules → Household → Print

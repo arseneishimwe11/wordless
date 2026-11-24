@@ -12,6 +12,7 @@
     "build": "react-router build",
     "preview": "vite preview --outDir build/client",
     "tokens": "node scripts/build-tokens.ts",
+    "graphics": "node scripts/graphics/extract.ts",
     "typecheck": "react-router typegen && tsc --noEmit",
     "lint": "eslint .",
     "lint:css": "stylelint \"src/**/*.css\"",

@@ -170,9 +170,17 @@ export function TokenReference() {
         <h3 id="sg-contrast" className={styles.groupTitle}>
           {t.groups.contrast}
         </h3>
-        <div className={styles.tableWrap}>
+        {/* Scrolls sideways on narrow screens, so it must be reachable from the keyboard. */}
+        <div
+          className={styles.tableWrap}
+          role="region"
+          aria-labelledby="sg-contrast-caption"
+          tabIndex={0}
+        >
           <table className={styles.table}>
-            <caption className={styles.caption}>{t.contrastCaption}</caption>
+            <caption id="sg-contrast-caption" className={styles.caption}>
+              {t.contrastCaption}
+            </caption>
             <thead>
               <tr>
                 <th scope="col">{t.contrastColumns.sample}</th>

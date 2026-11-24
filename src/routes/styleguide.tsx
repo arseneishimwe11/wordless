@@ -1,5 +1,11 @@
 import { copy } from '@/copy/en';
-import { ColorTypeBoard, TokenReference } from '@/features/styleguide';
+import {
+  ColorTypeBoard,
+  GraphicsIndex,
+  PictogramBoard,
+  PillBoard,
+  TokenReference,
+} from '@/features/styleguide';
 
 import type { Route } from './+types/styleguide';
 
@@ -14,6 +20,9 @@ export default function Styleguide() {
   return (
     <main>
       <ColorTypeBoard />
+      <PictogramBoard />
+      <PillBoard />
+      <GraphicsIndex />
       <TokenReference />
     </main>
   );

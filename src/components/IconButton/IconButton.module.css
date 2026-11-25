@@ -1,0 +1,30 @@
+.iconButton {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
+  color: var(--color-ink);
+  text-decoration: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-round);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.iconButton:disabled {
+  opacity: var(--opacity-muted);
+  cursor: default;
+}
+
+.iconButton:not(:disabled):hover {
+  background: var(--color-sunrise-wash);
+}
+
+.flip {
+  transform: scaleX(-1);
+}

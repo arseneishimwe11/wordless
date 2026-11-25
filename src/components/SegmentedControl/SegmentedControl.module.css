@@ -1,0 +1,96 @@
+/* An ink track: 2px of ink shows between the segments. */
+.track {
+  display: flex;
+  gap: var(--space-2);
+  overflow: hidden;
+  background: var(--color-ink);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-control);
+}
+
+.segmentShape {
+  border-radius: var(--radius-segment);
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+/* Segments clip inside the track, so the focus ring goes around the whole track. */
+.track:has(:focus-visible) {
+  outline: var(--stroke-heavy) solid var(--color-focus);
+  outline-offset: var(--space-3);
+}
+
+.item {
+  flex: 1;
+}
+
+/* ---- Sizes ---- */
+
+.size44 {
+  height: 44px;
+
+  --face-padding: var(--space-14);
+  --face-font: var(--text-15);
+}
+
+.size48 {
+  height: 48px;
+}
+
+.size52 {
+  height: 52px;
+
+  --face-font: var(--text-17);
+}
+
+.vertical.size44,
+.vertical.size48,
+.vertical.size52 {
+  height: auto;
+}
+
+/* In a column, flex: 1 would set the basis to 0 and override the height. */
+.vertical .item {
+  flex: none;
+}
+
+.vertical.size48 .item {
+  height: 48px;
+}
+
+.vertical.size52 .item {
+  height: 52px;
+}
+
+/* ---- Segment face and its states ---- */
+
+.face {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 0 var(--face-padding, var(--space-4));
+  font-family: var(--font-body);
+  font-size: var(--face-font, var(--text-16));
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  text-align: center;
+  background: var(--color-surface);
+  transition: background var(--duration-base) var(--ease-standard);
+}
+
+.item input:focus-visible + .face {
+  outline: none;
+}
+
+.item input:checked + .face {
+  color: var(--color-paper);
+  background: var(--color-ink);
+}
+
+.item:hover input:not(:checked, :disabled) + .face {
+  background: var(--color-sunrise-wash);
+}

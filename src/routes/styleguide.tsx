@@ -1,6 +1,7 @@
 import { copy } from '@/copy/en';
 import {
   ColorTypeBoard,
+  ComponentShowcase,
   GraphicsIndex,
   PictogramBoard,
   PillBoard,
@@ -23,6 +24,7 @@ export default function Styleguide() {
       <PictogramBoard />
       <PillBoard />
       <GraphicsIndex />
+      <ComponentShowcase />
       <TokenReference />
     </main>
   );

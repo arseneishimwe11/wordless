@@ -1,0 +1,34 @@
+.progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.segments {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.segment {
+  display: block;
+  width: 22px;
+  height: 10px;
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-progress);
+}
+
+.done {
+  background: var(--color-ink);
+}
+
+.current {
+  width: 36px;
+  background: var(--color-sunrise);
+}
+
+.label {
+  font-size: var(--text-16);
+  line-height: var(--leading-125);
+}

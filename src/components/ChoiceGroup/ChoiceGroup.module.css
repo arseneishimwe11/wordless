@@ -1,0 +1,63 @@
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.chip {
+  flex: none;
+  width: var(--chip-width, auto);
+}
+
+/* Grows into the rest of the row, but keeps its natural width so the row can wrap. */
+.fill {
+  flex: 1 0 auto;
+  width: auto;
+}
+
+.face {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 var(--space-6);
+  color: var(--color-ink);
+  white-space: nowrap;
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--chip-shape);
+  transition:
+    background var(--duration-base) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.number {
+  font-family: var(--font-display);
+  font-size: var(--chip-font);
+  letter-spacing: var(--tracking-display);
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  font-weight: var(--weight-bold);
+}
+
+.desktop {
+  height: 58px;
+  border-width: var(--stroke-desk);
+}
+
+.chip input:checked + .face {
+  background: var(--color-sunrise);
+}
+
+.chip input:checked + .desktop {
+  box-shadow: var(--shadow-pressed-sm);
+}
+
+.chip:hover input:not(:checked, :disabled) + .face {
+  background: var(--color-sunrise-wash);
+}

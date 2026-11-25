@@ -1,0 +1,53 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: 64px;
+  padding: 0 var(--space-4) 0 var(--space-6);
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: var(--stroke-thin) solid var(--color-rule);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.row:hover {
+  color: var(--color-ink);
+  background: var(--color-sunrise-wash);
+}
+
+.media {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--text-17);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-125);
+}
+
+.subtitle {
+  overflow: hidden;
+  font-size: var(--text-16);
+  line-height: var(--leading-125);
+  color: var(--color-ink-soft);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* The back chevron, turned to point forward. */
+.chevron {
+  flex: none;
+  transform: scaleX(-1);
+}

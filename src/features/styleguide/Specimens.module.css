@@ -1,0 +1,130 @@
+.specimens {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.title {
+  padding-bottom: var(--space-8);
+  font-size: var(--display-30);
+  border-bottom: var(--stroke-thin) solid var(--color-ink);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+}
+
+.specimen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: 100%;
+  margin: 0;
+  overflow-x: auto;
+}
+
+/* The board's own paper, so a crop compares like for like. */
+.frame {
+  position: relative;
+  flex: none;
+  background: var(--color-paper);
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: var(--text-14);
+  color: var(--color-ink-soft);
+}
+
+.at {
+  position: absolute;
+}
+
+.label {
+  position: absolute;
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-125);
+}
+
+.chipRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.aside {
+  margin-left: var(--space-4);
+  font-size: var(--text-16);
+  color: var(--color-ink-soft);
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.colorRow,
+.stepperRow {
+  display: flex;
+  align-items: center;
+  height: 48px;
+}
+
+.colorRow {
+  justify-content: space-between;
+}
+
+.stepperRow {
+  gap: var(--space-12);
+}
+
+.rowLabel {
+  padding-left: var(--space-4);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+
+.stepperRow .rowLabel {
+  flex: 1;
+}
+
+.halves {
+  width: 158px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-8) 0;
+  justify-items: center;
+}
+
+.note {
+  position: absolute;
+  margin: 0;
+  font-size: var(--text-16);
+  line-height: var(--leading-130);
+  color: var(--color-ink-soft);
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-10);
+}
+
+/* The Start screen's calls to action space their icon 12px from the words. */
+.gap12 {
+  gap: var(--space-12);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}

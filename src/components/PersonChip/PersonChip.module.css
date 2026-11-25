@@ -1,0 +1,28 @@
+.chip {
+  flex: none;
+}
+
+.face {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  height: 52px;
+  padding: 0 var(--space-16) 0 var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-segment);
+  transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.chip input:checked + .face {
+  color: var(--color-paper);
+  background: var(--color-ink);
+}
+
+.chip:hover input:not(:checked) + .face {
+  background: var(--color-sunrise-wash);
+}

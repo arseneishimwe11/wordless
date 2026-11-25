@@ -1,0 +1,11 @@
+.note {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-130);
+  color: var(--color-pen);
+}
+
+.error {
+  color: var(--color-error);
+}

@@ -1,0 +1,155 @@
+/*
+ * Buttons from the design. Heights and font sizes per size come from the boards:
+ * 48 (desktop "Back to editing"), 52 (landing nav), 56 (phone Next), 60 (desktop
+ * Continue), 64 (Start, landing calls to action).
+ */
+
+.button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-10);
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-normal);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  border: var(--stroke-base) solid var(--color-ink);
+  border-radius: var(--radius-control);
+  transition:
+    transform var(--duration-hover) var(--ease-standard),
+    box-shadow var(--duration-hover) var(--ease-standard),
+    background var(--duration-fast) var(--ease-standard);
+}
+
+.fullWidth {
+  display: flex;
+  width: 100%;
+}
+
+.icon {
+  flex: none;
+}
+
+.hint {
+  display: inline-flex;
+  gap: var(--space-4);
+  margin-left: var(--space-4);
+}
+
+/* ---- Sizes ---- */
+
+.size48 {
+  height: 48px;
+  padding: 0 var(--space-16);
+  font-size: var(--text-16);
+  border-width: var(--stroke-desk);
+}
+
+.size52 {
+  height: 52px;
+  padding: 0 var(--space-26);
+  font-size: var(--text-17);
+}
+
+.size56 {
+  height: 56px;
+  padding: 0 var(--space-22);
+  font-size: var(--text-18);
+}
+
+.size60 {
+  height: 60px;
+  padding: 0 var(--space-26);
+  font-size: var(--text-19);
+}
+
+.size64 {
+  height: 64px;
+  padding: 0 var(--space-26);
+  font-size: var(--text-19);
+}
+
+/* Desktop: thinner border; "Back" at 56 is 17px with 20px sides. */
+.desktop {
+  border-width: var(--stroke-desk);
+}
+
+.desktop.size56 {
+  padding: 0 var(--space-20);
+  font-size: var(--text-17);
+}
+
+/* ---- Variants ---- */
+
+.primary {
+  color: var(--color-paper);
+  background: var(--color-ink);
+  box-shadow: var(--shadow-cta);
+}
+
+.secondary {
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.dashed {
+  color: var(--color-ink);
+  background: transparent;
+  border-style: dashed;
+  border-width: var(--stroke-dash);
+}
+
+.text {
+  min-width: 48px;
+  height: 48px;
+  padding: 0 var(--space-12);
+  font-size: var(--text-16);
+  color: var(--color-pen);
+  background: transparent;
+  border: none;
+}
+
+/* Not ready yet: quiet, dashed, still pressable. */
+.pending {
+  color: var(--color-ink);
+  background: var(--color-paper-deep);
+  border-style: dashed;
+  box-shadow: none;
+}
+
+/* ---- States ---- */
+
+.primary:not(.pending, :disabled):hover {
+  transform: translate(-1px, -1px);
+}
+
+.primary:not(.pending, :disabled):active {
+  transform: translate(1px, 1px);
+  box-shadow: var(--shadow-cta-sm);
+}
+
+.secondary:not(:disabled):hover,
+.dashed:not(:disabled):hover,
+.pending:not(:disabled):hover {
+  background: var(--color-sunrise-wash);
+}
+
+.secondary:not(:disabled):active,
+.dashed:not(:disabled):active,
+.pending:not(:disabled):active {
+  transform: translate(1px, 1px);
+}
+
+.text:not(:disabled):hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+}
+
+.button:disabled {
+  opacity: var(--opacity-muted);
+  cursor: default;
+}

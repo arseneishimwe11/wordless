@@ -1,0 +1,58 @@
+.checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.box {
+  flex: none;
+  margin: 0;
+  accent-color: var(--color-ink);
+  cursor: pointer;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.media {
+  display: flex;
+  flex: none;
+}
+
+/* A checklist line: the counter checklist on the print page. */
+.inline {
+  gap: var(--space-12);
+  min-height: 48px;
+  font-size: var(--text-16);
+  line-height: var(--leading-135);
+}
+
+.inline .box {
+  width: 22px;
+  height: 22px;
+}
+
+/* A bordered chip: "Score line" in the Pill Builder. */
+.pill {
+  gap: var(--space-8);
+  height: 48px;
+  padding: 0 var(--space-12);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-control);
+}
+
+.pill .box {
+  width: 20px;
+  height: 20px;
+}
+
+.checkbox:has(.box:disabled) {
+  opacity: var(--opacity-muted);
+  cursor: default;
+}

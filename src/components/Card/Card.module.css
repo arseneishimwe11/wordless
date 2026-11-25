@@ -1,0 +1,44 @@
+.card {
+  position: relative;
+}
+
+.well {
+  background: var(--color-paper-deep);
+  border-radius: var(--radius-card);
+}
+
+.surface {
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.dashed {
+  border: var(--stroke-dash) dashed var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.panel {
+  padding: var(--space-26) var(--space-28);
+  background: var(--color-surface);
+  border: var(--stroke-base) solid var(--color-ink);
+  border-radius: var(--radius-panel);
+}
+
+.feature {
+  padding: var(--space-26) var(--space-26) var(--space-28);
+  background: var(--color-surface);
+  border: var(--stroke-base) solid var(--color-ink);
+  border-radius: var(--radius-feature);
+}
+
+.sheet {
+  background: var(--color-white);
+  box-shadow: var(--shadow-frame-sheet);
+}
+
+.phone {
+  overflow: hidden;
+  border-radius: var(--radius-phone);
+  box-shadow: var(--shadow-frame-phone);
+}

@@ -1,0 +1,35 @@
+.swatch {
+  flex: none;
+}
+
+.face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-round);
+  transition: box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.large {
+  width: 56px;
+  height: 56px;
+}
+
+.swatch input:checked + .face {
+  box-shadow: var(--shadow-ring-swatch);
+}
+
+.swatch input:checked + .onSurface {
+  box-shadow: var(--shadow-ring-swatch-surface);
+}
+
+.swatch:hover input:not(:checked, :disabled) + .face {
+  background: var(--color-sunrise-wash);
+}
+
+/* The ring already circles the swatch; push the focus ring outside it. */
+.swatch input:checked:focus-visible + .face {
+  outline-offset: var(--space-8);
+}

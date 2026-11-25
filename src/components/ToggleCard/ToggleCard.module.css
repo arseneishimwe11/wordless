@@ -1,0 +1,144 @@
+.card {
+  display: flex;
+}
+
+.face {
+  position: relative;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: var(--weight-bold);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  transition:
+    background var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.shape1 {
+  border-radius: var(--radius-chip-1);
+}
+
+.shape2 {
+  border-radius: var(--radius-chip-2);
+}
+
+.shape3 {
+  border-radius: var(--radius-chip-3);
+}
+
+.media {
+  display: flex;
+  flex: none;
+}
+
+/* Titles wrap between words only; a single long word is never split. */
+.title {
+  min-width: 0;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.subtitle {
+  font-size: var(--text-15);
+  font-weight: var(--weight-regular);
+  color: var(--color-ink-soft);
+}
+
+/* ---- Layouts ---- */
+
+/* Pill Builder form: 56 on phones, 64 on desktop. */
+.row {
+  gap: var(--space-6);
+  height: 56px;
+  padding: 0 var(--space-8);
+  font-size: var(--text-16);
+}
+
+.row.desktop {
+  gap: var(--space-8);
+  height: 64px;
+  font-size: var(--text-17);
+}
+
+/* Rule card: drawing beside the label on phones, above it on desktop. */
+.stack {
+  gap: var(--space-8);
+  height: 100px;
+  padding: 0 var(--space-10) 0 var(--space-8);
+  font-size: var(--text-16);
+  line-height: var(--leading-120);
+  text-align: left;
+}
+
+.stack.desktop {
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+  height: 132px;
+  padding: var(--space-10) var(--space-8);
+  text-align: center;
+}
+
+/* Print choice: drawing, title, subtitle. */
+.option {
+  gap: var(--space-12);
+  height: 76px;
+  padding: 0 var(--space-14);
+  font-size: var(--text-17);
+  text-align: left;
+}
+
+.dashed {
+  justify-content: center;
+  background: transparent;
+  border-style: dashed;
+  border-width: var(--stroke-dash);
+}
+
+/* ---- States ---- */
+
+.card input:checked + .face {
+  background: var(--color-sunrise-tint);
+  border-width: var(--stroke-heavy);
+}
+
+.card input:checked + .row {
+  box-shadow: var(--shadow-pressed-sm);
+}
+
+.card input:checked + .stack,
+.card input:checked + .option {
+  box-shadow: var(--shadow-pressed);
+}
+
+.card:hover input:not(:checked, :disabled) + .face {
+  background: var(--color-sunrise-wash);
+}
+
+.card:active input:not(:disabled) + .face {
+  transform: translate(1px, 1px);
+}
+
+/* The stamp sits over the top-right corner. */
+.stamp {
+  position: absolute;
+  top: -10px;
+  right: -8px;
+  display: flex;
+  pointer-events: none;
+}
+
+.desktop .stamp {
+  top: -11px;
+  right: -9px;
+}

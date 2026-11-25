@@ -1,0 +1,6 @@
+/* Keyframe names come in as a custom property, so CSS Modules leaves the global names alone. */
+.animated {
+  display: inline-block;
+  animation: var(--anim-name) var(--anim-duration) var(--anim-ease) var(--anim-delay)
+    var(--anim-count) both;
+}

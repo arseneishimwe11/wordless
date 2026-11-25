@@ -1,0 +1,13 @@
+.eyebrow {
+  margin: 0;
+  font-size: var(--text-14);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.large {
+  font-size: var(--text-15);
+  letter-spacing: var(--tracking-eyebrow-wide);
+}

@@ -1,0 +1,200 @@
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-40) var(--space-20);
+  border-top: var(--stroke-base) solid var(--color-ink);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.title {
+  font-size: var(--display-40);
+  line-height: var(--leading-100);
+}
+
+.lead {
+  max-width: 640px;
+  font-size: var(--text-18);
+  line-height: var(--leading-150);
+  color: var(--color-ink-soft);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-20);
+}
+
+.groupTitle {
+  padding-bottom: var(--space-8);
+  font-size: var(--display-30);
+  border-bottom: var(--stroke-thin) solid var(--color-ink);
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.demoLabel {
+  font-size: var(--text-14);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+}
+
+.demoBody {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.wide {
+  width: 100%;
+  max-width: 420px;
+}
+
+.halves {
+  width: 158px;
+}
+
+.vertical {
+  width: 100%;
+  max-width: 320px;
+}
+
+.aside {
+  font-size: var(--text-16);
+  color: var(--color-ink-soft);
+}
+
+.desktopChips {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  max-width: 420px;
+}
+
+.forms {
+  display: grid;
+
+  /* Three across at the design's 358px; fewer when the cards would be too narrow. */
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 358px;
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--space-10);
+  width: 100%;
+  max-width: 358px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  width: 100%;
+  max-width: 420px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 48px);
+  gap: var(--space-8);
+}
+
+.surfaceBox {
+  padding: var(--space-16);
+  background: var(--color-surface);
+  border-radius: var(--radius-card);
+}
+
+.swatchesDesktop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-12);
+  max-width: 328px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+}
+
+.field {
+  width: 100%;
+  max-width: 358px;
+}
+
+.fieldWide {
+  width: 100%;
+  max-width: 700px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.rail {
+  width: 100%;
+  max-width: 760px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 358px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-24);
+}
+
+.cardPad {
+  padding: var(--space-20);
+}
+
+.cardDashed {
+  display: flex;
+  align-items: center;
+  gap: var(--space-14);
+  padding: 0 var(--space-16);
+  min-height: 84px;
+}
+
+.keys {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+@media (width >= 1024px) {
+  .showcase {
+    padding: var(--space-52) var(--space-88) var(--space-72);
+  }
+
+  .title {
+    font-size: var(--display-54);
+  }
+}

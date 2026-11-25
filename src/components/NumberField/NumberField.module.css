@@ -1,0 +1,44 @@
+.field {
+  flex: none;
+  width: 90px;
+  height: 60px;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-display);
+  font-size: var(--display-34);
+  letter-spacing: var(--tracking-display);
+  color: var(--color-ink);
+  text-align: center;
+  background: var(--color-surface);
+  border: var(--stroke-base) solid var(--color-ink);
+  border-radius: var(--radius-control);
+  appearance: textfield;
+}
+
+/* No browser spinners: the design pairs the field with its own − and + buttons. */
+.field::-webkit-outer-spin-button,
+.field::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+.field::placeholder {
+  color: var(--color-ink-soft);
+}
+
+.desktop {
+  width: 150px;
+  height: 100px;
+  font-size: var(--display-64);
+  border-width: var(--stroke-heavy);
+  border-radius: var(--radius-card);
+}
+
+.invalid {
+  background: var(--color-error-wash);
+  border-color: var(--color-error);
+}
+
+.field:disabled {
+  opacity: var(--opacity-muted);
+}

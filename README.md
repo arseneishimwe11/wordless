@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 3 of 11, pictogram, pill and illustration library. See [Roadmap](#roadmap).
+> **Status:** Phase 4 of 11, UI primitives. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -56,6 +56,7 @@ src/
   store/           Application state and on-device persistence.
   styles/          Design tokens, global styles, motion, print.
   copy/            Every user-facing English string.
+  lib/             Small shared helpers (cx for class names).
   test/            Test setup.
 ```
 
@@ -99,6 +100,31 @@ Dependencies point one way: `routes → features → components / graphics → s
 
 - Domain rules get unit tests. Components get behaviour tests (Testing Library: query by role and label). Screens get Playwright tests, including an axe scan.
 
+## Components
+
+`src/components/` holds the UI primitives every screen is built from. They take their words as props (from `src/copy/`) and know nothing about medicines. Each is shown live in every state on `/styleguide`, next to exact-size specimens of the design.
+
+| Group             | Components                                                                                                                                             |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Actions           | `Button` (primary, secondary, dashed, text; sizes 48–64; `pending`; key hints; `href` makes it a link), `IconButton`                                   |
+| Choices           | `SegmentedControl`, `ChoiceGroup` (number and text chips), `ToggleCard` (form, rule and print cards), `Swatch`, `PersonChip`, grouped by `OptionGroup` |
+| Inputs            | `Stepper` and `StepperButton`, `TextField`, `NumberField`, `Checkbox`                                                                                  |
+| Wayfinding        | `StepProgress` (phone), `StepRail` and `StepRailItem` (desktop), `ListRow`                                                                             |
+| Surfaces and text | `Card` (well, surface, dashed, panel, feature, sheet, phone), `Kbd`, `Eyebrow`, `HandNote`, `Summary`                                                  |
+| Motion            | `Animated`: plays a design animation, again whenever `replay` changes                                                                                  |
+
+**Conventions:**
+
+- **Choices are real form controls.** Pick-one controls are native radio buttons and pick-many are checkboxes, visually hidden behind a styled face. The browser supplies arrow keys, labels and screen-reader roles; don't rebuild them with `aria-pressed`.
+- **"Not ready yet" is `pending`, never `disabled`.** The button stays pressable so it can explain what is missing.
+- **States, everywhere the same:**
+  - Hover: raised controls lift 1px; unselected choices take the sunrise wash.
+  - Pressed: controls sink 1px.
+  - Disabled: faded (`--opacity-muted`).
+  - Focus: a 3px pen outline, drawn on the visible face (or around a whole segmented track).
+  - Error: `--color-error`, with `--color-error-wash` behind fields.
+- **Accessible names stay readable.** Key hints are hidden from screen readers. Separate visible text pieces get a space between them, so names never run together ("Paracetamolonly when needed").
+
 ## Design tokens
 
 Every visual value in the design lives in **`src/styles/tokens.ts`**: one typed file and the only place a hex code or pixel size is written. `npm run tokens` turns it into `src/styles/tokens.css`, which defines a CSS custom property for each token, named `--{group}-{key}`. A unit test fails if the two files drift apart.
@@ -138,7 +164,7 @@ The styleguide at **`/styleguide`** (not linked, `noindex`) rebuilds the design'
 1. Scaffolding and tooling ✔
 2. Design tokens and global styles ✔
 3. Pictogram, pill and illustration library ✔
-4. UI primitives
+4. UI primitives ✔
 5. Domain model, storage and QR code
 6. Phone flow: Start → Medicine → When → How long → Rules → Household → Print
 7. Printables: fridge sheet, daily strips, black and white printing

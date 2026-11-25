@@ -14,5 +14,13 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.ts'],
     setupFiles: ['src/test/setup.ts'],
+    // The domain is the app's logic: every line and branch of it is tested.
+    coverage: {
+      provider: 'v8',
+      include: ['src/domain/**/*.ts'],
+      exclude: ['src/domain/**/*.test.ts', 'src/domain/index.ts'],
+      reporter: ['text-summary', 'text'],
+      thresholds: { 100: true },
+    },
   },
 });

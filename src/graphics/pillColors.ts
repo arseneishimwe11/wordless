@@ -1,24 +1,9 @@
-import type { SlotValues } from './types';
+import type { PillColor } from '@/domain/colors';
+
 import type { PatternName } from './generated/patterns';
+import type { SlotValues } from './types';
 
-/**
- * The Pill Builder's ten colours. Each is always paired with its own pattern, so
- * two medicines are never told apart by colour alone, even in black and white.
- */
-export const PILL_COLORS = [
-  'white',
-  'yellow',
-  'orange',
-  'pink',
-  'red',
-  'brown',
-  'green',
-  'blue',
-  'purple',
-  'dark',
-] as const;
-
-export type PillColor = (typeof PILL_COLORS)[number];
+export { PILL_COLORS, type PillColor } from '@/domain/colors';
 
 export const PILL_PATTERN: Record<PillColor, PatternName | null> = {
   white: null,

@@ -3,6 +3,7 @@ build/
 .react-router/
 test-results/
 playwright-report/
+coverage/
 *.log
 .DS_Store
 .env

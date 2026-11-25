@@ -1,8 +1,8 @@
+import type { HouseholdMarkId } from '@/domain/household';
+
 import { Glyph } from '../Glyph';
 
-export const HOUSEHOLD_MARKS = ['a', 'b', 'c', 'd'] as const;
-
-export type HouseholdMarkId = (typeof HOUSEHOLD_MARKS)[number];
+export { HOUSEHOLD_MARKS, type HouseholdMarkId } from '@/domain/household';
 
 export interface HouseholdMarkProps {
   mark: HouseholdMarkId;

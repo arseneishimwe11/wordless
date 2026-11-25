@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 4 of 11, UI primitives. See [Roadmap](#roadmap).
+> **Status:** Phase 5 of 11, domain model, storage and QR code. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -23,20 +23,21 @@ npx playwright install chromium
 
 ## Scripts
 
-| Script              | What it does                                                             |
-| ------------------- | ------------------------------------------------------------------------ |
-| `npm run dev`       | Development server with hot reload                                       |
-| `npm run build`     | Production build into `build/client` (a static single-page app)          |
-| `npm run tokens`    | Regenerates `src/styles/tokens.css` from `src/styles/tokens.ts`          |
-| `npm run graphics`  | Re-extracts `src/graphics/generated/` from `design/source/`              |
-| `npm run preview`   | Serves the production build                                              |
-| `npm run typecheck` | Generates route types, then runs TypeScript (strict)                     |
-| `npm run lint`      | ESLint: TypeScript, React hooks, accessibility (jsx-a11y strict)         |
-| `npm run lint:css`  | Stylelint: CSS must use design tokens, not raw values                    |
-| `npm run format`    | Formats everything with Prettier (`format:check` only verifies)          |
-| `npm run test`      | Unit and component tests (Vitest + Testing Library)                      |
-| `npm run test:e2e`  | End-to-end tests against the production build (Playwright + axe)         |
-| `npm run check`     | Everything above, in order. CI runs this on every push and pull request. |
+| Script                  | What it does                                                                                   |
+| ----------------------- | ---------------------------------------------------------------------------------------------- |
+| `npm run dev`           | Development server with hot reload                                                             |
+| `npm run build`         | Production build into `build/client` (a static single-page app)                                |
+| `npm run tokens`        | Regenerates `src/styles/tokens.css` from `src/styles/tokens.ts`                                |
+| `npm run graphics`      | Re-extracts `src/graphics/generated/` from `design/source/`                                    |
+| `npm run preview`       | Serves the production build                                                                    |
+| `npm run typecheck`     | Generates route types, then runs TypeScript (strict)                                           |
+| `npm run lint`          | ESLint: TypeScript, React hooks, accessibility (jsx-a11y strict)                               |
+| `npm run lint:css`      | Stylelint: CSS must use design tokens, not raw values                                          |
+| `npm run format`        | Formats everything with Prettier (`format:check` only verifies)                                |
+| `npm run test`          | Unit and component tests (Vitest + Testing Library)                                            |
+| `npm run test:coverage` | The tests, failing below 100% coverage of `src/domain`                                         |
+| `npm run test:e2e`      | End-to-end tests against the production build (Playwright + axe)                               |
+| `npm run check`         | Everything above, in order (tests with coverage). CI runs this on every push and pull request. |
 
 ## Project structure
 
@@ -57,10 +58,10 @@ src/
   styles/          Design tokens, global styles, motion, print.
   copy/            Every user-facing English string.
   lib/             Small shared helpers (cx for class names).
-  test/            Test setup.
+  test/            Test setup and shared fixtures.
 ```
 
-Dependencies point one way: `routes → features → components / graphics → styles`, and anything may use `domain` and `copy`. `domain` depends on nothing in `src`.
+Dependencies point one way: `routes → features → components / graphics → styles`, and anything may use `store`, `domain` and `copy`. `domain` depends only on the motion constants in `styles/tokens.ts`; `copy` only on `domain`'s types.
 
 ## Conventions
 
@@ -159,13 +160,46 @@ Every pictogram, pill, icon and illustration is **extracted from the design sour
 
 The styleguide at **`/styleguide`** (not linked, `noindex`) rebuilds the design's color and type, pictogram and pill boards, and lists every token, with motion demos and measured contrast.
 
+## Data
+
+Everything the screens know lives in `src/domain/` (pure TypeScript, 100% test coverage) and `src/store/` (state and saving).
+
+**The model** (`domain/types.ts`). A `Household` has up to four `Person`s, each with their own mark (a–d) and `Medicine`s, plus who prepared the sheets. A medicine is drawn, not described: its `form`, colours, score line and quantity (always one of the form's steps in `QTY_STEPS`). Its `timing` is fixed times of day, every N hours, or only when needed (at most N a day). Its `course` is a length in days or weeks, or no end date. Its `rules` are things like "with food". All three timing modes and the course length keep their values when switched away from and back, as on the design's screens.
+
+**The rules** are small pure functions, one file per step: `medicine.ts` (form changes, quantity steps, colours), `timing.ts` (the sun arc's six stops, presets, the every-N-hours mapping, sun travel time), `course.ts`, `rules.ts` ("with food" and "empty stomach" lift each other), and `validation.ts` (what stops each step). The every-N-hours mapping follows the design and is marked for clinical review.
+
+**Wording** (`domain/wording.ts`) builds every summary line ("Sunrise, midday and sunset", "7 days · 21 capsules in all") from pieces in `copy/en.ts` → `domain`, with `touch` and `desktop` variants where the design words them differently. Golden tests check each against the text the design boards' own scripts produce.
+
+**The sheet** (`domain/sheet.ts`): `sheetFor(person)` says what a fridge sheet contains (time columns, what goes in each cell, the boxes to tick or the when-needed tally) without saying how it's drawn.
+
+**The stores** (`store/`) are Zustand stores, created with a storage backend so tests run in memory: `householdStore` (people, medicines, preparedBy) and `draftStore` (the medicine being entered, so a reload doesn't lose it). React reads them with `useHousehold(select)` and `useDraft(select)`. Call `load()` on each at startup; nothing is saved until it has loaded.
+
+**Saving** uses IndexedDB (`idb-keyval`). Each value is saved as `{ version, data }`. On load, data is migrated (`MIGRATIONS` in `store/schema.ts`, empty while there is only version 1) and checked against the zod schemas in `domain/schema.ts`. Anything that can't be read is never deleted: it's copied to `<key>:corrupt:<timestamp>` and the app starts empty with `loadError` set (`corrupt`, `newer-version` or `unavailable`). If saving fails, the app carries on in memory with `saveFailed` set.
+
+**The QR code** (`domain/codec/`) carries one person's whole schedule, so a sheet can be scanned back in offline:
+
+```
+WL1:<Base45>      Base45 (RFC 9285) fits the QR code's compact alphanumeric mode
+  version         8 bits   1
+  mark, count     2 + 6    household mark; number of medicines
+  label           UTF-8, 1-byte length prefix
+  prepared by     UTF-8, 1-byte length prefix
+  prepared on     16 bits  days since 2019-12-31 (0: none)
+  each medicine   form 3, colour 4, body colour 4, score 1, quantity step 4,
+                  mode 2, doses 6 (one bit per time of day), every-N 2, max a day 3,
+                  ongoing 1, unit 1, length 7 (0: none), rules 7, then the name (UTF-8)
+  CRC-16          CCITT-FALSE over everything before it
+```
+
+`decodeSchedule` never throws. It returns the person (with new ids) or one of `not-wordless`, `newer-version`, `damaged` (failed the CRC, so scan again) or `invalid`. Four medicines with 30-letter Latin names come to under 300 characters, which fits a version 10 QR code at level M.
+
 ## Roadmap
 
 1. Scaffolding and tooling ✔
 2. Design tokens and global styles ✔
 3. Pictogram, pill and illustration library ✔
 4. UI primitives ✔
-5. Domain model, storage and QR code
+5. Domain model, storage and QR code ✔
 6. Phone flow: Start → Medicine → When → How long → Rules → Household → Print
 7. Printables: fridge sheet, daily strips, black and white printing
 8. Desktop: split view with live sheet, print page

@@ -1,3 +1,5 @@
+import type { WordingCopy } from '@/domain/wording';
+
 /**
  * Every English string the interface shows lives here, so wording is reviewed in
  * one place and can be translated later without touching components.
@@ -63,6 +65,163 @@ export const copy = {
       'The four day colours as the sun travels: a saffron sun rising, a coral sun high at midday, a terracotta sun setting, and the indigo night under the horizon with a moon',
     sunriseGrid: 'The sunrise mark drawn large over its 48-unit grid',
   },
+  /**
+   * The pieces the summary lines are built from (see src/domain/wording.ts), from
+   * the design boards' scripts. Plurals follow the design: more than one is plural.
+   */
+  domain: {
+    times: {
+      sunrise: { name: 'sunrise', at: '6 am' },
+      midMorning: { name: 'mid-morning', at: '9 am' },
+      midday: { name: 'midday', at: '12 noon' },
+      afternoon: { name: 'afternoon', at: '3 pm' },
+      sunset: { name: 'sunset', at: '6 pm' },
+      night: { name: 'night', at: '10 pm' },
+    },
+    colors: {
+      white: 'white',
+      yellow: 'yellow',
+      orange: 'orange',
+      pink: 'pink',
+      red: 'red',
+      brown: 'brown',
+      green: 'green',
+      blue: 'blue',
+      purple: 'purple',
+      dark: 'dark',
+    },
+    rules: {
+      withFood: 'with food',
+      emptyStomach: 'empty stomach',
+      withWater: 'with water',
+      noAlcohol: 'no alcohol',
+      sleepiness: 'may cause sleepiness',
+      keepCool: 'keep cool',
+      shakeFirst: 'shake first',
+    },
+    units: {
+      tablet: { one: 'tablet', other: 'tablets' },
+      capsule: { one: 'capsule', other: 'capsules' },
+      drop: { one: 'drop', other: 'drops' },
+      puff: { one: 'puff', other: 'puffs' },
+      spoon: { one: 'spoon', other: 'spoons' },
+      day: { one: 'day', other: 'days' },
+      dose: { one: 'dose', other: 'doses' },
+      ml: 'ml',
+    },
+    half: '½',
+    separator: ' · ',
+    noValue: '—',
+    list: (items: readonly string[]) =>
+      items.length > 1
+        ? `${items.slice(0, -1).join(', ')} and ${items.at(-1) ?? ''}`
+        : items.join(''),
+    manyTimes: (names: readonly string[]) =>
+      `${String(names.length)} times, ${names[0] ?? ''} to ${names.at(-1) ?? ''}`,
+    capitalize: (text: string) => text.charAt(0).toUpperCase() + text.slice(1),
+    about: (clockTimes: readonly string[]) => `about ${clockTimes.join(' · ')}`,
+    colorLabel: { solid: 'Color', liquid: 'Color of the liquid' },
+    builder: {
+      tablet: (qty: string, color: string, score: boolean, oval: boolean) =>
+        `${qty} · ${color}${score ? ', score line' : ''}${oval ? ', oval' : ''}`,
+      capsule: (qty: string, cap: string, body: string) => `${qty} · ${cap} cap, ${body} body`,
+      liquid: (qty: string, spoons: string, color: string) =>
+        `${qty}, ${spoons} of 5 ml · ${color}`,
+      drops: (qty: string, color: string) => `${qty} · ${color}`,
+      inhaler: (qty: string, color: string) => `${qty} · ${color} inhaler`,
+    },
+    when: {
+      count: {
+        whenNeeded: (max: number) => ({ big: `up to ${String(max)}`, small: 'a day, if needed' }),
+        every: (hours: number, perDay: number) => ({
+          big: `${String(hours)} h`,
+          small: `apart · ${String(perDay)} a day`,
+        }),
+        fixed: (perDay: number) => ({ big: String(perDay), small: 'a day' }),
+      },
+      whenNeeded: {
+        title: 'Only when needed',
+        detail: (qty: string, max: number) =>
+          `${qty} at a time, never more than ${String(max)} in a day`,
+      },
+      empty: {
+        title: 'No times yet',
+        errorTitle: 'Add at least one time first',
+        detail: {
+          touch: 'Tap a time on the sky, or choose how many a day.',
+          desktop: 'Click a time on the sky, drag the sun, or press 1–4.',
+        },
+      },
+      everyTitle: (hours: number, times: string) => `Every ${String(hours)} h: ${times}`,
+      fixedDetail: (qty: string, about: string) => `${qty} each time · ${about}`,
+    },
+    howLong: {
+      length: (days: string, doses: string | null) => (doses ? `${days} · ${doses}` : days),
+      inAll: (count: number, unit: string) => `${String(count)} ${unit} in all`,
+      ongoing: {
+        touch: {
+          title: (perDay: number) =>
+            perDay
+              ? `Ongoing · ${String(perDay)} a day, no end date`
+              : 'Ongoing · only when needed, no end date',
+          detail: 'Keep going until the prescriber says stop.',
+          note: 'no end date — the sheet shows one week; print a new one when it is full',
+        },
+        desktop: {
+          title: () => 'No end date',
+          detail: 'The sheet shows one week to repeat, with no finish stamp.',
+          note: 'one week of boxes, on the sheet →',
+        },
+      },
+      missing: {
+        title: 'How long is missing',
+        errorTitle: 'Add how long first',
+        detail: {
+          touch: 'Type a number, or pick one of the usual lengths.',
+          desktop: 'Type a number and press Enter, or pick a usual length.',
+        },
+        note: {
+          touch: 'how many days? the boxes need an end before they can be ticked',
+          desktop: 'type a number — the boxes appear on the sheet →',
+        },
+        errorNote: 'the boxes need an end before they can be ticked',
+      },
+      filled: {
+        detail: {
+          touch: (boxes: number) =>
+            `The sheet will show ${String(boxes)} boxes to tick, grouped by day.`,
+          desktop: (boxes: number) =>
+            `The sheet now shows ${String(boxes)} boxes to tick, grouped by day.`,
+        },
+        whenNeededDetail: 'Only when needed: the sheet shows a dashed tally for each day.',
+        note: {
+          touch: (extra: number) =>
+            `done when the boxes are done${extra ? ` — and ${String(extra)} more days like these` : ''}`,
+          desktop: () => 'done when the boxes are done →',
+        },
+      },
+    },
+    rail: {
+      medicine: (name: string, form: string) => `${name} · ${form}`,
+      tablet: (qty: string, color: string) => `${qty}, ${color}`,
+      capsule: (qty: string, cap: string, body: string) => `${qty}, ${cap} and ${body}`,
+      liquid: (qty: string, color: string) => `${qty}, ${color}`,
+      whenNeeded: 'only when needed',
+      noEnd: 'no end date',
+      noRules: 'none',
+    },
+    household: {
+      perDay: (n: number) => `${String(n)} a day`,
+      whenNeeded: 'only when needed',
+      atMost: (max: number) => `at most ${String(max)} a day`,
+      noEnd: 'no end date',
+    },
+    sheet: {
+      ongoing: 'no end date: one week to repeat',
+      missing: 'how long? the boxes appear here',
+      extra: (days: number) => `+ ${String(days)} more days like these`,
+    },
+  } satisfies WordingCopy,
   styleguide: {
     pageTitle: 'Styleguide · Wordless',
     board: {

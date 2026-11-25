@@ -20,16 +20,20 @@
     "format:check": "prettier --check .",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test --trace off",
-    "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm run test && npm run test:e2e"
+    "check": "npm run typecheck && npm run lint && npm run lint:css && npm run format:check && npm run test:coverage && npm run test:e2e"
   },
   "dependencies": {
     "@fontsource-variable/atkinson-hyperlegible-next": "5.3.0",
     "@fontsource/kalam": "5.3.0",
     "@fontsource/young-serif": "5.3.0",
+    "idb-keyval": "6.3.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "react-router": "8.5.3"
+    "react-router": "8.5.3",
+    "zod": "4.6.7",
+    "zustand": "5.1.0"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.1",
@@ -43,6 +47,7 @@
     "@types/react": "19.3.1",
     "@types/react-dom": "19.3.0",
     "@vitejs/plugin-react": "6.3.0",
+    "@vitest/coverage-v8": "5.1.1",
     "eslint": "9.39.5",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-jsx-a11y": "6.10.2",

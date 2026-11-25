@@ -221,6 +221,52 @@ export const copy = {
       extra: (days: number) => `+ ${String(days)} more days like these`,
     },
   } satisfies WordingCopy,
+  /** The printed sheet and strips (FridgeSheet, DailyStrip). Short: they're read at a glance. */
+  sheet: {
+    nameLine: 'name — write by hand',
+    sameMark: 'same mark on the medicine bag',
+    patient: 'Patient',
+    mark: (mark: string) => `Household mark ${mark.toUpperCase()}`,
+    tickTitle: 'Tick one box each time.',
+    /** After "Tick one box each time.": who the boxes count down for. */
+    finished: {
+      units: (units: string) =>
+        `The ${units} are finished when every box is ticked — even if the patient feels better.`,
+      one: 'This medicine is finished when every box is ticked — even if the patient feels better.',
+      many: 'Each medicine is finished when its boxes are all ticked — even if the patient feels better.',
+      ongoing: 'There is no end date: when the boxes are full, print a new sheet.',
+    },
+    legend: {
+      take: 'a dose to take — tick it',
+      ifNeeded: 'only if needed',
+      noMore: 'no more today',
+      finished: 'course finished',
+    },
+    allDone: 'All done when every box is ticked',
+    repeat: 'No end date: repeat this week',
+    atMost: (max: number) => `At most ${String(max)} in one day`,
+    beyondMax: 'One more, crossed out: never more than this',
+    reloadTitle: 'For the next clinic: scan with Wordless to reload this schedule.',
+    reloadBody:
+      'The whole schedule is inside the code, so it works offline. Nothing here was calculated: doses are exactly as the prescriber wrote them.',
+    preparedBy: 'Prepared by',
+    /** The same, inside a sentence. */
+    preparedByInline: 'prepared by',
+    qrLabel: 'QR code holding this whole schedule',
+    /** "25 November 2026". */
+    date: (date: Date) =>
+      new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }).format(
+        date,
+      ),
+    dose: (qty: string, food: boolean) => (food ? `${qty}, with food` : qty),
+    pageLabel: (n: number, total: number) => `Page ${String(n)} of ${String(total)}`,
+    strips: {
+      day: (n: number) => `Day ${String(n)}`,
+      cutTitle: 'Cut along the dashes — one strip for each day.',
+      cutBody: 'Fold it into a wallet or tape it inside the pill box lid.',
+      tick: 'Tick when taken',
+    },
+  },
   /** The phone flow's screens (design boards Start, AddMedicine, SunArc, HowLong, Rules, Household). */
   screens: {
     stepLabel: (step: string, n: number, total: number) =>
@@ -355,7 +401,14 @@ export const copy = {
     print: {
       pageTitle: 'Print · Wordless',
       title: 'Print',
-      soon: 'The printable sheet and daily strips arrive in the next phase.',
+      printer: 'Printer',
+      color: 'Color',
+      mono: 'Black & white',
+      what: 'What to print',
+      outputs: { sheet: 'Fridge sheet', strips: 'Daily strips' },
+      note: 'tap the page to print it again · both fit A4',
+      replay: 'Print the preview again',
+      print: 'Print',
     },
     scan: {
       pageTitle: 'Scan a sheet · Wordless',
@@ -366,6 +419,27 @@ export const copy = {
   },
   styleguide: {
     pageTitle: 'Styleguide · Wordless',
+    printables: {
+      title: 'Printables',
+      lead: 'The sheets as they print, at A4, with the design’s sample household.',
+      pages: 'The pages, at full size',
+      fridge: 'Fridge sheet — colour',
+      mono: 'Fridge sheet — black & white printer',
+      strips: 'Daily strips',
+      edge: 'Other forms on the sheet',
+      every8: 'Every 8 hours: the columns follow the doses',
+      pharmacy: '[PHARMACY NAME]',
+      date: '[DATE]',
+      names: {
+        amoxicillin: 'Amoxicillin 500 mg',
+        paracetamol: 'Paracetamol',
+        syrup: '[SYRUP NAME]',
+        drops: '[EYE DROPS NAME]',
+        tablet: '[TABLET NAME]',
+        inhaler: '[INHALER NAME]',
+        medicine: '[MEDICINE NAME]',
+      },
+    },
     board: {
       eyebrow: 'Wordless · design system · stage 1',
       wordmark: 'wordless',

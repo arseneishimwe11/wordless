@@ -19,6 +19,14 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-10);
   margin-top: var(--space-14);
+
+  /*
+   * A stamp lands large and settles on its card's corner. Near the screen's edge that
+   * overshoot must not scroll the page sideways: clip it at the screen's edge (the
+   * column's 16px padding), where it would not be seen anyway.
+   */
+  overflow-x: clip;
+  overflow-clip-margin: 16px;
 }
 
 .prints {

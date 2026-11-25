@@ -30,4 +30,9 @@
   .printOnly {
     display: revert;
   }
+
+  /* Each A4 page on its own sheet of paper, and no blank page after the last. */
+  .printOnly > :last-child {
+    break-after: auto;
+  }
 }

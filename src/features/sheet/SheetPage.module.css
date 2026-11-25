@@ -1,0 +1,15 @@
+.page {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-sheet);
+  break-after: page;
+}
+
+/* FridgeSheetMono.dc.html: white paper, and the same sheet in greys. */
+.mono {
+  background: var(--color-white);
+  filter: grayscale(1);
+}

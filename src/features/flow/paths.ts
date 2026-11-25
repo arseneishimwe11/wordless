@@ -14,3 +14,6 @@ export const SCAN_PATH = '/scan';
 
 export const householdPath = (personId?: string | null): string =>
   personId ? `/household?person=${encodeURIComponent(personId)}` : '/household';
+
+export const printPath = (personId?: string | null): string =>
+  personId ? `${PRINT_PATH}?person=${encodeURIComponent(personId)}` : PRINT_PATH;

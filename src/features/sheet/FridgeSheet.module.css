@@ -1,0 +1,97 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: center;
+  justify-content: center;
+  background: var(--color-sheet-cell);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.cardDrawing {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.cardName {
+  max-width: 160px;
+  font-size: var(--text-13);
+  line-height: var(--leading-125);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-veil);
+  border: var(--stroke-dash) dashed var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.bandDrawing {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.doses {
+  display: flex;
+  align-items: center;
+}
+
+.doses > * + * {
+  margin-left: calc(var(--space-4) * -1);
+}
+
+.divider {
+  width: 2px;
+  height: 56px;
+  margin: 0 var(--space-4);
+  background: var(--color-ink);
+}
+
+.dayNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--display-19);
+  line-height: var(--leading-100);
+  border: var(--stroke-thin) solid var(--color-ink);
+}
+
+.box {
+  background: var(--color-white);
+  border: var(--stroke-dash) solid var(--color-ink);
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.faded {
+  opacity: var(--opacity-ghost);
+}
+
+.circle {
+  background: var(--color-white);
+  border: var(--stroke-thin) dashed var(--color-ink);
+  border-radius: var(--radius-round);
+}
+
+.note {
+  font-family: var(--font-hand);
+  font-size: var(--text-15);
+  line-height: var(--leading-120);
+  color: var(--color-pen);
+}

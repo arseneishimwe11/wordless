@@ -23,6 +23,10 @@ export const STACK_SIZES = {
    * the rest follow the sheet's proportions (two thirds).
    */
   today: { main: [40, 40, 31, 25, 21, 19], drop: 14, puff: 14, device: 34 },
+  /** A cell of the printed fridge sheet: one unit at 66 (FridgeSheet.dc.html), the rest in proportion. */
+  fridge: { main: [66, 66, 50, 42, 35, 31], drop: 22, puff: 22, device: 55 },
+  /** A daily strip: one unit at 36 (DailyStrip.dc.html), the rest in proportion. */
+  strip: { main: [36, 36, 28, 23, 19, 17], drop: 12, puff: 12, device: 30 },
 } as const;
 
 export type StackContext = keyof typeof STACK_SIZES;

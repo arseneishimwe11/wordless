@@ -12,6 +12,7 @@ export const STORAGE_VERSION = 1;
 export const KEYS = {
   household: 'wordless:household',
   draft: 'wordless:draft',
+  prefs: 'wordless:prefs',
 } as const;
 
 export const envelopeSchema = z.object({
@@ -33,6 +34,19 @@ export const draftSchema = z.object({
 });
 
 export type Draft = z.infer<typeof draftSchema>;
+
+export const PRINT_OUTPUTS = ['sheet', 'strips'] as const;
+
+export type PrintOutput = (typeof PRINT_OUTPUTS)[number];
+
+/** How the last sheet was printed, to offer the same next time. */
+export const prefsSchema = z.object({
+  /** For a black and white printer. */
+  mono: z.boolean(),
+  output: z.enum(PRINT_OUTPUTS),
+});
+
+export type Prefs = z.infer<typeof prefsSchema>;
 
 /** Turns data saved by version N into version N + 1. */
 export type Migration = (data: unknown) => unknown;

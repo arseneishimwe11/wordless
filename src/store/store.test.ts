@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import { amoxicillin, paracetamol } from '@/test/fixtures';
 
 import { createDraftStore } from './draft';
+import { createPrefsStore } from './prefs';
 import { createHouseholdStore } from './household';
 import { corruptKey, load, save } from './persist';
 import { draftSchema, KEYS, migrate, savedHouseholdSchema, STORAGE_VERSION } from './schema';
@@ -268,5 +269,37 @@ describe('migration', () => {
     const failing = { ...storage, set: () => Promise.reject(new Error('full')) };
     expect(await load(failing, 'key', draftSchema)).toEqual({ data: null, error: 'unavailable' });
     expect(storage.entries.get('key')).toBe('junk');
+  });
+});
+
+describe('print preferences', () => {
+  it('start in colour with the fridge sheet, and are remembered', async () => {
+    const storage = memoryStore();
+    const prefs = createPrefsStore(storage);
+    await prefs.getState().load();
+    expect(prefs.getState()).toMatchObject({ mono: false, output: 'sheet' });
+    prefs.getState().setMono(true);
+    prefs.getState().setOutput('strips');
+    await prefs.getState().flush();
+
+    const again = createPrefsStore(storage);
+    await again.getState().load();
+    expect(again.getState()).toMatchObject({ mono: true, output: 'strips' });
+  });
+
+  it('keep unreadable preferences aside and fall back to the defaults', async () => {
+    const storage = memoryStore({ [KEYS.prefs]: { version: 1, data: { mono: 'yes' } } });
+    const prefs = createPrefsStore(storage);
+    await prefs.getState().load();
+    expect(prefs.getState()).toMatchObject({ mono: false, output: 'sheet', loadError: 'corrupt' });
+  });
+
+  it('carry on when they cannot be saved', async () => {
+    const storage = memoryStore();
+    const prefs = createPrefsStore({ ...storage, set: () => Promise.reject(new Error('full')) });
+    await prefs.getState().load();
+    prefs.getState().setMono(true);
+    await prefs.getState().flush();
+    expect(prefs.getState().mono).toBe(true);
   });
 });

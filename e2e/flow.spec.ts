@@ -1,38 +1,7 @@
 import AxeBuilder from '@axe-core/playwright';
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test } from '@playwright/test';
 
-/** Picks a styled radio or checkbox (the native input sits under its drawn face). */
-const pick = (page: Page, role: 'radio' | 'checkbox', name: string) =>
-  page.getByRole(role, { name, exact: true }).dispatchEvent('click');
-
-/** Enters the design's main example, Amoxicillin 3 a day for 7 days with food, by clicking. */
-async function enterAmoxicillin(page: Page) {
-  await page.goto('/');
-  await page.getByRole('button', { name: 'New schedule' }).click();
-  await page.getByLabel('Medicine name').fill('Amoxicillin 500 mg');
-  await pick(page, 'radio', 'Capsule');
-  await pick(page, 'radio', 'Red, cross-hatch');
-  await page.getByRole('button', { name: 'Next: when' }).click();
-  await page
-    .getByRole('radiogroup', { name: 'Times a day' })
-    .getByRole('radio', { name: '3' })
-    .dispatchEvent('click');
-  await page.getByRole('button', { name: 'Next: how long' }).click();
-  await pick(page, 'radio', '7');
-  await page.getByRole('button', { name: 'Next: rules' }).click();
-  await pick(page, 'checkbox', 'With food');
-  await page.getByRole('button', { name: 'Done: see the schedule' }).click();
-  await expect(page.getByRole('heading', { name: 'Today, for Person A' })).toBeVisible();
-}
-
-function collectErrors(page: Page) {
-  const errors: string[] = [];
-  page.on('pageerror', (error) => errors.push(error.message));
-  page.on('console', (message) => {
-    if (message.type() === 'error') errors.push(message.text());
-  });
-  return errors;
-}
+import { collectErrors, enterAmoxicillin, pick } from './helpers';
 
 test.describe('phone flow', () => {
   test.use({ viewport: { width: 390, height: 844 } });
@@ -181,6 +150,13 @@ test.describe('phone flow widths', () => {
       await page.setViewportSize({ width, height: 844 });
       const noScroll = async (label: string) => {
         await page.evaluate(() => document.fonts.ready);
+        await page.waitForFunction(() =>
+          document
+            .getAnimations()
+            .every(
+              (a) => a.effect?.getTiming().iterations === Infinity || a.playState === 'finished',
+            ),
+        );
         const overflow = await page.evaluate(
           () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
         );

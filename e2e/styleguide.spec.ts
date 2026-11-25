@@ -97,6 +97,14 @@ test.describe('styleguide', () => {
           ),
         )
         .toBeGreaterThanOrEqual(3);
+      // Measure the layout at rest: a stamp landing overshoots its corner for half a second.
+      await page.waitForFunction(() =>
+        document
+          .getAnimations()
+          .every(
+            (a) => a.effect?.getTiming().iterations === Infinity || a.playState === 'finished',
+          ),
+      );
       const overflow = await page.evaluate(
         () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
       );

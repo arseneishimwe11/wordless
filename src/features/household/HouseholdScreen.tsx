@@ -6,7 +6,7 @@ import { HOUSEHOLD_MARKS, householdRow, keyUnit } from '@/domain';
 import { Icon, PillUnit } from '@/graphics';
 import { draftStore, householdStore, useHousehold } from '@/store';
 
-import { PRINT_PATH, ScreenLayout, START_PATH, STEP_PATHS, StorageNotice } from '../flow';
+import { printPath, ScreenLayout, START_PATH, STEP_PATHS, StorageNotice } from '../flow';
 import styles from './HouseholdScreen.module.css';
 import { TodayGrid } from './TodayGrid';
 
@@ -42,7 +42,7 @@ export function HouseholdScreen() {
         </>
       }
       footer={
-        <Button fullWidth iconEnd="arrow" href={PRINT_PATH}>
+        <Button fullWidth iconEnd="arrow" href={printPath(person.id)}>
           {t.print}
         </Button>
       }

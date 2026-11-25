@@ -1,0 +1,8 @@
+.arrow {
+  overflow: visible;
+  fill: none;
+  stroke: var(--color-ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: var(--stroke-thin);
+}

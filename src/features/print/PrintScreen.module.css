@@ -1,0 +1,100 @@
+.back {
+  position: absolute;
+  top: 8px;
+  left: -10px;
+}
+
+.barTitle {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-top: var(--space-8);
+  font-family: var(--font-body);
+  font-size: var(--text-17);
+  font-weight: var(--weight-bold);
+  letter-spacing: inherit;
+}
+
+/* From y 70: the printer slot, and the page coming out of it. */
+.stage {
+  margin-top: var(--space-6);
+}
+
+.slot {
+  position: absolute;
+  top: 0;
+  left: 10px;
+  z-index: var(--layer-overlay);
+  width: 370px;
+  height: 20px;
+  background: var(--color-ink);
+  border-radius: var(--radius-10);
+}
+
+.slotLine {
+  position: absolute;
+  top: 8px;
+  right: 24px;
+  left: 24px;
+  height: 4px;
+  background: var(--color-illo-slot);
+  border-radius: var(--radius-2);
+}
+
+.preview {
+  position: absolute;
+  z-index: var(--layer-raised);
+  height: 494px;
+  overflow: hidden;
+}
+
+.replay {
+  position: absolute;
+  z-index: var(--layer-overlay);
+  height: 484px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.paper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 342px;
+  height: 484px;
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-outline-hair);
+}
+
+.page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  transform-origin: 0 0;
+}
+
+.stamp {
+  position: absolute;
+  right: 14px;
+  bottom: 72px;
+}
+
+.control {
+  margin-top: var(--space-16);
+}
+
+.controlNext {
+  margin-top: var(--space-12);
+}
+
+.note {
+  margin-top: var(--space-10);
+  padding-left: var(--space-4);
+}

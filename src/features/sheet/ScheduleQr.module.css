@@ -1,0 +1,11 @@
+.qr {
+  display: block;
+}
+
+.light {
+  fill: var(--color-white);
+}
+
+.dark {
+  fill: var(--color-ink);
+}

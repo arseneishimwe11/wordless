@@ -5,6 +5,7 @@ import {
   GraphicsIndex,
   PictogramBoard,
   PillBoard,
+  Printables,
   TokenReference,
 } from '@/features/styleguide';
 
@@ -25,6 +26,7 @@ export default function Styleguide() {
       <PillBoard />
       <GraphicsIndex />
       <ComponentShowcase />
+      <Printables />
       <TokenReference />
     </main>
   );

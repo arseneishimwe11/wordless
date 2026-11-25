@@ -14,3 +14,18 @@
   width: 42px;
   height: 42px;
 }
+
+.slot {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+
+.print {
+  width: 31px;
+  height: 31px;
+  border-width: var(--stroke-ink);
+}

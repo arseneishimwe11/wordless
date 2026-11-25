@@ -1,0 +1,101 @@
+.at {
+  position: absolute;
+}
+
+.small {
+  font-size: var(--text-12);
+  line-height: var(--leading-120);
+  color: var(--color-ink-soft);
+}
+
+.nameLine {
+  border-bottom: var(--stroke-thin) dotted var(--color-ink);
+}
+
+.markRow {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.markRow .small {
+  max-width: 120px;
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rule svg {
+  max-width: none;
+  overflow: visible;
+}
+
+.tickText {
+  font-size: var(--text-13);
+  line-height: var(--leading-130);
+}
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legendItem {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.legendWords {
+  max-width: 110px;
+  font-size: var(--text-12);
+  line-height: var(--leading-125);
+}
+
+.qrFrame {
+  min-width: 120px;
+  min-height: 120px;
+  padding: var(--space-6);
+  background: var(--color-white);
+  border: var(--stroke-dash) solid var(--color-ink);
+  border-radius: var(--radius-sheet-1);
+  box-shadow: var(--shadow-qr);
+}
+
+.reload {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  font-size: var(--text-12);
+  line-height: var(--leading-135);
+}
+
+.reloadTitle {
+  font-size: var(--text-13);
+  line-height: var(--leading-125);
+}
+
+.writeIn {
+  display: inline-block;
+  width: 140px;
+  border-bottom: var(--stroke-thin) dotted var(--color-ink);
+}
+
+.wordmark {
+  position: absolute;
+  top: 1002px;
+  right: 40px;
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.wordmarkText {
+  font-family: var(--font-display);
+  font-size: var(--display-26);
+  letter-spacing: var(--tracking-display);
+}

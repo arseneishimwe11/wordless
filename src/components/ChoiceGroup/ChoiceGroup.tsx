@@ -12,8 +12,11 @@ export interface ChoiceOption<T extends string | number> {
   wide?: boolean | undefined;
   /** This chip's width in px, where the design gives one (the Sun Arc's "12 h" is wider). */
   width?: number | undefined;
-  /** Draw this one chip differently from the group ("No end date" among number chips). */
-  chip?: 'number' | 'text' | undefined;
+  /**
+   * Draw this one chip differently from the group: `label` is a quieter 16px word
+   * ("No end date" among number chips).
+   */
+  chip?: 'number' | 'text' | 'label' | undefined;
 }
 
 export interface ChoiceGroupProps<T extends string | number> {
@@ -29,6 +32,10 @@ export interface ChoiceGroupProps<T extends string | number> {
   chipWidth?: number | 'fill' | undefined;
   /** Display size of number chips, by the design's authored size. */
   numberSize?: 22 | 24 | 26 | undefined;
+  /** Space between chips in px: 10 (the Sun Arc) or 6 (How long's usual lengths). */
+  gap?: 6 | 10 | undefined;
+  /** On a narrow screen, narrow the chips (never below 44px) instead of wrapping the row. */
+  shrink?: boolean | undefined;
   className?: string | undefined;
 }
 
@@ -47,11 +54,18 @@ export function ChoiceGroup<T extends string | number>({
   size = 'phone',
   chipWidth = size === 'desktop' ? 'fill' : chip === 'number' ? 56 : 74,
   numberSize = size === 'desktop' ? 26 : 24,
+  gap = 10,
+  shrink = false,
   className,
 }: ChoiceGroupProps<T>) {
   const name = useId();
   return (
-    <div role="radiogroup" aria-label={label} className={cx(styles.group, className)}>
+    <div
+      role="radiogroup"
+      aria-label={label}
+      className={cx(styles.group, shrink && styles.shrink, className)}
+      style={{ '--group-gap': `var(--space-${String(gap)})` } as CSSProperties}
+    >
       {options.map((option, i) => {
         const width = option.width ?? chipWidth;
         const kind = option.chip ?? chip;

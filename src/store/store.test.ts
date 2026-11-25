@@ -56,6 +56,12 @@ describe('household store', () => {
     expect(store.getState().people).toEqual([]);
   });
 
+  it('can name someone after their mark', async () => {
+    const { store } = await household();
+    const person = store.getState().addPerson((mark) => `Person ${mark.toUpperCase()}`);
+    expect(person).toMatchObject({ label: 'Person A', mark: 'a' });
+  });
+
   it('frees a mark when its person is removed, and stops at four people', async () => {
     const { store } = await household();
     const s = store.getState();

@@ -124,6 +124,8 @@
 /* ---- States ---- */
 
 .primary:not(.pending, :disabled):hover {
+  /* As a link, the global a:hover colour would otherwise turn the words ink on ink. */
+  color: var(--color-paper);
   transform: translate(-1px, -1px);
 }
 

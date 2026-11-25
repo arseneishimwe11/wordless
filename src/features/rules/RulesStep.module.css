@@ -1,0 +1,56 @@
+/* From Rules.dc.html: title at 74, lead at 114, cards at 148, "How it prints" at 600. */
+.title {
+  padding-left: var(--space-4);
+  margin-top: var(--space-10);
+  font-size: var(--display-31);
+  line-height: var(--leading-120);
+}
+
+.lead {
+  padding-left: var(--space-4);
+  margin-top: var(--space-6);
+  font-size: var(--text-16);
+  line-height: var(--leading-125);
+  color: var(--color-ink-soft);
+}
+
+.rules {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-10);
+  margin-top: var(--space-14);
+}
+
+.prints {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  margin-top: var(--space-22);
+}
+
+.printsTitle {
+  padding-left: var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-normal);
+  letter-spacing: inherit;
+}
+
+.preview {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  min-height: 84px;
+  padding: 0 var(--space-14);
+  background: var(--color-white);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  align-items: center;
+}

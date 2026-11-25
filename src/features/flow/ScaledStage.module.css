@@ -1,0 +1,15 @@
+.stage {
+  position: relative;
+  flex: none;
+}
+
+.bleed {
+  margin-inline: calc(var(--space-16) * -1);
+}
+
+.inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}

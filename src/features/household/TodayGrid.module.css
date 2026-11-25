@@ -1,0 +1,58 @@
+.card {
+  margin-top: var(--space-12);
+  padding: var(--space-10);
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 52px repeat(var(--columns), minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+/* Rows only group cells for screen readers; the tiles sit on the grid. */
+.row {
+  display: contents;
+}
+
+.head,
+.cell,
+.rowHeader,
+.corner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.head {
+  height: 48px;
+}
+
+.cell,
+.rowHeader {
+  height: 64px;
+}
+
+.band {
+  grid-column: span var(--columns);
+  height: 64px;
+  background: var(--color-white);
+  border: var(--stroke-thin) dashed var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.bandDrawing {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* The dashed doses overlap a little, like a handful. */
+.bandDrawing > span + span {
+  margin-left: calc(var(--space-6) * -1);
+}

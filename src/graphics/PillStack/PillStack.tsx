@@ -18,6 +18,11 @@ export const STACK_SIZES = {
   'builder-desktop': { main: [176, 176, 140, 112, 96, 80], drop: 50, puff: 58, device: 150 },
   /** A cell on the printed sheet. */
   sheet: { main: [60, 60, 46, 38, 32, 28], drop: 20, puff: 20, device: 50 },
+  /**
+   * A cell of the Household screen's "Today" grid. The design draws one unit at 40;
+   * the rest follow the sheet's proportions (two thirds).
+   */
+  today: { main: [40, 40, 31, 25, 21, 19], drop: 14, puff: 14, device: 34 },
 } as const;
 
 export type StackContext = keyof typeof STACK_SIZES;

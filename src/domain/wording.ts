@@ -71,7 +71,7 @@ export interface WordingCopy {
       errorTitle: string;
       detail: Record<WordingVariant, string>;
       note: Record<WordingVariant, string>;
-      errorNote: string;
+      errorNote: Record<WordingVariant, string>;
     };
     filled: {
       detail: Record<WordingVariant, (boxes: number) => string>;
@@ -280,7 +280,7 @@ export function howLongSummary(
     return {
       title: error ? t.missing.errorTitle : t.missing.title,
       detail: t.missing.detail[variant],
-      note: error ? t.missing.errorNote : t.missing.note[variant],
+      note: error ? t.missing.errorNote[variant] : t.missing.note[variant],
       tone: error ? 'error' : 'normal',
     };
   }

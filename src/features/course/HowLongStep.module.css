@@ -1,0 +1,30 @@
+.title {
+  padding-left: var(--space-4);
+  margin-top: var(--space-12);
+  font-size: var(--display-31);
+  line-height: var(--leading-120);
+  white-space: nowrap;
+}
+
+/* y 204: −, the number, +, and days/weeks on the right. */
+.lengthRow {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+  height: 60px;
+  margin-top: var(--space-12);
+}
+
+.unit {
+  width: 134px;
+  margin-left: auto;
+}
+
+.usual {
+  margin-top: var(--space-12);
+}
+
+.summary {
+  margin-top: var(--space-12);
+  padding: 0 var(--space-4);
+}

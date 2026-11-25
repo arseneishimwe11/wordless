@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 5 of 11, domain model, storage and QR code. See [Roadmap](#roadmap).
+> **Status:** Phase 6 of 11, the phone screens. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -50,7 +50,8 @@ src/
   root.tsx         App shell: <html>, meta, error boundary.
   routes.ts        Route table.
   routes/          One module per screen. Thin: reads state, composes features.
-  features/        Feature components (sun-arc, pill-builder, course, rules, household, sheet, print, landing).
+  features/        Screens and their parts: flow (layout, step header, routing helpers), start, pill-builder,
+                   sun-arc, course, rules, household; later sheet, print, landing.
   components/      UI primitives (Button, SegmentedControl, Stepper, …). No domain knowledge.
   graphics/        Pictograms, pills, household marks, illustrations. Pure rendering.
   domain/          Pure TypeScript model and rules. No React, no browser APIs.
@@ -193,6 +194,25 @@ WL1:<Base45>      Base45 (RFC 9285) fits the QR code's compact alphanumeric mode
 
 `decodeSchedule` never throws. It returns the person (with new ids) or one of `not-wordless`, `newer-version`, `damaged` (failed the CRC, so scan again) or `invalid`. Four medicines with 30-letter Latin names come to under 300 characters, which fits a version 10 QR code at level M.
 
+## Screens
+
+The phone flow, one route per screen (`src/routes.ts`); the screens themselves live in `src/features/`.
+
+| Path                  | Screen                                                              | Design board                       |
+| --------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| `/`                   | Start: what Wordless does, New schedule, the schedules already made | `Start`                            |
+| `/entry/medicine`     | Step 1, the Pill Builder                                            | `AddMedicine`, `AddMedicineStates` |
+| `/entry/when`         | Step 2, the Sun Arc                                                 | `SunArc`, `When`, `SunArcStates`   |
+| `/entry/how-long`     | Step 3, the course grid                                             | `HowLong`, `HowLongStates`         |
+| `/entry/rules`        | Step 4, rules and how they print                                    | `Rules`                            |
+| `/household?person=…` | Everyone's day, and their medicines                                 | `Household`                        |
+| `/print`, `/scan`     | Placeholders until Phases 7 and 11                                  |                                    |
+
+- **Loading.** Every route's `clientLoader` awaits `loadStores()`, so nothing renders or saves before the saved data is in. The entry steps go back to `/` when nothing is being entered.
+- **The flow.** New schedule adds a person with the next free mark and starts a medicine for them. Each step's address is its place in the flow, so Back and reload both work, and the medicine being entered is saved as it changes. Next on an unanswered step stays put and says what is missing (the design's nudge). Done saves the medicine to its person and opens the household. A medicine row opens it again to change it.
+- **Layout.** One phone-width column (up to 430px), centred on wider screens until the desktop split view (Phase 8). The call to action stays pinned at the bottom. Drawings laid out in the design's own coordinates (the Sun Arc, the Start sky) use `ScaledStage`, which scales them to the width available.
+- **People.** The design has no screen for naming people yet (Phase 11), so they are called "Person A" to "Person D" after their mark.
+
 ## Roadmap
 
 1. Scaffolding and tooling ✔
@@ -200,8 +220,8 @@ WL1:<Base45>      Base45 (RFC 9285) fits the QR code's compact alphanumeric mode
 3. Pictogram, pill and illustration library ✔
 4. UI primitives ✔
 5. Domain model, storage and QR code ✔
-6. Phone flow: Start → Medicine → When → How long → Rules → Household → Print
-7. Printables: fridge sheet, daily strips, black and white printing
+6. Phone flow: Start → Medicine → When → How long → Rules → Household ✔
+7. Printables and the Print screen: fridge sheet, daily strips, black and white printing
 8. Desktop: split view with live sheet, print page
 9. Landing page
 10. Hardening and final visual QA

@@ -1,0 +1,34 @@
+.well {
+  position: relative;
+  height: 172px;
+  margin-top: var(--space-12);
+  overflow: hidden;
+  background: var(--color-paper-deep);
+  border-radius: var(--radius-card);
+}
+
+/* The plate is centred, so a narrower phone crops its rim evenly. */
+.plate {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  max-width: none;
+  transform: translateX(-50%);
+}
+
+.units {
+  position: absolute;
+  inset: 6px 0 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  place-content: center;
+  align-items: center;
+  padding: 0 var(--space-10);
+}
+
+.score {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+}

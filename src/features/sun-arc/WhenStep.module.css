@@ -1,0 +1,13 @@
+/* "When does it go in?" at y 158: 12px under the medicine card. */
+.title {
+  padding-left: var(--space-4);
+  margin-top: var(--space-12);
+  font-size: var(--display-31);
+  line-height: var(--leading-120);
+  white-space: nowrap;
+}
+
+.summary {
+  margin-top: var(--space-10);
+  padding: 0 var(--space-4);
+}

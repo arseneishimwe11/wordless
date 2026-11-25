@@ -1,0 +1,9 @@
+.notice {
+  padding: var(--space-12) var(--space-14);
+  font-size: var(--text-16);
+  line-height: var(--leading-130);
+  color: var(--color-error);
+  background: var(--color-error-wash);
+  border: var(--stroke-thin) solid var(--color-error);
+  border-radius: var(--radius-card);
+}

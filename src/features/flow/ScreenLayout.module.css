@@ -1,0 +1,41 @@
+.screen {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 430px;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 0 var(--space-16);
+}
+
+/* 64px tall, like the design's bar: back at 6,8; progress or title centred. */
+.header {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: center;
+  height: 64px;
+}
+
+.main {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+.body {
+  display: flex;
+  flex: 1 0 auto;
+  flex-direction: column;
+}
+
+/* The design's call to action sits 36px above the bottom of the phone. */
+.footer {
+  position: sticky;
+  bottom: 0;
+  z-index: var(--layer-raised);
+  flex: none;
+  padding: var(--space-12) 0 var(--space-36);
+  background: var(--color-paper);
+}

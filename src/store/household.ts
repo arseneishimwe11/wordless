@@ -1,6 +1,13 @@
 import { createStore } from 'zustand/vanilla';
 
-import { newId, nextFreeMark, type Household, type Medicine, type Person } from '@/domain';
+import {
+  newId,
+  nextFreeMark,
+  type Household,
+  type HouseholdMarkId,
+  type Medicine,
+  type Person,
+} from '@/domain';
 
 import { load, writeQueue, type LoadError } from './persist';
 import { KEYS, savedHouseholdSchema } from './schema';
@@ -13,8 +20,11 @@ export interface HouseholdState extends Household {
   /** The last save failed (storage full or blocked); the data is still in memory. */
   saveFailed: boolean;
   load: () => Promise<void>;
-  /** Adds someone with the next free mark; null when all four marks are taken. */
-  addPerson: (label: string) => Person | null;
+  /**
+   * Adds someone with the next free mark; null when all four marks are taken. The label
+   * can depend on the mark ("Person B").
+   */
+  addPerson: (label: string | ((mark: HouseholdMarkId) => string)) => Person | null;
   renamePerson: (personId: string, label: string) => void;
   removePerson: (personId: string) => void;
   /** Adds the medicine, or replaces the one with the same id. */
@@ -58,7 +68,12 @@ export function createHouseholdStore(storage: KeyValueStore) {
       addPerson: (label) => {
         const mark = nextFreeMark(getState().people.map((p) => p.mark));
         if (!mark) return null;
-        const person: Person = { id: newId(), label, mark, medicines: [] };
+        const person: Person = {
+          id: newId(),
+          label: typeof label === 'function' ? label(mark) : label,
+          mark,
+          medicines: [],
+        };
         change((s) => ({ people: [...s.people, person] }));
         return person;
       },

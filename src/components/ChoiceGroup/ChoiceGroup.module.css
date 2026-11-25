@@ -2,12 +2,23 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: var(--space-10);
+  gap: var(--group-gap);
 }
 
 .chip {
   flex: none;
   width: var(--chip-width, auto);
+}
+
+/* Narrow screens: the chips give up width rather than wrap, down to a 44px target. */
+.shrink {
+  flex-wrap: nowrap;
+  min-width: 0;
+}
+
+.shrink .chip {
+  flex-shrink: 1;
+  min-width: 44px;
 }
 
 /* Grows into the rest of the row, but keeps its natural width so the row can wrap. */
@@ -39,10 +50,16 @@
   letter-spacing: var(--tracking-display);
 }
 
-.text {
+.text,
+.label {
   font-family: var(--font-body);
   font-size: var(--text-17);
   font-weight: var(--weight-bold);
+}
+
+.label {
+  padding: 0 var(--space-8);
+  font-size: var(--text-16);
 }
 
 .desktop {

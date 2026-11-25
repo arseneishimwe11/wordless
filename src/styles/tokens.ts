@@ -89,7 +89,10 @@ export const weight = { regular: '400', bold: '700' } as const;
 
 /** Young Serif sizes, keyed by the size authored in the design (rendered at ×0.92). */
 export const display = record(
-  [14, 15, 16, 17, 19, 20, 22, 24, 26, 27, 28, 30, 31, 32, 34, 36, 38, 40, 44, 54, 56, 60, 64, 150],
+  [
+    14, 15, 16, 17, 19, 20, 22, 24, 26, 27, 28, 30, 31, 32, 34, 36, 38, 40, 44, 50, 54, 56, 60, 64,
+    150,
+  ],
   scaled,
 );
 
@@ -187,6 +190,8 @@ export const radius = {
   tile: '10px 14px 9px 12px / 12px 9px 14px 10px',
   progress: '6px 5px 6px 5px',
   kbd: '7px 6px 7px 5px',
+  /** The Sun Arc's day sky: a half circle on the horizon. */
+  sky: '185px 185px 0 0',
   phone: '34px',
   'phone-sm': '26px',
   tag: '18px',
@@ -302,6 +307,8 @@ export const breakpoint = {
   /** Landing page container widths. */
   landingCompact: 760,
   landingNarrow: 389,
+  /** Below this, the Pill Builder's six forms sit in two columns instead of three. */
+  phoneNarrow: 380,
 } as const;
 
 /** The Sun Arc's animation: easeOutBack, duration grows with the angle travelled. */

@@ -12,13 +12,15 @@ export interface ListRowProps {
   media?: ReactNode;
   title: string;
   subtitle?: string | undefined;
+  /** Runs before the link is followed (to set up what the next screen shows). */
+  onClick?: (() => void) | undefined;
   className?: string | undefined;
 }
 
 /** A tappable row in a list: drawing, title, details, and a chevron. */
-export function ListRow({ href, media, title, subtitle, className }: ListRowProps) {
+export function ListRow({ href, media, title, subtitle, onClick, className }: ListRowProps) {
   return (
-    <Link to={href} className={cx(styles.row, className)}>
+    <Link to={href} className={cx(styles.row, className)} onClick={onClick}>
       {media && (
         <span className={styles.media} aria-hidden="true">
           {media}

@@ -24,3 +24,16 @@ export const useHousehold = <T>(select: (state: HouseholdState) => T): T =>
   useStore(householdStore, select);
 
 export const useDraft = <T>(select: (state: DraftState) => T): T => useStore(draftStore, select);
+
+let loading: Promise<void> | null = null;
+
+/**
+ * Reads both stores from the device, once. Every route loader awaits it, so screens
+ * never render (or save) before the saved data is in.
+ */
+export function loadStores(): Promise<void> {
+  loading ??= Promise.all([householdStore.getState().load(), draftStore.getState().load()]).then(
+    () => undefined,
+  );
+  return loading;
+}

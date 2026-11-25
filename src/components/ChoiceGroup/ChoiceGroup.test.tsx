@@ -39,3 +39,19 @@ describe('ChoiceGroup', () => {
     expect(screen.getByRole('radio', { name: '7' })).not.toBeChecked();
   });
 });
+
+describe('ChoiceGroup sizing', () => {
+  it('can let its chips shrink instead of wrapping', () => {
+    render(
+      <ChoiceGroup
+        label="Times a day"
+        chip="number"
+        shrink
+        options={[1, 2].map((n) => ({ value: n, label: String(n) }))}
+        value={null}
+        onChange={() => undefined}
+      />,
+    );
+    expect(screen.getByRole('radiogroup').className).toMatch(/shrink/);
+  });
+});

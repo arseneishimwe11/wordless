@@ -1,0 +1,34 @@
+/* Positions from the design's 390px phone, measured from its edge (the column pads 16px). */
+.back {
+  position: absolute;
+  top: 8px;
+  left: -10px;
+}
+
+.progress {
+  margin-top: var(--space-12);
+}
+
+.action {
+  position: absolute;
+  top: 8px;
+  right: -10px;
+}
+
+.textAction {
+  min-width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0 var(--space-12);
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  color: var(--color-pen);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-control);
+}
+
+.textAction:hover {
+  background: var(--color-sunrise-wash);
+}

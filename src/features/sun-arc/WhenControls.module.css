@@ -1,0 +1,24 @@
+/* y 568 on the phone: 12px under the arc. */
+.modes {
+  margin-top: var(--space-12);
+}
+
+.row {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+  min-height: 48px;
+  margin-top: var(--space-10);
+}
+
+.max {
+  gap: var(--space-12);
+}
+
+.aside {
+  flex: none;
+  margin-left: var(--space-4);
+  font-size: var(--text-16);
+  line-height: var(--leading-125);
+  color: var(--color-ink-soft);
+}

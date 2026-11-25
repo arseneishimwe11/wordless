@@ -1,0 +1,162 @@
+/* The stage starts 8px under the title (y 200 on the phone). */
+.stage {
+  margin-top: var(--space-8);
+}
+
+.arc {
+  position: absolute;
+  inset: 0;
+}
+
+.sky {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  width: 370px;
+  height: 192px;
+  border-radius: var(--radius-sky);
+  transition: background var(--duration-slower) var(--ease-standard);
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: none;
+  transition: opacity var(--duration-medium) var(--ease-standard);
+}
+
+.muted {
+  opacity: var(--opacity-muted);
+}
+
+.label {
+  position: absolute;
+  font-family: var(--font-hand);
+  font-size: var(--text-17);
+  line-height: var(--leading-120);
+  color: var(--color-pen);
+  pointer-events: none;
+}
+
+.onNight {
+  color: var(--color-paper);
+}
+
+.stops {
+  position: absolute;
+  inset: 0;
+  transition: opacity var(--duration-medium) var(--ease-standard);
+}
+
+.faint {
+  opacity: var(--opacity-faint);
+}
+
+.stop {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  background: var(--color-surface);
+  border: var(--stroke-base) solid var(--color-ink);
+  transition: box-shadow var(--duration-medium) var(--ease-standard);
+}
+
+.stop:disabled {
+  cursor: default;
+}
+
+.dose {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  pointer-events: none;
+}
+
+.doseFace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--color-sheet);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-round);
+  box-shadow: var(--shadow-dose-offset) var(--dose-color);
+}
+
+.hand {
+  position: absolute;
+  top: 288px;
+  left: 172px;
+}
+
+/* The count in the middle of the arc: 140 × 58 at 125,172, aligned to its foot. */
+.count {
+  position: absolute;
+  top: 172px;
+  left: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 140px;
+  height: 58px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.big {
+  font-family: var(--font-display);
+  line-height: var(--leading-100);
+  letter-spacing: var(--tracking-display);
+}
+
+.sizeLarge {
+  font-size: var(--display-50);
+}
+
+.sizeMedium {
+  font-size: var(--display-38);
+}
+
+.sizeSmall {
+  font-size: var(--display-30);
+}
+
+.small {
+  font-size: var(--text-16);
+  line-height: var(--leading-130);
+  color: var(--color-ink-soft);
+}
+
+.hint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.hintText {
+  position: absolute;
+  top: 4px;
+  left: 44px;
+  font-family: var(--font-hand);
+  font-size: var(--text-19);
+  line-height: var(--leading-115);
+  color: var(--color-pen);
+  white-space: nowrap;
+}
+
+.hintArrow {
+  position: absolute;
+  top: 30px;
+  left: 10px;
+  overflow: visible;
+}

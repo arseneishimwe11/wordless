@@ -1,0 +1,75 @@
+.back {
+  position: absolute;
+  top: 8px;
+  left: -10px;
+}
+
+.barTitle {
+  display: flex;
+  align-items: center;
+  height: 48px;
+  margin-top: var(--space-8);
+  font-size: var(--text-17);
+  font-weight: var(--weight-bold);
+}
+
+/* Who: y 66, chips 52px tall, 8px apart. */
+.who {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  align-items: center;
+  margin-top: var(--space-2);
+}
+
+.people {
+  display: contents;
+}
+
+.addPerson {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin: 0;
+  padding: 0;
+  color: var(--color-ink);
+  cursor: pointer;
+  background: transparent;
+  border: var(--stroke-dash) dashed var(--color-ink);
+  border-radius: var(--radius-round);
+}
+
+.addPerson:hover {
+  background: var(--color-sunrise-wash);
+}
+
+.title {
+  padding-left: var(--space-4);
+  margin-top: var(--space-16);
+  font-size: var(--display-28);
+  line-height: var(--leading-125);
+}
+
+/* The list starts at y 428, 40px under the grid. */
+.list {
+  margin: var(--space-40) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.addMedicine {
+  margin-top: var(--space-12);
+}
+
+/* The note keeps to the bottom of the screen, above Print. */
+.note {
+  margin-top: auto;
+  padding: var(--space-24) 0 var(--space-28) var(--space-4);
+}
+
+.note p {
+  line-height: var(--leading-130);
+}

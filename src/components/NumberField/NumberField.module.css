@@ -18,6 +18,7 @@
 /* No browser spinners: the design pairs the field with its own − and + buttons. */
 .field::-webkit-outer-spin-button,
 .field::-webkit-inner-spin-button {
+  display: none;
   margin: 0;
   appearance: none;
 }

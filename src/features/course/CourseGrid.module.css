@@ -1,0 +1,108 @@
+/* y 338 on the phone, 330px tall. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+  height: 330px;
+  margin-top: var(--space-14);
+  padding: var(--space-12) var(--space-10) var(--space-10);
+  overflow: hidden;
+  background: var(--color-surface);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.weeks {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-height: 0;
+}
+
+.week {
+  display: flex;
+}
+
+.faded {
+  opacity: var(--opacity-ghost);
+}
+
+.times {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  width: 30px;
+  padding-top: var(--space-26);
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  height: 31px;
+}
+
+.dayCell {
+  flex: 0 1 43px;
+  min-width: 0;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dayNumber {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-family: var(--font-display);
+  font-size: var(--display-14);
+  line-height: var(--leading-100);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-round);
+}
+
+.box {
+  display: block;
+  width: 26px;
+  height: 26px;
+  margin-top: var(--space-5);
+  background: var(--color-white);
+  border: var(--stroke-dash) solid var(--color-ink);
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.tally {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-top: var(--space-5);
+}
+
+.circle {
+  display: block;
+  width: 12px;
+  height: 12px;
+  background: var(--color-white);
+  border: var(--stroke-thin) dashed var(--color-ink);
+  border-radius: var(--radius-round);
+}
+
+.foot {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+  min-height: 48px;
+}
+
+.note {
+  line-height: var(--leading-125);
+}

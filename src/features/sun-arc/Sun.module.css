@@ -1,0 +1,84 @@
+/* A zero-size point on the arc; the 68px sun is centred on it. */
+.anchor {
+  position: absolute;
+  z-index: var(--layer-handle);
+  width: 0;
+  height: 0;
+}
+
+.sun {
+  position: absolute;
+  top: -34px;
+  left: -34px;
+  width: 68px;
+  height: 68px;
+  margin: 0;
+  padding: 0;
+  cursor: grab;
+  touch-action: none;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-round);
+}
+
+.sun:active {
+  cursor: grabbing;
+}
+
+/* Before any nudge has played, the wrapper must not hold the sun in place. */
+.body {
+  position: absolute;
+  inset: 0;
+}
+
+.rays {
+  position: absolute;
+  inset: 0;
+}
+
+.slip,
+.disc,
+.moonShadow,
+.moon {
+  position: absolute;
+  transition: background var(--duration-slow) var(--ease-standard);
+}
+
+.slip {
+  top: 15px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-round);
+}
+
+.disc {
+  top: 12px;
+  left: 12px;
+  width: 44px;
+  height: 44px;
+  border: var(--stroke-ink) solid var(--color-ink);
+  border-radius: var(--radius-sun);
+}
+
+.moonShadow {
+  top: 11px;
+  left: 12px;
+  width: 50px;
+  height: 50px;
+  background: var(--color-night-tint);
+  border-radius: var(--radius-round);
+}
+
+.moon {
+  top: 8px;
+  left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: var(--color-paper);
+  border: var(--stroke-ink) solid var(--color-ink);
+  border-radius: var(--radius-round);
+}

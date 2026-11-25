@@ -267,7 +267,7 @@ describe('how long (HowLong.dc.html)', () => {
     expect(howLongSummary(missing, c, { error: true })).toEqual({
       title: 'Add how long first',
       detail: 'Type a number, or pick one of the usual lengths.',
-      note: 'the boxes need an end before they can be ticked',
+      note: 'how many days? the boxes need an end before they can be ticked',
       tone: 'error',
     });
   });

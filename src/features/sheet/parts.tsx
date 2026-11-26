@@ -157,19 +157,28 @@ export function Footer({
   person,
   meta,
   date,
+  live = false,
 }: {
   person: Person;
   meta: ScheduleMeta;
   date: string;
+  /** While the schedule is still being typed, the code waits for printing. */
+  live?: boolean;
 }) {
   return (
     <>
       <At left={36} top={FOOT.ruleTop} className={styles.rule}>
         <Illustration data={sheetRuleBottom} width={722} />
       </At>
-      <At left={40} top={FOOT.footerTop} className={styles.qrFrame}>
-        <ScheduleQr person={person} meta={meta} />
-      </At>
+      {live ? (
+        <At left={40} top={FOOT.footerTop} width={120} height={120} className={styles.qrLater}>
+          {copy.screens.desktop.sheet.codeLater}
+        </At>
+      ) : (
+        <At left={40} top={FOOT.footerTop} className={styles.qrFrame}>
+          <ScheduleQr person={person} meta={meta} />
+        </At>
+      )}
       <At left={176} top={962} width={360} className={styles.reload}>
         <strong className={styles.reloadTitle}>{t.reloadTitle}</strong>
         <span>{t.reloadBody}</span>

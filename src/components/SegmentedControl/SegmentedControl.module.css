@@ -26,6 +26,12 @@
   flex: 1;
 }
 
+/* Content-width segments that keep their words on one line. */
+.fit .item {
+  flex: none;
+  white-space: nowrap;
+}
+
 /* ---- Sizes ---- */
 
 .size44 {

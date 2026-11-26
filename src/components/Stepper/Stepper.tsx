@@ -24,8 +24,8 @@ export interface StepperProps {
   format?: ((value: number) => StepperValue) | undefined;
   decreaseLabel: string;
   increaseLabel: string;
-  /** Button size in px: 48 (phone), 56 (desktop). */
-  size?: 48 | 56 | undefined;
+  /** Button size in px: 48 (phone), 52 (desktop copies), 56 (desktop). */
+  size?: 48 | 52 | 56 | undefined;
   /** Width of the value in px (the design uses 84, 40, 96, 44). */
   valueWidth?: number | undefined;
   /** Display size of the number, by its authored size. */

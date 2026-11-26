@@ -1,0 +1,75 @@
+/* 560px beside the form at 1440; it drops underneath on narrower screens. */
+.column {
+  display: flex;
+  flex: 1 1 560px;
+  flex-direction: column;
+  gap: var(--space-14);
+  min-width: 0;
+  max-width: 600px;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-12);
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--display-26);
+  line-height: var(--leading-110);
+}
+
+.sub {
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+.toggle {
+  width: auto;
+}
+
+/* The A4 page at 0.68: 540 × 764, a frame and its offset shadow. */
+.paper {
+  width: 540px;
+  max-width: 100%;
+  overflow: hidden;
+  background: var(--color-white);
+  box-shadow: var(--shadow-frame-preview);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-10);
+  align-items: center;
+  font-size: var(--text-15);
+}
+
+.chipsLabel {
+  font-weight: var(--weight-bold);
+}
+
+.chip {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  height: 36px;
+  padding: 0 var(--space-12);
+  border: var(--stroke-thin) solid var(--color-ink);
+  border-radius: var(--radius-control);
+}
+
+.entering {
+  font-weight: var(--weight-bold);
+  color: var(--color-pen);
+  border-style: dashed;
+  border-color: var(--color-pen);
+}

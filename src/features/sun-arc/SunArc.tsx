@@ -16,13 +16,22 @@ import { Glyph, Graphic, Illustration, PillUnit } from '@/graphics';
 import { glyphs } from '@/graphics/generated/glyphs';
 import { hintArrow } from '@/graphics/generated/illustrations/hint-arrow';
 import { sunArcBands } from '@/graphics/generated/illustrations/sun-arc-bands';
+import { sunArcDesktop } from '@/graphics/generated/illustrations/sun-arc-desktop';
+import { sunArcDesktopPrn } from '@/graphics/generated/illustrations/sun-arc-desktop-prn';
 import { sunArcGround } from '@/graphics/generated/illustrations/sun-arc-ground';
 import { sunArcPrn } from '@/graphics/generated/illustrations/sun-arc-prn';
 import { cx } from '@/lib/cx';
 
 import { DashedDose } from '../household/DashedDose';
 import { phaseColor, ScaledStage, TIME_GLYPH } from '../flow';
-import { arcPoint, doseChipCenter, isBigStop, STAGE, whenNeededChips } from './geometry';
+import {
+  ARCS,
+  arcPoint,
+  doseChipCenter,
+  isBigStop,
+  whenNeededChips,
+  type ArcSize,
+} from './geometry';
 import { Sun } from './Sun';
 import styles from './SunArc.module.css';
 import type { SunMotion } from './useSun';
@@ -56,10 +65,10 @@ const doseShadow = (time: TimeOfDay) =>
   TIMES[time].phase === 'night' ? 'var(--color-night-tint)' : phaseColor(TIMES[time].phase, 'ink');
 
 const LABELS = [
-  { time: 'midday', x: 228, y: 66, onNight: false },
-  { time: 'sunrise', x: 20, y: 252, onNight: true },
-  { time: 'sunset', x: 304, y: 252, onNight: true },
-  { time: 'night', x: 232, y: 302, onNight: true },
+  { time: 'midday', onNight: false },
+  { time: 'sunrise', onNight: true },
+  { time: 'sunset', onNight: true },
+  { time: 'night', onNight: true },
 ] as const;
 
 export interface SunArcProps {
@@ -74,6 +83,8 @@ export interface SunArcProps {
   onSunDrop: (time: TimeOfDay) => void;
   onSunStep: (direction: 1 | -1) => void;
   onTouch: () => void;
+  /** The phone arc (390 × 356, scaled to the screen) or the desktop one (520 × 410). */
+  size?: ArcSize | undefined;
 }
 
 /**
@@ -90,12 +101,15 @@ export function SunArc({
   onSunDrop,
   onSunStep,
   onTouch,
+  size = 'phone',
 }: SunArcProps) {
+  const g = ARCS[size];
+  const desktop = size === 'desktop';
   const whenNeeded = medicine.timing.mode === 'whenNeeded';
   const doses = scheduledDoses(medicine.timing);
   const near = nearestTime(sun.angle);
   const unit = keyUnit(medicine);
-  const pillSize = unit === 'capsule' ? 34 : 30;
+  const pillSize = unit === 'capsule' ? g.chipPill.capsule : g.chipPill.other;
   const count = whenCount(medicine, copy.domain);
   const bigSize = whenNeeded
     ? 'sizeSmall'
@@ -103,134 +117,188 @@ export function SunArc({
       ? 'sizeMedium'
       : 'sizeLarge';
 
-  return (
-    <ScaledStage width={STAGE.width} height={STAGE.height} bleed className={styles.stage}>
-      <div data-arc="" className={styles.arc}>
-        <div
-          aria-hidden="true"
-          className={styles.sky}
-          style={{ background: whenNeeded ? 'var(--color-prn-sky)' : skyOf(near) }}
-        />
-        <Illustration data={sunArcGround} width={STAGE.width} className={styles.layer} />
+  const arc = (
+    <div data-arc="" className={cx(styles.arc, desktop && styles.desktop)}>
+      <div
+        aria-hidden="true"
+        className={styles.sky}
+        style={{
+          ...g.sky,
+          background: whenNeeded ? 'var(--color-prn-sky)' : skyOf(near),
+        }}
+      />
+      <Illustration
+        data={desktop ? sunArcDesktop : sunArcGround}
+        width={g.width}
+        className={styles.layer}
+      />
+      {!desktop && (
         <div aria-hidden="true" className={cx(styles.layer, whenNeeded && styles.muted)}>
-          <Illustration data={sunArcBands} width={STAGE.width} />
+          <Illustration data={sunArcBands} width={g.width} />
         </div>
-        {whenNeeded && (
-          <Illustration data={sunArcPrn} width={STAGE.width} className={styles.layer} />
-        )}
-        {LABELS.map((label) => (
+      )}
+      {whenNeeded && (
+        <Illustration
+          data={desktop ? sunArcDesktopPrn : sunArcPrn}
+          width={g.width}
+          className={styles.layer}
+        />
+      )}
+      {LABELS.map((label) => {
+        const [left, top] = g.labels[label.time];
+        return (
           <span
             key={label.time}
             aria-hidden="true"
             className={cx(styles.label, label.onNight && styles.onNight)}
-            style={{ left: label.x, top: label.y }}
+            style={{ left, top }}
           >
             {copy.domain.times[label.time].name}
           </span>
-        ))}
+        );
+      })}
 
-        <div className={cx(styles.stops, whenNeeded && styles.faint)}>
-          {TIMES_OF_DAY.map((time) => {
-            const { x, y } = arcPoint(TIMES[time].angle);
-            const big = isBigStop(time);
-            const size = big ? 56 : 44;
-            const on = doses.includes(time);
-            const name = copy.domain.times[time];
-            return (
-              <button
-                key={time}
-                type="button"
-                aria-label={t.stop(copy.domain.capitalize(name.name), name.at)}
-                aria-pressed={on}
-                disabled={whenNeeded}
-                className={styles.stop}
-                style={{
-                  left: x - size / 2,
-                  top: y - size / 2,
-                  width: size,
-                  height: size,
-                  borderRadius: STOP_SHAPE[time],
-                  // A halo in the stop's own tint, then an ink ring (tokens hold the geometry).
-                  boxShadow: on
-                    ? `var(--shadow-ring-stop-halo) ${skyOf(time)}, var(--shadow-ring-stop-edge)`
-                    : 'none',
-                }}
-                onClick={() => {
-                  onStop(time);
-                }}
-              >
-                {big ? (
-                  <Glyph name={TIME_GLYPH[time]} size={40} />
-                ) : (
-                  <Graphic data={DOTS[time as 'midMorning' | 'afternoon']} width={30} height={30} />
-                )}
-              </button>
-            );
-          })}
-        </div>
-
-        {!whenNeeded &&
-          doses.map((time) => {
-            const c = doseChipCenter(time);
-            return (
-              <div key={time} className={styles.dose} style={{ left: c.x - 21, top: c.y - 21 }}>
-                <Animated effect="drop" delay={delays[time] ?? 0}>
-                  <span
-                    className={styles.doseFace}
-                    style={{ '--dose-color': doseShadow(time) } as CSSProperties}
-                  >
-                    <PillUnit
-                      kind={unit}
-                      color={medicine.color}
-                      color2={medicine.color2}
-                      score={medicine.score}
-                      size={pillSize}
-                    />
-                  </span>
-                </Animated>
-              </div>
-            );
-          })}
-
-        {whenNeeded && (
-          <>
-            {whenNeededChips(medicine.timing.maxPerDay).map((c, i) => (
-              <div key={i} className={styles.dose} style={{ left: c.x - 21, top: c.y - 21 }}>
-                <Animated effect="drop" delay={i * 90}>
-                  <DashedDose medicine={medicine} unit={unit} size={42} />
-                </Animated>
-              </div>
-            ))}
-            <Animated effect="fade" className={styles.hand}>
-              <Glyph name="no-more" size={46} label={t.noMore} />
-            </Animated>
-          </>
-        )}
-
-        <div aria-live="polite" className={styles.count}>
-          <span className={cx(styles.big, styles[bigSize])}>{count.big}</span>{' '}
-          <span className={styles.small}>{count.small}</span>
-        </div>
-
-        {!whenNeeded && (
-          <Sun
-            sun={sun}
-            label={t.sun(copy.domain.times[near].name, doses.includes(near))}
-            nudge={nudge}
-            onDrop={onSunDrop}
-            onPress={onStop}
-            onStep={onSunStep}
-            onTouch={onTouch}
-          />
-        )}
-
-        {showHint && (
-          <div aria-hidden="true" className={styles.hint}>
-            <span className={styles.hintText}>{t.hint}</span>
-            <Illustration data={hintArrow} width={60} className={styles.hintArrow} />
-          </div>
-        )}
+      <div className={cx(styles.stops, whenNeeded && styles.faint)}>
+        {TIMES_OF_DAY.map((time) => {
+          const { x, y } = arcPoint(TIMES[time].angle, g);
+          const big = isBigStop(time);
+          const stop = big ? g.stop.big : g.stop.small;
+          const on = doses.includes(time);
+          const name = copy.domain.times[time];
+          const ring = desktop
+            ? `var(--shadow-ring-stop-halo-lg) ${skyOf(time)}, var(--shadow-ring-stop-edge-lg)`
+            : `var(--shadow-ring-stop-halo) ${skyOf(time)}, var(--shadow-ring-stop-edge)`;
+          return (
+            <button
+              key={time}
+              type="button"
+              aria-label={t.stop(copy.domain.capitalize(name.name), name.at)}
+              aria-pressed={on}
+              disabled={whenNeeded}
+              className={styles.stop}
+              style={{
+                left: x - stop / 2,
+                top: y - stop / 2,
+                width: stop,
+                height: stop,
+                borderRadius: STOP_SHAPE[time],
+                // A halo in the stop's own tint, then an ink ring (tokens hold the geometry).
+                boxShadow: on ? ring : 'none',
+              }}
+              onClick={() => {
+                onStop(time);
+              }}
+            >
+              {big ? (
+                <Glyph name={TIME_GLYPH[time]} size={g.stopGlyph.big} />
+              ) : (
+                <Graphic
+                  data={DOTS[time as 'midMorning' | 'afternoon']}
+                  width={g.stopGlyph.small}
+                  height={g.stopGlyph.small}
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
+
+      {!whenNeeded &&
+        doses.map((time) => {
+          const c = doseChipCenter(time, g);
+          return (
+            <div
+              key={time}
+              className={styles.dose}
+              style={{
+                left: c.x - g.chip / 2,
+                top: c.y - g.chip / 2,
+                width: g.chip,
+                height: g.chip,
+              }}
+            >
+              <Animated effect="drop" delay={delays[time] ?? 0}>
+                <span
+                  className={styles.doseFace}
+                  style={{ '--dose-color': doseShadow(time) } as CSSProperties}
+                >
+                  <PillUnit
+                    kind={unit}
+                    color={medicine.color}
+                    color2={medicine.color2}
+                    score={medicine.score}
+                    size={pillSize}
+                  />
+                </span>
+              </Animated>
+            </div>
+          );
+        })}
+
+      {whenNeeded && (
+        <>
+          {whenNeededChips(medicine.timing.maxPerDay, g).map((c, i) => (
+            <div
+              key={i}
+              className={styles.dose}
+              style={{
+                left: c.x - g.chip / 2,
+                top: c.y - g.chip / 2,
+                width: g.chip,
+                height: g.chip,
+              }}
+            >
+              <Animated effect="drop" delay={i * 90}>
+                <DashedDose medicine={medicine} unit={unit} size={desktop ? 56 : 42} />
+              </Animated>
+            </div>
+          ))}
+          <div className={styles.hand} style={{ left: g.hand.left, top: g.hand.top }}>
+            <Animated effect="fade">
+              <Glyph name="no-more" size={g.hand.size} label={t.noMore} />
+            </Animated>
+          </div>
+        </>
+      )}
+
+      <div aria-live="polite" className={styles.count} style={g.count}>
+        <span className={cx(styles.big, styles[bigSize])}>{count.big}</span>{' '}
+        <span className={styles.small}>{count.small}</span>
+      </div>
+
+      {!whenNeeded && (
+        <Sun
+          sun={sun}
+          geometry={g}
+          label={t.sun(copy.domain.times[near].name, doses.includes(near))}
+          nudge={nudge}
+          onDrop={onSunDrop}
+          onPress={onStop}
+          onStep={onSunStep}
+          onTouch={onTouch}
+        />
+      )}
+
+      {showHint && !desktop && (
+        <div aria-hidden="true" className={styles.hint}>
+          <span className={styles.hintText}>{t.hint}</span>
+          <Illustration data={hintArrow} width={60} className={styles.hintArrow} />
+        </div>
+      )}
+    </div>
+  );
+
+  // The desktop arc keeps its size and scrolls in its own box if ever too narrow.
+  if (desktop) {
+    return (
+      <div className={styles.desktopStage}>
+        <div style={{ position: 'relative', width: g.width, height: g.height }}>{arc}</div>
+      </div>
+    );
+  }
+  return (
+    <ScaledStage width={g.width} height={g.height} bleed className={styles.stage}>
+      {arc}
     </ScaledStage>
   );
 }

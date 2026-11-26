@@ -69,6 +69,24 @@ function MedicineCard({ row, place }: { row: SheetRow; place: PlacedRow }) {
   );
 }
 
+/** The medicine being typed: a dashed pen outline around its row, and a tag. */
+function BeingEntered({ place }: { place: PlacedRow }) {
+  return (
+    <>
+      <At
+        left={TABLE.left - 6}
+        top={place.top - 6}
+        width={TABLE.right - TABLE.left + 12}
+        height={place.height + 12}
+        className={styles.entering}
+      />
+      <At left={TABLE.right - 200} top={place.top - 34} width={200} className={styles.enteringTag}>
+        <span>{copy.screens.desktop.sheet.tag}</span>
+      </At>
+    </>
+  );
+}
+
 /** A scheduled medicine: its dose drawn in each time it is taken. */
 function ScheduledCells({ row, place }: { row: ScheduledRow; place: PlacedRow }) {
   const cols = columns(row.cells.length);
@@ -87,6 +105,11 @@ function ScheduledCells({ row, place }: { row: ScheduledRow; place: PlacedRow })
             className={styles.cell}
             style={{ background: timeColor(cell.time, 'wash'), borderRadius: tileRadius(i + 1) }}
           >
+            {row.noTimes && (
+              <span className={styles.unknown} aria-hidden="true">
+                ?
+              </span>
+            )}
             {cell.dose && (
               <>
                 <PillStack
@@ -320,10 +343,15 @@ export interface FridgeSheetProps {
   /** The printed date ("25 November 2026"). */
   date: string;
   mono?: boolean | undefined;
+  /**
+   * The sheet as it is being typed (LiveSheet.dc.html): marks the medicine being entered,
+   * shows "?" where it has no times yet, and leaves the code until it is printed.
+   */
+  live?: { medicineId: string } | undefined;
 }
 
 /** The fridge sheet (FridgeSheet.dc.html): one A4 page, or more for a long schedule. */
-export function FridgeSheet({ person, meta, date, mono = false }: FridgeSheetProps) {
+export function FridgeSheet({ person, meta, date, mono = false, live }: FridgeSheetProps) {
   const sheet = sheetFor(person);
   const notes = person.medicines.map((m) => sheetNote(m, copy.domain));
   const pages = paginate(
@@ -336,6 +364,7 @@ export function FridgeSheet({ person, meta, date, mono = false }: FridgeSheetPro
     <>
       {pages.map((page, p) => (
         <SheetPage
+          kind="sheet"
           key={p}
           mono={mono}
           label={pages.length > 1 ? t.pageLabel(p + 1, pages.length) : undefined}
@@ -347,6 +376,7 @@ export function FridgeSheet({ person, meta, date, mono = false }: FridgeSheetPro
             if (!row) return null;
             return (
               <Fragment key={row.medicine.id}>
+                {live?.medicineId === row.medicine.id && <BeingEntered place={place} />}
                 <MedicineCard row={row} place={place} />
                 {row.kind === 'scheduled' ? (
                   <ScheduledCells row={row} place={place} />
@@ -379,7 +409,7 @@ export function FridgeSheet({ person, meta, date, mono = false }: FridgeSheetPro
             );
           })}
           <Legend />
-          <Footer person={person} meta={meta} date={date} />
+          <Footer person={person} meta={meta} date={date} live={Boolean(live)} />
         </SheetPage>
       ))}
     </>

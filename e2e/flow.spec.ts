@@ -145,7 +145,8 @@ test.describe('phone flow', () => {
 });
 
 test.describe('phone flow widths', () => {
-  for (const width of [320, 360, 390, 768, 1024]) {
+  // From 1024px up the desktop view takes over: e2e/desktop.spec.ts.
+  for (const width of [320, 360, 390, 768]) {
     test(`no sideways scroll at ${String(width)}px on any screen`, async ({ page }) => {
       await page.setViewportSize({ width, height: 844 });
       const noScroll = async (label: string) => {

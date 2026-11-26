@@ -33,9 +33,11 @@ export interface ChoiceGroupProps<T extends string | number> {
   /** Display size of number chips, by the design's authored size. */
   numberSize?: 22 | 24 | 26 | undefined;
   /** Space between chips in px: 10 (the Sun Arc) or 6 (How long's usual lengths). */
-  gap?: 6 | 10 | undefined;
+  gap?: 6 | 8 | 10 | undefined;
   /** On a narrow screen, narrow the chips (never below 44px) instead of wrapping the row. */
   shrink?: boolean | undefined;
+  /** Lay the chips out in this many equal columns (the desktop's 2 × 2 grids). */
+  columns?: number | undefined;
   className?: string | undefined;
 }
 
@@ -56,6 +58,7 @@ export function ChoiceGroup<T extends string | number>({
   numberSize = size === 'desktop' ? 26 : 24,
   gap = 10,
   shrink = false,
+  columns,
   className,
 }: ChoiceGroupProps<T>) {
   const name = useId();
@@ -64,7 +67,15 @@ export function ChoiceGroup<T extends string | number>({
       role="radiogroup"
       aria-label={label}
       className={cx(styles.group, shrink && styles.shrink, className)}
-      style={{ '--group-gap': `var(--space-${String(gap)})` } as CSSProperties}
+      style={
+        {
+          '--group-gap': `var(--space-${String(gap)})`,
+          ...(columns && {
+            display: 'grid',
+            gridTemplateColumns: `repeat(${String(columns)}, minmax(0, 1fr))`,
+          }),
+        } as CSSProperties
+      }
     >
       {options.map((option, i) => {
         const width = option.width ?? chipWidth;

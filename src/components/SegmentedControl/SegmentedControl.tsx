@@ -21,6 +21,8 @@ export interface SegmentedControlProps<T extends string> {
   size?: 44 | 48 | 52 | undefined;
   /** Corner shape: `control` everywhere, `segment` for the Sun Arc's mode picker. */
   shape?: 'control' | 'segment' | undefined;
+  /** Each segment as wide as its words, as the live sheet's Colour / Black & white is. */
+  fit?: boolean | undefined;
   className?: string | undefined;
 }
 
@@ -33,6 +35,7 @@ export function SegmentedControl<T extends string>({
   orientation = 'horizontal',
   size = 48,
   shape = 'control',
+  fit = false,
   className,
 }: SegmentedControlProps<T>) {
   const name = useId();
@@ -45,6 +48,7 @@ export function SegmentedControl<T extends string>({
         orientation === 'vertical' && styles.vertical,
         shape === 'segment' && styles.segmentShape,
         styles[`size${String(size)}`],
+        fit && styles.fit,
         className,
       )}
     >

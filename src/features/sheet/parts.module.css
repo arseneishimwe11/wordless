@@ -99,3 +99,17 @@
   font-size: var(--display-26);
   letter-spacing: var(--tracking-display);
 }
+
+.qrLater {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-8);
+  font-family: var(--font-hand);
+  font-size: var(--text-15);
+  line-height: var(--leading-130);
+  color: var(--color-pen);
+  text-align: center;
+  border: var(--stroke-dash) dashed var(--color-ink);
+  border-radius: var(--radius-sheet-1);
+}

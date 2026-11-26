@@ -4,7 +4,7 @@ Wordless turns a prescription into a medicine schedule anyone can follow without
 
 It runs entirely in the browser. There is no server and no account, and schedules stay on the device.
 
-> **Status:** Phase 7 of 11, the printables. See [Roadmap](#roadmap).
+> **Status:** Phase 8 of 11, the desktop view. See [Roadmap](#roadmap).
 
 ## Getting started
 
@@ -51,7 +51,7 @@ src/
   routes.ts        Route table.
   routes/          One module per screen. Thin: reads state, composes features.
   features/        Screens and their parts: flow (layout, step header, routing helpers), start, pill-builder,
-                   sun-arc, course, rules, household; later sheet, print, landing.
+                   sun-arc, course, rules, household, sheet, print, desktop; later landing.
   components/      UI primitives (Button, SegmentedControl, Stepper, …). No domain knowledge.
   graphics/        Pictograms, pills, household marks, illustrations. Pure rendering.
   domain/          Pure TypeScript model and rules. No React, no browser APIs.
@@ -196,23 +196,35 @@ WL1:<Base45>      Base45 (RFC 9285) fits the QR code's compact alphanumeric mode
 
 ## Screens
 
-The phone flow, one route per screen (`src/routes.ts`); the screens themselves live in `src/features/`.
+One route per screen (`src/routes.ts`); the screens themselves live in `src/features/`. Below 1024px each route shows the phone screen; from 1024px the entry steps and Print show the desktop view instead (see [Desktop](#desktop)).
 
-| Path                  | Screen                                                              | Design board                       |
-| --------------------- | ------------------------------------------------------------------- | ---------------------------------- |
-| `/`                   | Start: what Wordless does, New schedule, the schedules already made | `Start`                            |
-| `/entry/medicine`     | Step 1, the Pill Builder                                            | `AddMedicine`, `AddMedicineStates` |
-| `/entry/when`         | Step 2, the Sun Arc                                                 | `SunArc`, `When`, `SunArcStates`   |
-| `/entry/how-long`     | Step 3, the course grid                                             | `HowLong`, `HowLongStates`         |
-| `/entry/rules`        | Step 4, rules and how they print                                    | `Rules`                            |
-| `/household?person=…` | Everyone's day, and their medicines                                 | `Household`                        |
-| `/print?person=…`     | Print: preview, colour or black and white, fridge sheet or strips   | `SheetPreview`                     |
-| `/scan`               | Placeholder until Phase 11                                          |                                    |
+| Path                  | Screen                                                              | Design board                                        |
+| --------------------- | ------------------------------------------------------------------- | --------------------------------------------------- |
+| `/`                   | Start: what Wordless does, New schedule, the schedules already made | `Start`                                             |
+| `/entry/medicine`     | Step 1, the Pill Builder                                            | `AddMedicine`, `AddMedicineStates`                  |
+| `/entry/when`         | Step 2, the Sun Arc                                                 | `SunArc`, `When`, `SunArcStates`                    |
+| `/entry/how-long`     | Step 3, the course grid                                             | `HowLong`, `HowLongStates`                          |
+| `/entry/rules`        | Step 4, rules and how they print                                    | `Rules`                                             |
+| `/entry/*` (desktop)  | The split view: steps, one panel, the sheet as you type             | `DesktopEntry`, `DesktopEntryMedicine`, `LiveSheet` |
+| `/household?person=…` | Everyone's day, and their medicines                                 | `Household`                                         |
+| `/print?person=…`     | Print: preview, colour or black and white, fridge sheet or strips   | `SheetPreview`                                      |
+| `/print` (desktop)    | Print: sheet, strips or both, copies, the counter checklist         | `DesktopPrint`                                      |
+| `/scan`               | Placeholder until Phase 11                                          |                                                     |
 
 - **Loading.** Every route's `clientLoader` awaits `loadStores()`, so nothing renders or saves before the saved data is in. The entry steps go back to `/` when nothing is being entered.
 - **The flow.** New schedule adds a person with the next free mark and starts a medicine for them. Each step's address is its place in the flow, so Back and reload both work, and the medicine being entered is saved as it changes. Next on an unanswered step stays put and says what is missing (the design's nudge). Done saves the medicine to its person and opens the household. A medicine row opens it again to change it.
-- **Layout.** One phone-width column (up to 430px), centred on wider screens until the desktop split view (Phase 8). The call to action stays pinned at the bottom. Drawings laid out in the design's own coordinates (the Sun Arc, the Start sky) use `ScaledStage`, which scales them to the width available.
+- **Layout.** One phone-width column (up to 430px), centred on wider screens. Start and Household keep it on a computer too, as the design has no desktop version of them yet. The call to action stays pinned at the bottom. Drawings laid out in the design's own coordinates (the Sun Arc, the Start sky) use `ScaledStage`, which scales them to the width available.
 - **People.** The design has no screen for naming people yet (Phase 11), so they are called "Person A" to "Person D" after their mark.
+
+## Desktop
+
+From 1024px (`breakpoint.desktop`, `useIsDesktop()` in `src/lib/useMediaQuery.ts`) the entry steps and Print switch to the design's desktop pages, in `src/features/desktop/`. They use the same routes, draft store and `useEntryStep` as the phone, so the two cannot disagree. The answer is held while the page prints, since printing narrows it to A4.
+
+- **Entry** (`DesktopEntry`): the top bar (who the medicine is for, or which one is being changed), the step rail with each step's summary (click to jump), one panel per step at desktop sizes (the 520px Sun Arc, the 420px Pill Builder well), Back and Continue, and the key legend. The sheet column sits beside the form at 1440 and wraps under it at 1280 and 1024, as in the design.
+- **Keys**, from anywhere on the page: Enter continues (not on a button or link, which keep their own Enter), Shift + Enter goes back, and on the When step 1–4 place that many doses and ← → move the sun. Each step starts with focus on its first field.
+- **The sheet, as you type** (`LiveSheetColumn`): the real `FridgeSheet` with the medicine being entered in place (or in place of the one being changed), outlined and tagged "being entered", "?" cells until it has times, and "the code is drawn when you print" where the QR goes. Colour or black and white is the same choice as on Print. The scaled page is a picture for sighted users; its words are in the "On this sheet" list and each step's summary.
+- **Add to the sheet** saves the medicine and keeps the panel open with "On the sheet." and Print preview (focused, so Enter prints next). The sheet then shows it as it will print.
+- **Print** (`DesktopPrint`): fridge sheet, daily strips or both; colour or black and white; 1–5 copies; the counter checklist (not saved); the code; Print N copies (or Enter away from a control). Every page is printed once per copy, the sheet before the strips. "Both" is for that print only; a single choice is remembered.
 
 ## Printables
 
@@ -236,7 +248,7 @@ The styleguide's **Printables** section shows the design's sample household, the
 5. Domain model, storage and QR code ✔
 6. Phone flow: Start → Medicine → When → How long → Rules → Household ✔
 7. Printables and the Print screen: fridge sheet, daily strips, black and white printing ✔
-8. Desktop: split view with live sheet, print page
+8. Desktop: split view with live sheet, print page ✔
 9. Landing page
 10. Hardening and final visual QA
 11. Screens the design doesn't cover yet: offline install, scanning a sheet, people, editing

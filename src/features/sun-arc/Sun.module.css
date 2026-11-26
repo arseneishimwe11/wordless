@@ -82,3 +82,42 @@
   border: var(--stroke-ink) solid var(--color-ink);
   border-radius: var(--radius-round);
 }
+
+/* The desktop sun (DesktopEntry.dc.html): 88px, its parts scaled to match. */
+.desktop {
+  top: -44px;
+  left: -44px;
+  width: 88px;
+  height: 88px;
+}
+
+.desktop .slip {
+  top: 19px;
+  left: 20px;
+  width: 52px;
+  height: 52px;
+}
+
+.desktop .disc {
+  top: 15px;
+  left: 15px;
+  width: 58px;
+  height: 58px;
+  border-width: var(--stroke-heavy);
+  border-radius: var(--radius-sun-lg);
+}
+
+.desktop .moonShadow {
+  top: 14px;
+  left: 15px;
+  width: 64px;
+  height: 64px;
+}
+
+.desktop .moon {
+  top: 10px;
+  left: 10px;
+  width: 66px;
+  height: 66px;
+  border-width: var(--stroke-heavy);
+}

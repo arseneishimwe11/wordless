@@ -1,0 +1,173 @@
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+}
+
+.label {
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+}
+
+/* Pill Builder: the plate and its controls side by side, wrapping when narrow. */
+.builder {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  align-items: stretch;
+}
+
+.builderControls {
+  display: flex;
+  flex: 1 1 340px;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-width: 300px;
+}
+
+.forms {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.colorRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  margin-top: var(--space-4);
+}
+
+.halves {
+  width: 164px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(5, 56px);
+  gap: var(--space-8) var(--space-12);
+}
+
+.stepperRow {
+  display: flex;
+  gap: var(--space-14);
+  align-items: center;
+  margin-top: var(--space-6);
+}
+
+.stepperRow .label {
+  flex: 1;
+}
+
+/* When: the arc, and its controls beside it; the summary sits 24px under them. */
+.whenStack {
+  gap: var(--space-24);
+}
+
+.whenRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  align-items: flex-start;
+}
+
+.whenControls {
+  display: flex;
+  flex: 1 1 190px;
+  flex-direction: column;
+  gap: var(--space-12);
+  min-width: 190px;
+}
+
+.orPress {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+.maxBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+/* How long. */
+.howLong {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-22);
+}
+
+.lengthRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-14);
+  align-items: center;
+}
+
+.unit {
+  width: 124px;
+  margin-left: var(--space-8);
+}
+
+/* Rules: four to a row. */
+.rules {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-12);
+}
+
+.added {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-18);
+  align-items: center;
+  padding: var(--space-16) var(--space-20);
+  background: var(--color-sunrise-wash);
+  border: var(--stroke-desk) solid var(--color-ink);
+  border-radius: var(--radius-card);
+}
+
+.addedText {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 200px;
+}
+
+.addedTitle {
+  font-family: var(--font-display);
+  font-size: var(--display-26);
+  line-height: var(--leading-110);
+  letter-spacing: var(--tracking-display);
+}
+
+.addedBody {
+  font-size: var(--text-16);
+  color: var(--color-ink-soft);
+}
+
+.addedStatus {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* A quiet way back, under the words. */
+.addedLink {
+  align-self: flex-start;
+  min-height: 32px;
+  padding: 0;
+  font-size: var(--text-16);
+  font-weight: var(--weight-bold);
+  color: var(--color-pen);
+  text-decoration: underline;
+  text-underline-offset: var(--space-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+}

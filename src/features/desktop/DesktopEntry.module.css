@@ -1,0 +1,124 @@
+.page {
+  min-height: 100vh;
+}
+
+/* The bar across the top (14px 40px, an ink rule underneath). */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-20);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-14) var(--space-40);
+  border-bottom: var(--stroke-base) solid var(--color-ink);
+}
+
+.brand {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--color-ink);
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-size: var(--display-28);
+  line-height: var(--leading-100);
+  letter-spacing: var(--tracking-display);
+}
+
+.who {
+  display: flex;
+  gap: var(--space-12);
+  align-items: center;
+  font-size: var(--text-17);
+}
+
+.keysHint {
+  display: flex;
+  gap: var(--space-8);
+  align-items: center;
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+}
+
+/*
+ * The form, then the sheet: a row that wraps, as in the design. At 1440 the sheet sits
+ * beside the form; narrower, it drops underneath.
+ */
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-40);
+  align-items: flex-start;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: var(--space-24) var(--space-40) var(--space-40);
+}
+
+.pane {
+  display: flex;
+  flex: 999 1 660px;
+  flex-direction: column;
+  gap: var(--space-16);
+  min-width: 0;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-18);
+  min-height: 560px;
+  padding: var(--space-26) var(--space-28);
+  background: var(--color-surface);
+  border: var(--stroke-base) solid var(--color-ink);
+  border-radius: var(--radius-panel);
+}
+
+.panelHead {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-20);
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: var(--display-40);
+  line-height: var(--leading-105);
+}
+
+/* Under the panel head, to beat the note's own line height. */
+.panelHead .hint {
+  line-height: var(--leading-120);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-16);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8) var(--space-20);
+  margin: 0;
+  padding: 0;
+  font-size: var(--text-15);
+  color: var(--color-ink-soft);
+  list-style: none;
+}
+
+.legend li {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+}

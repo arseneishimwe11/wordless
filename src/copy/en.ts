@@ -415,6 +415,101 @@ export const copy = {
       title: 'Scan a sheet',
       soon: 'Scanning a printed sheet arrives in a later phase.',
     },
+    /** The desktop split view (DesktopEntry.dc.html) and print page (DesktopPrint.dc.html). */
+    desktop: {
+      home: 'Wordless, back to the start',
+      newMedicine: 'new medicine for this sheet',
+      changing: (name: string) => `changing ${name}`,
+      doEverything: { and: 'and', rest: 'do everything' },
+      stepsLabel: 'Steps',
+      done: 'done',
+      titles: {
+        medicine: 'What is the medicine?',
+        when: 'When does it go in?',
+        howLong: 'For how long?',
+        rules: 'Anything else it says?',
+      },
+      hints: {
+        medicine: 'build it the way it looks in the hand',
+        when: 'click the sky, drag the sun — or press 1 to 4',
+        howLong: 'type a number, then Enter',
+        rules: 'tick everything the prescription says',
+      },
+      pillNote: 'the pill as it sits in the hand',
+      orPress: 'or press',
+      everyHours: 'Every … hours',
+      back: 'Back',
+      continue: 'Continue',
+      add: 'Add to the sheet',
+      keys: {
+        label: 'Keyboard',
+        tab: 'Tab',
+        enter: 'Enter',
+        shift: 'Shift',
+        space: 'Space',
+        left: '←',
+        right: '→',
+        nextField: 'next field',
+        continue: 'continue',
+        moveSun: 'move the sun',
+        toggleDose: 'add or remove a dose',
+        timesADay: 'times a day',
+      },
+      added: {
+        title: 'On the sheet.',
+        body: (name: string, who: string, others: string) =>
+          others
+            ? `${name} has been added for ${who}, next to ${others}.`
+            : `${name} has been added for ${who}.`,
+        print: 'Print preview',
+        household: 'Back to the household',
+      },
+      sheet: {
+        title: 'The sheet, as you type',
+        sub: 'A4 · redraws with every change',
+        label: 'Live preview of the printed sheet',
+        previewAs: 'Preview as',
+        onSheet: 'On this sheet:',
+        beingEntered: (name: string) => `${name} · being entered`,
+        tag: 'being entered',
+        noTimes: 'no times yet',
+        codeLater: 'the code is drawn when you print',
+      },
+      print: {
+        backToEditing: 'Back to editing',
+        hint: 'check it, print it, hand it over',
+        settings: 'Print settings',
+        what: 'What to print',
+        outputs: {
+          sheet: { title: 'Fridge sheet', subtitle: 'A4 · the whole course on one page' },
+          strips: { title: 'Daily strips', subtitle: 'A4 · cut into seven, one for each day' },
+          both: { title: 'Both', subtitle: 'two A4 pages' },
+        },
+        printerNote:
+          'Every color also carries a symbol or pattern, so nothing is lost in black and white.',
+        copies: 'Copies',
+        fewer: 'One fewer copy',
+        more: 'One more copy',
+        checklist: 'At the counter, before it goes home',
+        checks: [
+          'Point at each sun: this is when.',
+          'Tick one box together: one tick, each time.',
+          'Point at the stamp: finished when every box is ticked.',
+        ],
+        codeTitle: 'The code is the schedule.',
+        codeBody: 'Another clinic can scan it to reload everything, even offline.',
+        printN: (n: number) => (n === 1 ? 'Print 1 copy' : `Print ${String(n)} copies`),
+        preview: 'Print preview',
+        printed: 'Printed',
+        caption: (what: string, mono: boolean) =>
+          `${what} · A4 · ${mono ? 'black & white printer' : 'color printer'}`,
+        captionBoth: 'Fridge sheet and daily strips',
+        medicines: (names: readonly string[]) =>
+          names.length > 1
+            ? `${names.slice(0, -1).join(', ')} and ${names.at(-1) ?? ''}`
+            : names.join(''),
+      },
+    },
     backHome: 'Back to the start',
   },
   styleguide: {

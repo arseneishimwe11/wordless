@@ -95,3 +95,36 @@
   line-height: var(--leading-120);
   color: var(--color-pen);
 }
+
+/* The sheet as it is being typed (LiveSheet.dc.html). */
+.entering {
+  border: var(--stroke-desk) dashed var(--color-pen);
+  border-radius: var(--radius-card);
+}
+
+.enteringTag {
+  font-family: var(--font-hand);
+  font-size: var(--text-22);
+  line-height: var(--leading-120);
+  color: var(--color-pen);
+  text-align: right;
+}
+
+/* A patch of paper behind the words where they cross the night tile. */
+.enteringTag span {
+  padding: 0 var(--space-8);
+  background: var(--color-sheet);
+}
+
+.unknown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  font-family: var(--font-hand);
+  font-size: var(--text-22);
+  color: var(--color-pen);
+  border: var(--stroke-thin) dashed var(--color-pen);
+  border-radius: var(--radius-round);
+}

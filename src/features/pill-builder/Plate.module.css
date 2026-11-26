@@ -32,3 +32,38 @@
   top: 6px;
   right: 8px;
 }
+
+/* The desktop well (DesktopEntry.dc.html): 420px tall, the plate at its foot. */
+.desktop {
+  flex: 1 1 300px;
+  min-width: 280px;
+  height: 420px;
+  margin-top: 0;
+}
+
+.plateDesktop {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  max-width: none;
+  transform: translateX(-50%);
+}
+
+.desktop .units {
+  inset: 50px 0 40px;
+  gap: var(--space-2) var(--space-6);
+  padding: 0 var(--space-14);
+}
+
+.desktop .score {
+  top: 10px;
+  right: 10px;
+}
+
+.note {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  max-width: 170px;
+  line-height: var(--leading-120);
+}

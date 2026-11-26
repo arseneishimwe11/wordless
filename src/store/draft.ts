@@ -64,6 +64,8 @@ export interface DraftState extends Draft {
   setOngoing: (ongoing: boolean) => void;
   toggleRule: (rule: Rule) => void;
   clearRules: () => void;
+  /** The medicine was saved: from now on, changes are to that saved medicine. */
+  markSaved: () => void;
   /** Done or cancelled: back to a blank medicine. */
   reset: () => void;
   flush: () => Promise<void>;
@@ -176,6 +178,9 @@ export function createDraftStore(storage: KeyValueStore) {
       },
       clearRules: () => {
         edit((m) => ({ ...m, rules: clearRules() }));
+      },
+      markSaved: () => {
+        change({ editingId: getState().medicine.id });
       },
       reset: () => {
         change(emptyDraft());

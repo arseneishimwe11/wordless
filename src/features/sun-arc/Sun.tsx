@@ -3,15 +3,18 @@ import { useRef, type KeyboardEvent, type PointerEvent } from 'react';
 import { Animated } from '@/components';
 import { nearestTime, TIMES, type TimeOfDay } from '@/domain';
 import { Glyph, Illustration } from '@/graphics';
+import { cx } from '@/lib/cx';
 import { sunRays } from '@/graphics/generated/illustrations/sun-rays';
 
 import { phaseColor } from '../flow';
-import { arcPoint, NIGHT_BELOW, pointAngle } from './geometry';
+import { ARCS, arcPoint, NIGHT_BELOW, pointAngle, type ArcGeometry } from './geometry';
 import styles from './Sun.module.css';
 import type { SunMotion } from './useSun';
 
 export interface SunProps {
   sun: SunMotion;
+  /** The arc the sun travels (phone or desktop). */
+  geometry?: ArcGeometry | undefined;
   label: string;
   /** Plays the nudge, again each time this changes (Next pressed with no times). */
   nudge: number;
@@ -28,10 +31,20 @@ const DRAG_THRESHOLD = 6;
  * The sun on the arc. Drag it along the sky and let go to add a dose where it lands;
  * press it to add or remove the dose at its stop; arrow keys move it stop to stop.
  */
-export function Sun({ sun, label, nudge, onDrop, onPress, onStep, onTouch }: SunProps) {
+export function Sun({
+  sun,
+  geometry = ARCS.phone,
+  label,
+  nudge,
+  onDrop,
+  onPress,
+  onStep,
+  onTouch,
+}: SunProps) {
+  const desktop = geometry.width > ARCS.phone.width;
   const drag = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const justDragged = useRef(false);
-  const { x, y } = arcPoint(sun.angle);
+  const { x, y } = arcPoint(sun.angle, geometry);
   const near = nearestTime(sun.angle);
   const { phase } = TIMES[near];
   const night = sun.angle < NIGHT_BELOW;
@@ -41,11 +54,11 @@ export function Sun({ sun, label, nudge, onDrop, onPress, onStep, onTouch }: Sun
     const stage = event.currentTarget.closest('[data-arc]');
     if (!stage) return sun.current();
     const box = stage.getBoundingClientRect();
-    const scale = box.width / 390 || 1;
-    return pointAngle({
-      x: (event.clientX - box.left) / scale,
-      y: (event.clientY - box.top) / scale,
-    });
+    const scale = box.width / geometry.width || 1;
+    return pointAngle(
+      { x: (event.clientX - box.left) / scale, y: (event.clientY - box.top) / scale },
+      geometry,
+    );
   };
 
   const down = (event: PointerEvent<HTMLButtonElement>) => {
@@ -89,7 +102,10 @@ export function Sun({ sun, label, nudge, onDrop, onPress, onStep, onTouch }: Sun
       <button
         type="button"
         aria-label={label}
-        className={styles.sun}
+        className={cx(styles.sun, desktop && styles.desktop)}
+        // On the desktop the sun is where the When step starts, and Enter continues
+        // from it (Space adds or removes the dose), as DesktopEntry.dc.html does.
+        {...(desktop && { 'data-step-focus': '', 'data-enter-continues': '' })}
         onPointerDown={down}
         onPointerMove={move}
         onPointerUp={up}
@@ -109,13 +125,13 @@ export function Sun({ sun, label, nudge, onDrop, onPress, onStep, onTouch }: Sun
             <>
               <span className={styles.moonShadow} />
               <span className={styles.moon}>
-                <Glyph name="moon" size={40} />
+                <Glyph name="moon" size={desktop ? 50 : 40} />
               </span>
             </>
           ) : (
             <>
               <Animated effect="spin" className={styles.rays}>
-                <Illustration data={sunRays} width={68} />
+                <Illustration data={sunRays} width={desktop ? 88 : 68} />
               </Animated>
               <span className={styles.slip} style={{ background: phaseColor(phase, 'tint') }} />
               <span className={styles.disc} style={{ background: phaseColor(phase, 'ink') }} />

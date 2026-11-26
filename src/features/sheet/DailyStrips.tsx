@@ -145,7 +145,12 @@ export function DailyStrips({ person, meta, date, mono = false }: DailyStripsPro
         const first = p * STRIPS_PER_PAGE + 1;
         const count = Math.min(STRIPS_PER_PAGE, total - first + 1);
         return (
-          <SheetPage key={p} mono={mono} label={pages > 1 ? t.pageLabel(p + 1, pages) : undefined}>
+          <SheetPage
+            key={p}
+            kind="strips"
+            mono={mono}
+            label={pages > 1 ? t.pageLabel(p + 1, pages) : undefined}
+          >
             {Array.from({ length: count }, (_, i) => {
               const top = STRIP.top + i * STRIP.pitch;
               return (

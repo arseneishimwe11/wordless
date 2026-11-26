@@ -29,3 +29,9 @@
   height: 31px;
   border-width: var(--stroke-ink);
 }
+
+.desktop {
+  width: 56px;
+  height: 56px;
+  border-width: var(--stroke-desk);
+}

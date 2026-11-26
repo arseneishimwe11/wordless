@@ -192,6 +192,8 @@ export const radius = {
   kbd: '7px 6px 7px 5px',
   /** The Sun Arc's day sky: a half circle on the horizon. */
   sky: '185px 185px 0 0',
+  /** The desktop Sun Arc's sky. */
+  'sky-lg': '248px 248px 0 0',
   phone: '34px',
   'phone-sm': '26px',
   tag: '18px',
